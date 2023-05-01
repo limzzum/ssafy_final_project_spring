@@ -31,8 +31,8 @@
 			<!-- The slideshow/carousel -->
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<a href="${root }/main?action=mvtrip" class="stretched-link"> <img
-						src="${root }/assets/img/001.jpg" alt="테마 여행" class="d-block"
+					<a href="/main?action=mvtrip" class="stretched-link"> <img
+						src="/img/001.jpg" alt="테마 여행" class="d-block"
 						style="min-width: 100%; min-height: 200px" />
 						<div class="bg-opacity-50 carousel-caption bg-light p-2 rounded-3 text-dark">
 							<h3>테마 여행</h3>
@@ -41,8 +41,8 @@
 					</a>
 				</div>
 				<div class="carousel-item">
-					<a href="${root }/main?action=mvplan" class="stretched-link"> <img
-						src="${root }/assets/img/002.jpg" alt="나의 여행 계획" class="d-block"
+					<a href="/main?action=mvplan" class="stretched-link"> <img
+						src="/img/002.jpg" alt="나의 여행 계획" class="d-block"
 						style="min-width: 100%; min-height: 200px" />
 						<div class="bg-opacity-50 carousel-caption bg-light p-2 rounded-3 text-dark">
 							<h3>나의 여행 계획</h3>
@@ -51,8 +51,8 @@
 					</a>
 				</div>
 				<div class="carousel-item">
-					<a href="${root }/main?action=mvworldcup" class="stretched-link">
-						<img src="${root }/assets/img/003.jpg" alt="관광지 월드컵"
+					<a href="/main?action=mvworldcup" class="stretched-link">
+						<img src="/img/003.jpg" alt="관광지 월드컵"
 						class="d-block" style="min-width: 100%; min-height: 200px" />
 						<div class="bg-opacity-50 carousel-caption bg-light p-2 rounded-3 text-dark">
 							<h3>관광지 월드컵</h3>
@@ -61,8 +61,8 @@
 					</a>
 				</div>
 				<div class="carousel-item">
-					<a href="${root }/main?action=mvrecommend" class="stretched-link">
-						<img src="${root }/assets/img/004.jpg" alt="맛집 뽑기" class="d-block"
+					<a href="/main?action=mvrecommend" class="stretched-link">
+						<img src="/img/004.jpg" alt="맛집 뽑기" class="d-block"
 						style="min-width: 100%; min-height: 200px" />
 						<div class="bg-opacity-50 carousel-caption bg-light p-2 rounded-3 text-dark">
 							<h3>맛집 뽑기</h3>
@@ -71,8 +71,8 @@
 					</a>
 				</div>
 				<div class="carousel-item">
-					<a href="${root }/main?action=mvboard" class="stretched-link">
-						<img src="${root }/assets/img/005.jpg" alt="게시판" class="d-block"
+					<a href="/main?action=mvboard" class="stretched-link">
+						<img src="/img/005.jpg" alt="게시판" class="d-block"
 						style="min-width: 100%; min-height: 200px" />
 						<div class="opacity-75 carousel-caption bg-light p-2 rounded-3 text-dark">
 							<h3 class="opacity-100">게시판</h3>
