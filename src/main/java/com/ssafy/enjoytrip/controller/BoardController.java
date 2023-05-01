@@ -18,7 +18,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/board")
 public class BoardController {
-    private BoardService service;
+    private final BoardService service;
+
+    @Autowired
     public BoardController(BoardService service){
         this.service = service;
     }
