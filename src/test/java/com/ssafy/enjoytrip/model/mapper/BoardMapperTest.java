@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -39,10 +42,16 @@ class BoardMapperTest {
 
     @Test
     void selectAll() {
+        List<Board> boards = mapper.selectAll();
     }
 
     @Test
     void delete() {
+        Board board = Board.builder().title("title").content("content").userNo(1).boardType("review").hits(1).build();
+        mapper.insert(board);
+
+        int result = mapper.delete(board.getPostId());
+        Assertions.assertEquals(result, 1);
     }
 
     @Test
