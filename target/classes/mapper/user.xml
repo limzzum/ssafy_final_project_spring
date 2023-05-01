@@ -18,4 +18,11 @@
         where user_id = #{id};
     </select>
 
+    <insert id="insert" parameterType="user">
+        insert into user
+        (user_id,user_name,user_pwd,email)
+        values
+        (#{userId},#{userName},#{userPwd},#{email});
+    </insert>
+
 </mapper>
