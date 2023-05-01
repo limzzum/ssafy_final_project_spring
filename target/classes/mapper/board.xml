@@ -36,7 +36,8 @@
 
     <update id="update" parameterType="board">
         update board
-            set title=#{title}, content=#{content}, user_no=#{userNo}, board_type = #{boardType});
+            set title=#{title}, content=#{content}, user_no=#{userNo}, board_type = #{boardType}
+        where post_id=#{postId}
     </update>
 
     <delete id="delete" parameterType="int" >
