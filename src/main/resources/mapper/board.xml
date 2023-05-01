@@ -24,6 +24,20 @@
         from board limit 100;
     </select>
 
+    <select id="selectAll" parameterType="string" resultMap="BoardMap" >
+        select *
+        from board
+        where type = #{type}
+        limit 100;
+    </select>
+
+    <select id="selectAll" parameterType="map" resultMap="BoardMap" >
+        select *
+        from board
+        where type = #{type} and user_no = #{userNo}
+        limit 100;
+    </select>
+
     <insert id="insert" parameterType="board">
         <selectKey order="AFTER" keyProperty="postId" resultType="int">
             select max(post_id)
