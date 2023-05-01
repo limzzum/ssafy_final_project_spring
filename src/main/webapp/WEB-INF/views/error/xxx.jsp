@@ -7,6 +7,6 @@
 <title>에러</title>
 </head>
 <body>
-<h1>Error : 잠시 후 다시 시도해보세요</h1>
+<h1>Error : 알 수 없는 오류</h1>
 </body>
 </html>
