@@ -1,6 +1,6 @@
 package com.ssafy.enjoytrip.dto;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,11 +14,13 @@ import lombok.ToString;
 @Data
 @ToString
 public class Board {
-	int num;
-	Date datetime;
+
+	int postId; // AI, PK
 	String title;
+	Timestamp createTime;
 	String content;
-	String writername;
-	String writerid;
+	int userNo;
+	String boardType;
 	int hits;
+
 }
