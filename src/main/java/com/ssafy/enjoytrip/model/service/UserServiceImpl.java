@@ -24,7 +24,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int regist(User user) {
-		return 0;
+		User check = mapper.select(user.getUserId());
+
+		// 중복 아이디 회원이 존재하는 경우 -1 리턴
+		if(check!=null) return -1;
+
+		// 성공시 1, 실패시 0 리턴
+		return mapper.insert(user);
 	}
 
 	@Override
@@ -33,28 +39,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean update(User user) {
-		return false;
+	public int update(User user) {
+		return 0;
 	}
-//	@Override
-//	public int registUser(User user) throws SQLException {
-//		return UserDaoImpl.getUserDao().registUser(user);
-//	}
-//
-//	@Override
-//	public int deleteUser(User user) throws SQLException {
-//		String id = user.getId();
-//
-//		return UserDaoImpl.getUserDao().deleteUser(id);
-//	}
-//	@Override
-//	public boolean updateUser(User user, String originalpw, String pass1, String pass2) throws SQLException {
-//
-//		if(pass1.equals(pass2) && originalpw.equals(user.getPassword())) {
-//			UserDaoImpl.getUserDao().updateUser(pass1, user.getId());
-//			return true;
-//		}else {
-//			return false;
-//		}
-//	}
+
 }

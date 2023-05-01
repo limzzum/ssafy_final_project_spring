@@ -4,7 +4,7 @@
 <nav
 	class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
 	<div class="container">
-		<a class="navbar-brand text-primary fw-bold" href="${root }/main"> <img
+		<a class="navbar-brand text-primary fw-bold" href="/"> <img
 			src="/img/trip_logo.png" alt="여행어때" width="100" />
 		</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -64,33 +64,31 @@
 			</div>
 			<div class="modal-body">
 				<div class="input-form-backgroud row">
-					<form class="input-form col-md-12 mx-auto" action="${root }/main">
+					<form class="input-form col-md-12 mx-auto" method="post" action="/user/regist">
 						<div class="row">
-							<input type="hidden" class="form-control" name="action"
-								value="userregist" />
 							<div class="col-md-6 mb-3">
-								<label for="regid">아이디</label>
-								<input type="text" class="form-control" id="regid" name="regid"
+								<label for="regId">아이디</label>
+								<input type="text" class="form-control" id="regId" name="userId"
 									placeholder="" value="" required />
 								<div class="invalid-feedback">아이디를 입력해주세요.</div>
 							</div>
 							<div class="col-md-6 mb-3">
-								<label for="nickname">닉네임</label>
-								<input type="text" class="form-control" id="nickname"
-									name="nickname" placeholder="" value="" required />
-								<div class="invalid-feedback">닉네임을 입력해주세요.</div>
+								<label for="regName">이름</label>
+								<input type="text" class="form-control" id="regName"
+									name="userName" placeholder="" value="" required />
+								<div class="invalid-feedback">이름을 입력해주세요.</div>
 							</div>
 						</div>
 						<div class="mb-3">
 							<label for="regpw">비밀번호</label>
 							<input type="password" class="form-control" id="regpw"
-								name="regpw" placeholder="" required />
+								name="userPwd" placeholder="" required />
 							<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 						</div>
 
 						<div class="mb-3">
-							<label for="email">이메일</label>
-							<input type="email" class="form-control" id="email" name="email"
+							<label for="regEmail">이메일</label>
+							<input type="email" class="form-control" id="regEmail" name="email"
 								placeholder="you@example.com" required />
 							<div class="invalid-feedback">이메일을 입력해주세요.</div>
 						</div>
@@ -126,14 +124,14 @@
 			<form action="/user/login" method="post">
 				<div class="modal-body">
 					<div class="mb-3">
-						<label for="userId">아이디</label>
-						<input type="text" class="form-control" id="userId" name="userId"
+						<label for="loginId">아이디</label>
+						<input type="text" class="form-control" id="loginId" name="userId"
 							placeholder="" required />
 						<div class="invalid-feedback">아이디를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="userPwd">비밀번호</label>
-						<input type="password" class="form-control" id="userPwd"
+						<label for="loginPwd">비밀번호</label>
+						<input type="password" class="form-control" id="loginPwd"
 							name="userPwd" placeholder="" required />
 						<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 					</div>
@@ -148,13 +146,13 @@
 </div>
 <!-- 로그인 Modal end -->
 
-  <form id="securedLoginForm" name="securedLoginForm" action="<%=request.getContextPath()%>/login" method="post" style="display: none;">
-            <input type="hidden" name="securedUsername" id="securedUsername" value="" />
-            <input type="hidden" name="securedPassword" id="securedPassword" value="" />
+<%--  <form id="securedLoginForm" name="securedLoginForm" action="<%=request.getContextPath()%>/login" method="post" style="display: none;">--%>
+<%--            <input type="hidden" name="securedUsername" id="securedUsername" value="" />--%>
+<%--            <input type="hidden" name="securedPassword" id="securedPassword" value="" />--%>
 
-        </form> 
+<%--        </form> --%>
 
-<script type="text/javascript" src="/resources/js/rsa/rsa.js"></script>
-<script type="text/javascript" src="/resources/js/rsa/jsbn.js"></script>
-<script type="text/javascript" src="/resources/js/rsa/prng4.js"></script>
-<script type="text/javascript" src="/resources/js/rsa/rng.js"></script>
+<%--<script type="text/javascript" src="/resources/js/rsa/rsa.js"></script>--%>
+<%--<script type="text/javascript" src="/resources/js/rsa/jsbn.js"></script>--%>
+<%--<script type="text/javascript" src="/resources/js/rsa/prng4.js"></script>--%>
+<%--<script type="text/javascript" src="/resources/js/rsa/rng.js"></script>--%>
