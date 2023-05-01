@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `enjoytrip`.`attraction_detail` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `enjoytrip`.`user` (
                                                   `user_no` INT NOT NULL AUTO_INCREMENT,
-                                                  `user_id` VARCHAR(16) NOT NULL,
+                                                  `user_id` VARCHAR(16) NOT NULL UNIQUE,
                                                   `user_name` VARCHAR(100) NOT NULL,
                                                   `user_pwd` VARCHAR(100) NOT NULL,
                                                   `email` VARCHAR(100) NOT NULL,
