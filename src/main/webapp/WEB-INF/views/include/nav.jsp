@@ -41,7 +41,7 @@
 				<ul class="navbar-nav mb-2 me-2 mb-lg-0" id="navbar-login"
 					style="display: flex; white-space: nowrap">
 					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="${root }/main?action=logout" id="logout">로그아웃</a></li>
+						href="/user/logout" id="logout">로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
 						href="${root }/main?action=mvMypage">마이페이지</a></li>
 				</ul>
@@ -123,20 +123,18 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
-			<form action="${root }/main">
-				<input type="hidden" class="form-control" name="action"
-					value="login" />
+			<form action="/user/login" method="post">
 				<div class="modal-body">
 					<div class="mb-3">
-						<label for="userid">아이디</label>
-						<input type="text" class="form-control" id="userid" name="userid"
+						<label for="userId">아이디</label>
+						<input type="text" class="form-control" id="userId" name="userId"
 							placeholder="" required />
 						<div class="invalid-feedback">아이디를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="userpw">비밀번호</label>
-						<input type="password" class="form-control" id="userpw"
-							name="userpw" placeholder="" required />
+						<label for="userPwd">비밀번호</label>
+						<input type="password" class="form-control" id="userPwd"
+							name="userPwd" placeholder="" required />
 						<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 					</div>
 				</div>

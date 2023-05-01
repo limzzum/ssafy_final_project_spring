@@ -6,12 +6,12 @@ import com.ssafy.enjoytrip.model.dto.User;
 
 
 public interface UserService {
-	public User getUser(String id) throws SQLException;
+	User login(User user);
 	
-	int registUser(User user) throws SQLException;
+	int regist(User user);
 	
-	public int deleteUser(User user) throws SQLException;
+	int delete(User user);
 	
-	public boolean updateUser(User user, String originalpw, String pass1, String pass2) throws SQLException;
+	boolean update(User user);
 	
 }
