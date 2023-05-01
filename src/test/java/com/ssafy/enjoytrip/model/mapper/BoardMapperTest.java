@@ -26,6 +26,14 @@ class BoardMapperTest {
 
     @Test
     void select() {
+        Board board = Board.builder().title("title").content("content").userNo(1).boardType("review").build();
+        mapper.insert(board);
+
+        Board selected = mapper.select(board.getPostId());
+        assertEquals(board.getTitle(),selected.getTitle());
+        assertEquals(board.getContent(), selected.getContent());
+        assertEquals(board.getHits(),selected.getHits());
+        assertEquals(board.getBoardType(), selected.getBoardType());
 
     }
 
