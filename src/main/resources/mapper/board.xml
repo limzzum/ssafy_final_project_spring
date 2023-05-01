@@ -25,14 +25,18 @@
     </select>
 
     <insert id="insert" parameterType="board">
+        <selectKey order="AFTER" keyProperty="postId" resultType="int">
+            select max(post_id)
+            from board
+        </selectKey>
         insert into board
-            (title, content, user_no, board_type)
-        values (#{title},#{content},#{user_no},#{board_type});
+        (title, content, user_no, board_type)
+            values (#{title},#{content},#{userNo},#{boardType});
     </insert>
 
     <update id="update" parameterType="board">
         update board
-        set title=#{title}, content=#{content}, user_no=#{userNo}, board_type = #{boardType});
+            set title=#{title}, content=#{content}, user_no=#{userNo}, board_type = #{boardType});
     </update>
 
     <delete id="delete" parameterType="int" >
