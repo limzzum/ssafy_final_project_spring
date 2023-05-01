@@ -1,4 +1,4 @@
-package com.ssafy.enjoytrip;
+package com.ssafy.enjoytrip.model.mapper;
 
 import com.ssafy.enjoytrip.model.dto.User;
 import com.ssafy.enjoytrip.model.mapper.UserMapper;
