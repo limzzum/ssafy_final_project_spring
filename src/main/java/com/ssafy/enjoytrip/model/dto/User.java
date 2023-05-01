@@ -12,5 +12,10 @@ import lombok.ToString;
 @Data
 @ToString
 public class User {
-	private String id, name, password, email;
+	int userNo;
+	String userId;
+	String userName;
+	String userPwd;
+	String email;
+	String isAdmin;
 }

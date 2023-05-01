@@ -3,7 +3,6 @@ package com.ssafy.enjoytrip.model.service;
 import java.sql.SQLException;
 
 import com.ssafy.enjoytrip.model.dto.User;
-import com.ssafy.enjoytrip.model.dao.BoardDaoImpl;
 
 public class BoardServiceImpl implements BoardService {
 
@@ -19,7 +18,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public int noticeWrite(String title, String content, User u) throws SQLException {
-		return BoardDaoImpl.getBoardDaoImpl().registNoticeBoard(title, content, u);
+		//return BoardDaoImpl.getBoardDaoImpl().registNoticeBoard(title, content, u);
+		return -1;
 	}
 	
 }
