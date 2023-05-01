@@ -1,12 +1,10 @@
 package com.ssafy.enjoytrip.controller;
 
 import java.io.IOException;
-import java.security.KeyPair;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Base64;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ssafy.enjoytrip.dto.Place;
-import com.ssafy.enjoytrip.dto.User;
-import com.ssafy.enjoytrip.dto.Worldcup;
+import com.ssafy.enjoytrip.model.dto.Place;
+import com.ssafy.enjoytrip.model.dto.User;
+import com.ssafy.enjoytrip.model.dto.Worldcup;
 import com.ssafy.enjoytrip.model.dao.BoardDaoImpl;
 import com.ssafy.enjoytrip.model.service.PlaceServiceImpl;
 import com.ssafy.enjoytrip.model.service.UserServiceImpl;

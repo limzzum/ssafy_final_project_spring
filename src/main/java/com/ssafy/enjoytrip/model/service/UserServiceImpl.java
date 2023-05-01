@@ -2,7 +2,7 @@ package com.ssafy.enjoytrip.model.service;
 
 import java.sql.SQLException;
 
-import com.ssafy.enjoytrip.dto.User;
+import com.ssafy.enjoytrip.model.dto.User;
 import com.ssafy.enjoytrip.model.dao.UserDaoImpl;
 
 public class UserServiceImpl implements UserService {

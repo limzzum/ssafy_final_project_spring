@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.ssafy.enjoytrip.dto.User;
+import com.ssafy.enjoytrip.model.dto.User;
 import com.ssafy.enjoytrip.util.DBUtil;
 
 public class UserDaoImpl implements UserDao{

@@ -1,4 +1,6 @@
-package com.ssafy.enjoytrip.dto;
+package com.ssafy.enjoytrip.model.dto;
+
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,8 +13,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class Worldcup {
+public class Place {
 	int id;
-	String title, content, img;
-	int wins;
+	int type;
+	String title;
+	String addr1;
+	String image;
+	String sido;
+	double lat;
+	double lng;
 }

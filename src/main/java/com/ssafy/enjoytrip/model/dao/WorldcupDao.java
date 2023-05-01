@@ -3,7 +3,7 @@ package com.ssafy.enjoytrip.model.dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.ssafy.enjoytrip.dto.Worldcup;
+import com.ssafy.enjoytrip.model.dto.Worldcup;
 
 public interface WorldcupDao {
 	ArrayList<Worldcup> getWorldcupList() throws SQLException;

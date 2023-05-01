@@ -6,8 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.ssafy.enjoytrip.dto.Place;
-import com.ssafy.enjoytrip.dto.Worldcup;
+import com.ssafy.enjoytrip.model.dto.Worldcup;
 import com.ssafy.enjoytrip.util.DBUtil;
 
 public class WorldcupDaoImpl implements WorldcupDao{

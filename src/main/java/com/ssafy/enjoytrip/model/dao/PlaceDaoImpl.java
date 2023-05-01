@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import com.ssafy.enjoytrip.dto.Place;
+import com.ssafy.enjoytrip.model.dto.Place;
 import com.ssafy.enjoytrip.util.DBUtil;
 
 public class PlaceDaoImpl implements PlaceDao{

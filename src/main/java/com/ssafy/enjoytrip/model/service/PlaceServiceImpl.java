@@ -3,7 +3,7 @@ package com.ssafy.enjoytrip.model.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.ssafy.enjoytrip.dto.Place;
+import com.ssafy.enjoytrip.model.dto.Place;
 import com.ssafy.enjoytrip.model.dao.PlaceDaoImpl;
 
 public class PlaceServiceImpl implements PlaceService{
