@@ -1,5 +1,6 @@
 package com.ssafy.enjoytrip.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.ssafy.enjoytrip.model.dto.Board;
 import com.ssafy.enjoytrip.model.dto.User;
 import com.ssafy.enjoytrip.model.service.BoardService;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/api/board")
 public class BoardRestController {
     private final BoardService service;
 
@@ -24,9 +25,9 @@ public class BoardRestController {
         this.service = service;
     }
 
-    @GetMapping("/list/{type}/{page}")
-    public ResponseEntity<Map<String, Object>> list(@PathVariable String type){
-
+    @GetMapping("/{type}/{page}")
+    public ResponseEntity<Map<String, Object>> list(@PathVariable String type,@PathVariable int page){
+        PageHelper.startPage(page,10);
         List<Board> list = service.getAll(type);
         Map<String, Object> map = new HashMap<>();
         map.put("result", list);
@@ -34,7 +35,7 @@ public class BoardRestController {
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/list/{type}/my")
+    @GetMapping("/{type}/my")
     public ResponseEntity<Map<String, Object>> list(@PathVariable String type, HttpSession session){
         User loginUser = (User) session.getAttribute("loginUser");
         List<Board> list = service.getAll(type, loginUser.getUserNo());

@@ -16,24 +16,27 @@
     <select id="select" parameterType="int" resultMap="BoardMap" >
         select *
         from board
-        where post_id = #{postId}
+        where post_id = #{postId}현
     </select>
 
     <select id="selectAll" resultMap="BoardMap" >
         select *
         from board
+        order by post_id desc
     </select>
 
     <select id="selectAllType" parameterType="string" resultMap="BoardMap" >
         select *
         from board
         where board_type = #{type}
+        order by post_id desc
     </select>
 
     <select id="selectAllTypeAndUser" parameterType="map" resultMap="BoardMap" >
         select *
         from board
         where board_type = #{type} and user_no = #{userNo}
+        order by post_id desc
     </select>
 
     <insert id="insert" parameterType="board">

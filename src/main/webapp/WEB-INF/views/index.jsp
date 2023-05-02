@@ -45,7 +45,7 @@
                 <li class="nav-item"><a class="nav-link" aria-current="page"
                                         onclick="return load([`recommend`]);">맛집 뽑기</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page"
-                                        onclick="return board();">게시판</a></li>
+                                        onclick="return board(`notice`,1);">게시판</a></li>
             </ul>
             <%--main contents link end--%>
 
@@ -278,7 +278,7 @@
                 </a>
             </div>
             <div class="carousel-item">
-                <a onclick="return board();"  class="stretched-link">
+                <a onclick="return board(`notice`,1);"  class="stretched-link">
                     <img src="/img/005.jpg" alt="게시판" class="d-block"
                          style="min-width: 100%; min-height: 200px"/>
                     <div class="opacity-75 carousel-caption bg-light p-2 rounded-3 text-dark">
@@ -783,16 +783,16 @@
                 <div class="list-group" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active"
                        id="board1-list" data-bs-toggle="list" href="#list-board1"
-                       role="tab" aria-controls="list-board1">공지사항</a> <a
+                       role="tab" aria-controls="list-board1" onclick="return board(`notice`,1);">공지사항</a> <a
                         class="list-group-item list-group-item-action" id="board2-list"
                         data-bs-toggle="list" href="#list-board1" role="tab"
-                        aria-controls="list-board2">여행 후기</a> <a
+                        aria-controls="list-board1" onclick="return board(`review`,1);">여행 후기</a> <a
                         class="list-group-item list-group-item-action" id="board3-list"
                         data-bs-toggle="list" href="#list-board1" role="tab"
-                        aria-controls="list-board3">자유게시판</a> <a
+                        aria-controls="list-board1" onclick="return board(`free`,1);">자유게시판</a> <a
                         class="list-group-item list-group-item-action" id="board4-list"
                         data-bs-toggle="list" href="#list-board1" role="tab"
-                        aria-controls="list-board4">일행 구하기</a>
+                        aria-controls="list-board1" onclick="return board(`team`,1);">일행 구하기</a>
                 </div>
             </div>
             <!-- 게시판 리스트 목록 end -->
@@ -802,79 +802,9 @@
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active text-center" id="list-board1"
                          role="tabpanel" aria-labelledby="board1-list">
-                        <h3>공지사항</h3>
-                        <table class="table table-hover" id="boardtable">
-                            <thead>
-                            <tr>
-                                <th>번호</th>
-                                <th>제목</th>
-                                <th>작성자</th>
-                                <th>조회수</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>3</td>
-                                <td>주말동안 공부를 열심히 해 오세요</td>
-                                <td>SSAFY</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>이거보다 더 잘 만들어 오세요</td>
-                                <td>조용준</td>
-                                <td>11</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>예비군 출결 소명 관련 사항</td>
-                                <td>홍선주</td>
-                                <td>12</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div id = "boardRes">
+
+                        </div>
                         <!-- 검색창 -->
                         <form method="post" action="${root}/main">
                             <input type="hidden" name="action" value="mvNoticeBoardWrite">
