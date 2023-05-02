@@ -37,143 +37,14 @@
             <%--main contents link start--%>
             <ul class="navbar-nav me-auto mb-lg-0">
                 <li class="nav-item"><a class="nav-link" aria-current="page"
-                                        href="${root }/main?action=mvtrip">테마 여행</a></li>
-                <li class="nav-item"><a class="nav-link" aria-current="page"
-                                        href="${root }/main?action=mvplan">나의 여행 계획</a></li>
-                <li class="nav-item"><a class="nav-link" aria-current="page"
-                                        href="${root }/main?action=mvworldcup">관광지 월드컵</a></li>
-                <li class="nav-item"><a class="nav-link" aria-current="page"
-                                        href="${root }/main?action=mvrecommend">맛집 뽑기</a></li>
-                <li class="nav-item"><a class="nav-link" aria-current="page"
-                                        href="${root }/main?action=mvboard">게시판</a></li>
+                                        href="/">메인 화면으로 돌아가기</a></li>
             </ul>
             <%--main contents link end--%>
-
-            <%--user 회원가입, 로그인, 로그아웃, 마이페이지 링크 start--%>
-            <c:if test="${empty user }">
-                <ul class="navbar-nav mb-2 me-2 mb-lg-0" id="navbar-logout"
-                    style="display: flex; white-space: nowrap">
-                    <li class="nav-item"><a class="nav-link" aria-current="page"
-                                            href="#" data-bs-toggle="modal" data-bs-target="#registerModal">회원가입</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" aria-current="page"
-                                            href="#" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a>
-                    </li>
-                </ul>
-            </c:if>
-            <c:if test="${!empty user }">
-                <ul class="navbar-nav mb-2 me-2 mb-lg-0" id="navbar-login"
-                    style="display: flex; white-space: nowrap">
-                    <li class="nav-item"><a class="nav-link" aria-current="page"
-                                            href="/user/logout" id="logout">로그아웃</a></li>
-                    <li class="nav-item"><a class="nav-link" aria-current="page"
-                                            href="/" onclick="return load(`#mypage`);">
-                        마이페이지</a></li>
-                </ul>
-            </c:if>
-            <%--user 회원가입, 로그인, 로그아웃, 마이페이지 링크 start--%>
 
         </div>
     </div>
 </nav>
 <!-- 상단 navbar end -->
-
-<!-- 회원가입 Modal start -->
-<div class="modal fade" id="registerModal" data-bs-backdrop="static"
-     data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">회원가입</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="input-form-backgroud row">
-                    <form class="input-form col-md-12 mx-auto" method="post" action="/user/regist">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="regId">아이디</label>
-                                <input type="text" class="form-control" id="regId" name="userId"
-                                       placeholder="" value="" required/>
-                                <div class="invalid-feedback">아이디를 입력해주세요.</div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="regName">이름</label>
-                                <input type="text" class="form-control" id="regName"
-                                       name="userName" placeholder="" value="" required/>
-                                <div class="invalid-feedback">이름을 입력해주세요.</div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="regpw">비밀번호</label>
-                            <input type="password" class="form-control" id="regpw"
-                                   name="userPwd" placeholder="" required/>
-                            <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="regEmail">이메일</label>
-                            <input type="email" class="form-control" id="regEmail" name="email"
-                                   placeholder="you@example.com" required/>
-                            <div class="invalid-feedback">이메일을 입력해주세요.</div>
-                        </div>
-                        <hr class="mb-4"/>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input"
-                                   id="aggrement" required/>
-                            <label class="custom-control-label" for="aggrement">개인정보
-                                수집 및 이용에 동의합니다.</label>
-                        </div>
-                        <div class="mb-4"></div>
-                        <button class="btn btn-primary btn-lg btn-block" id="register">
-                            가입 완료
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 회원가입 Modal end -->
-
-<!-- 로그인 Modal start -->
-<div class="modal fade" id="loginModal" data-bs-backdrop="static"
-     data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">로그인</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-            </div>
-            <form action="/user/login" method="post">
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="loginId">아이디</label>
-                        <input type="text" class="form-control" id="loginId" name="userId"
-                               placeholder="" required/>
-                        <div class="invalid-feedback">아이디를 입력해주세요.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="loginPwd">비밀번호</label>
-                        <input type="password" class="form-control" id="loginPwd"
-                               name="userPwd" placeholder="" required/>
-                        <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
-                    </div>
-                </div>
-                <div class="modal-footer flex">
-                    <button class="btn btn-primary btn-lg btn-block" id="login">
-                        로그인
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- 로그인 Modal end -->
 
 <!-- 상단 navbar 와 밑의 내용 spacing start -->
 <div style="height: 130px"></div>
