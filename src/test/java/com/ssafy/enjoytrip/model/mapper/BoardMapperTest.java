@@ -51,7 +51,7 @@ class BoardMapperTest {
     @ParameterizedTest
     @ValueSource(strings = { "review", "free", "notice", "team"})
     void selectAll(String type) {
-        List<Board> boards = mapper.selectAll(type);
+        List<Board> boards = mapper.selectAllType(type);
         int max = Math.min(10, boards.size());
         for (int i = 0; i < max; i++) {
             assertEquals(boards.get(i).getBoardType(), type);
@@ -61,7 +61,7 @@ class BoardMapperTest {
     @ParameterizedTest
     @CsvSource(value = { "review,1", "free,1", "notice,2", "team,2"})
     void selectAll(String type, int userNo) {
-        List<Board> boards = mapper.selectAll(type, userNo);
+        List<Board> boards = mapper.selectAllTypeAndUser(type, userNo);
         int max = Math.min(10, boards.size());
         for (int i = 0; i < max; i++) {
             assertEquals(boards.get(i).getBoardType(), type);
