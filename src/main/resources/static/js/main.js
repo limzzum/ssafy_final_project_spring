@@ -35,7 +35,7 @@ async function searchPlace(){
     console.log(sido);
     console.log(type);
     console.log(keyword);
-    if(sido===0 || type===0 || !keyword){
+    if(sido==0 || type==0 || !keyword){
         alert("null값 안돼요");
         return;
     }
