@@ -173,7 +173,7 @@
         </div>
     </div>
 </div>
-<!-- 상단 navbar end -->
+<!-- 로그인 Modal end -->
 
 <!-- 상단 navbar 와 밑의 내용 spacing start -->
 <div style="height: 130px"></div>
