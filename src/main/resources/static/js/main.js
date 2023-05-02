@@ -55,7 +55,7 @@ async function searchPlace(){
     let result = json.result
     console.log(result);
     load([`themesearch`,`themetrip`]);
-    let tripList = document.querySelector("#trip-list").innerHTML
+    let tripList = document.querySelector("#trip-list")
     result.forEach(place =>{
         let trip = `<tr>
                     <td><img src="${place.image}" alt="" height="100px" onerror="this.src=/img/김민섭.PNG"/></td>
@@ -64,8 +64,51 @@ async function searchPlace(){
                     <td>${place.lat}</td>
                     <td>${place.lng}</td>
                     </tr>`
-        tripList += trip;
+        tripList.innerHTML += trip;
     })
-    document.querySelector("#trip-list").innerHTML = tripList;
+    // document.querySelector("#trip-list").innerHTML = tripList;
 
 }
+
+
+async function getRegion() {
+    let regionUrl = "/api/place/region";
+    let config = {
+        method:"GET"
+    };
+    let response = await fetch(regionUrl, config);
+    let json = await response.json();
+
+    let regions = json.result;
+    let area = document.querySelector("#search-area");
+    regions.forEach((data) => {
+        let option = document.createElement("option");
+        option.value = data.code;
+        option.innerHTML = data.name;
+        area.append(option);
+    });
+}
+getRegion();
+
+
+async function getContent() {
+    let gugunUrl = "/api/place/content";
+    let config = {
+        method:"GET"
+    };
+    let response = await fetch(gugunUrl, config);
+    let json = await response.json();
+
+    console.log(json);
+    let guguns = json.result;
+    let area = document.querySelector("#search-content-id");
+    // area.innerHTML = `<option value="0" selected>구/군 선택</option>`;
+    guguns.forEach((data) => {
+        let option = document.createElement("option");
+        option.value = data.id;
+        option.innerHTML = data.content;
+        area.append(option);
+    });
+}
+
+getContent();
