@@ -15,7 +15,7 @@ public class Place {
 	String title;
 	String addr1;
 	String image;
-	String sido;
+	int sido;
 	double lat;
 	double lng;
 }
