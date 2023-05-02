@@ -184,10 +184,8 @@
 
     <!-- 검색창 start -->
     <div id="themesearch" class="container text-center">
-        <form class="d-flex my-3" action="${root}/main">
-            <input type="hidden" class="form-control" name="action"
-                   value="searchPlace"/> <select id="search-area"
-                                                 class="form-select me-2" name="sido">
+        <form class="d-flex my-3">
+            <select id="search-area" class="form-select me-2" name="sido">
             <option value="0" selected="">검색 할 지역 선택</option>
             <option value="1">서울</option>
             <option value="2">인천</option>
@@ -219,7 +217,7 @@
         </select>
             <input id="search-keyword" class="form-control me-2" type="search"
                    placeholder="검색어" aria-label="검색어" name="keyword"/>
-            <input class="btn btn-outline-success" type="submit" value="검색"/>
+            <input class="btn btn-outline-success" onclick="searchPlace()" value="검색"/>
         </form>
     </div>
     <!-- 검색창 end -->
@@ -448,20 +446,20 @@
                 </tr>
                 </thead>
                 <tbody id="trip-list">
-                <c:forEach var="place" items="${places }">
-                    <tr>
-                        <td><c:if test="${!empty place.image}">
-                            <img src="${place.image}" alt="" height="100px"/>
-                        </c:if>
-                            <c:if test="${empty place.image}">
-                                <img src="${root}/assets/img/김민섭.PNG" alt="" height="100px"/>
-                            </c:if></td>
-                        <td>${place.title}</td>
-                        <td>${place.addr1}</td>
-                        <td>${place.lat}</td>
-                        <td>${place.lng}</td>
-                    </tr>
-                </c:forEach>
+<%--                <c:forEach var="place" items="${places }">--%>
+<%--                    <tr>--%>
+<%--                        <td><c:if test="${!empty place.image}">--%>
+<%--                            <img src="${place.image}" alt="" height="100px"/>--%>
+<%--                        </c:if>--%>
+<%--                            <c:if test="${empty place.image}">--%>
+<%--                                <img src="${root}/assets/img/김민섭.PNG" alt="" height="100px"/>--%>
+<%--                            </c:if></td>--%>
+<%--                        <td>${place.title}</td>--%>
+<%--                        <td>${place.addr1}</td>--%>
+<%--                        <td>${place.lat}</td>--%>
+<%--                        <td>${place.lng}</td>--%>
+<%--                    </tr>--%>
+<%--                </c:forEach>--%>
                 </tbody>
             </table>
         </div>
@@ -933,6 +931,8 @@
     <c:if test="${!empty msg}">
     alert("${msg}");
     </c:if>
+</script>
+<script>
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
