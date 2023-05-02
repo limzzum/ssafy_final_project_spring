@@ -1,7 +1,9 @@
 package com.ssafy.enjoytrip.model.service;
 
+import com.ssafy.enjoytrip.model.dto.ContentType;
 import com.ssafy.enjoytrip.model.dto.Place;
 import com.ssafy.enjoytrip.model.dto.SearchPlace;
+import com.ssafy.enjoytrip.model.dto.Sido;
 import com.ssafy.enjoytrip.model.mapper.PlaceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +27,15 @@ public class PlaceServiceImpl implements PlaceService{
     @Override
     public Place getPlace(int contentId) {
         return mapper.select(contentId);
+    }
+
+    @Override
+    public List<ContentType> getContents() {
+        return mapper.selectAllContent();
+    }
+
+    @Override
+    public List<Sido> getRegions() {
+        return mapper.selectAllSido();
     }
 }
