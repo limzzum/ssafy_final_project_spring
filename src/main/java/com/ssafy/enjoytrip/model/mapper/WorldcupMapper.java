@@ -8,9 +8,8 @@ import java.util.List;
 @Mapper
 public interface WorldcupMapper {
 
-
-    List<Worldcup> getWorldcupList() ;
-    Worldcup getWorldcup(int id);
-    int updateWorldcupWins(int id);
+    List<Worldcup> selectAll() ;
+    Worldcup select(int id);
+    int update(int id);
 
 }
