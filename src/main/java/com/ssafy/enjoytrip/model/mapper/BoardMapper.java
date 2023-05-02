@@ -11,8 +11,8 @@ public interface BoardMapper {
     int insert(Board board);
     Board select(int postId);
     List<Board> selectAll();
-    List<Board> selectAll(String type);
-    List<Board> selectAll(@Param("type") String type, @Param("userNo") int userNo);
+    List<Board> selectAllType(String type);
+    List<Board> selectAllTypeAndUser(@Param("type") String type, @Param("userNo") int userNo);
     int delete(int postId);
     int update(Board board);
 
