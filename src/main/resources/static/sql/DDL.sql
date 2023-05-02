@@ -272,9 +272,13 @@ insert into content_type values(28,'레포츠');
 insert into content_type values(32,'숙박');
 insert into content_type values(38,'쇼핑');
 insert into content_type values(39,'음식점');
-
+insert into board_info values ('review', 'reviewPage');
+insert into board_info values ('free', 'freePage');
+insert into board_info values ('notice', 'noticePage');
+insert into board_info values ('team', 'teamPage');
+insert into board_info values ('plan', 'planPage');
 INSERT INTO USER
-(user_id,user_name,user_pwd,email,is_admin)
+(user_no,user_id,user_name,user_pwd,email,is_admin)
 VALUES
-    ('admin','관리자','1234','admin@ssafy.com','T'),
-    ('ssafy','김싸피','1234','ssafy@ssafy.com','T');
+    (1,'admin','관리자','1234','admin@ssafy.com','T'),
+    (2,'ssafy','김싸피','1234','ssafy@ssafy.com','T');
