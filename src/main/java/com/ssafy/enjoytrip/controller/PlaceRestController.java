@@ -1,7 +1,9 @@
 package com.ssafy.enjoytrip.controller;
 
+import com.ssafy.enjoytrip.model.dto.ContentType;
 import com.ssafy.enjoytrip.model.dto.Place;
 import com.ssafy.enjoytrip.model.dto.SearchPlace;
+import com.ssafy.enjoytrip.model.dto.Sido;
 import com.ssafy.enjoytrip.model.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +34,22 @@ public class PlaceRestController {
         Place place = service.getPlace(id);
         Map<String, Object> map = new HashMap<>();
         map.put("result", place);
+        return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/content")
+    public ResponseEntity<Map<String, Object>> content(){
+        List<ContentType> contents = service.getContents();
+        Map<String, Object> map = new HashMap<>();
+        map.put("result", contents);
+        return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/region")
+    public ResponseEntity<Map<String, Object>> region(){
+        List<Sido> regions = service.getRegions();
+        Map<String, Object> map = new HashMap<>();
+        map.put("result", regions);
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
