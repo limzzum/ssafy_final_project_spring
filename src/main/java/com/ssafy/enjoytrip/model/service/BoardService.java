@@ -13,5 +13,7 @@ public interface BoardService {
 	int update(Board board);
 	Board get(int postId);
 	List<Board> getAll();
+	List<Board> getAll(String type);
+	List<Board> getAll(String type, int userNo);
 
 }

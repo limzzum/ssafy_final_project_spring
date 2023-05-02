@@ -3,6 +3,9 @@ package com.ssafy.enjoytrip.model.mapper;
 import com.ssafy.enjoytrip.model.dto.Board;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +47,28 @@ class BoardMapperTest {
     void selectAll() {
         List<Board> boards = mapper.selectAll();
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "review", "free", "notice", "team"})
+    void selectAll(String type) {
+        List<Board> boards = mapper.selectAll(type);
+        int max = Math.min(10, boards.size());
+        for (int i = 0; i < max; i++) {
+            assertEquals(boards.get(i).getBoardType(), type);
+        }
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = { "review,1", "free,1", "notice,2", "team,2"})
+    void selectAll(String type, int userNo) {
+        List<Board> boards = mapper.selectAll(type, userNo);
+        int max = Math.min(10, boards.size());
+        for (int i = 0; i < max; i++) {
+            assertEquals(boards.get(i).getBoardType(), type);
+            assertEquals(boards.get(i).getUserNo(), userNo);
+        }
+    }
+
 
     @Test
     void delete() {

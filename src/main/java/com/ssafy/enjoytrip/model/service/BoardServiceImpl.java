@@ -43,5 +43,15 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.selectAll();
 	}
 
+	@Override
+	public List<Board> getAll(String type) {
+		return mapper.selectAllType(type);
+	}
+
+	@Override
+	public List<Board> getAll(String type, int userNo) {
+		return mapper.selectAllTypeAndUser(type,userNo);
+	}
+
 
 }
