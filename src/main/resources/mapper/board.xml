@@ -24,14 +24,14 @@
         from board limit 100;
     </select>
 
-    <select id="selectAll" parameterType="string" resultMap="BoardMap" >
+    <select id="selectAllType" parameterType="string" resultMap="BoardMap" >
         select *
         from board
         where type = #{type}
         limit 100;
     </select>
 
-    <select id="selectAll" parameterType="map" resultMap="BoardMap" >
+    <select id="selectAllTypeAndUser" parameterType="map" resultMap="BoardMap" >
         select *
         from board
         where type = #{type} and user_no = #{userNo}
