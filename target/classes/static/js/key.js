@@ -1,1 +1,0 @@
-const serviceKey = "U6Y9ESynAE13kXP2EQZaC%2FP%2Bo%2FuaYngg4AeVEg3xLo%2F1%2BtWLt3n6YfJH0YmjUyejHsKT0k9ivB0HvSNcIfSvAg%3D%3D";
