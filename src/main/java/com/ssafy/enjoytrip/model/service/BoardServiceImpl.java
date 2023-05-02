@@ -45,12 +45,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<Board> getAll(String type) {
-		return mapper.selectAll(type);
+		return mapper.selectAllType(type);
 	}
 
 	@Override
 	public List<Board> getAll(String type, int userNo) {
-		return mapper.selectAll(type,userNo);
+		return mapper.selectAllTypeAndUser(type,userNo);
 	}
 
 
