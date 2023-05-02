@@ -3,11 +3,9 @@ package com.ssafy.enjoytrip.controller;
 import com.ssafy.enjoytrip.model.dto.Board;
 import com.ssafy.enjoytrip.model.dto.User;
 import com.ssafy.enjoytrip.model.service.BoardService;
-import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -17,11 +15,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/board")
-public class BoardController {
+public class BoardRestController {
     private final BoardService service;
 
     @Autowired
-    public BoardController(BoardService service){
+    public BoardRestController(BoardService service){
         this.service = service;
     }
 
