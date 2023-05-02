@@ -14,6 +14,16 @@
         <result column="longitude" property="lng"/>
     </resultMap>
 
+    <resultMap type="contentType" id="ContentMap">
+        <id column="content_type_id" property="id"/>
+        <result column="content_type_name" property="content"/>
+    </resultMap>
+
+    <resultMap type="sido" id="SidoMap">
+        <id column="sido_code" property="code"/>
+        <result column="sido_name" property="name"/>
+    </resultMap>
+
     <select id="select" parameterType="int" resultMap="PlaceMap" >
         select content_id, content_type_id, title, addr1, first_image, sido_code, latitude, longitude
         from attraction_info
@@ -28,5 +38,14 @@
             limit 100;
     </select>
 
+    <select id="selectAllContent" resultMap="ContentMap" >
+        select *
+        from content_type
+    </select>
+
+    <select id="selectAllSido" resultMap="SidoMap" >
+        select *
+        from sido
+    </select>
 
 </mapper>
