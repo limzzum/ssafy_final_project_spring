@@ -27,14 +27,14 @@
     <select id="selectAllType" parameterType="string" resultMap="BoardMap" >
         select *
         from board
-        where type = #{type}
+        where board_type = #{type}
         limit 100;
     </select>
 
     <select id="selectAllTypeAndUser" parameterType="map" resultMap="BoardMap" >
         select *
         from board
-        where type = #{type} and user_no = #{userNo}
+        where board_type = #{type} and user_no = #{userNo}
         limit 100;
     </select>
 
