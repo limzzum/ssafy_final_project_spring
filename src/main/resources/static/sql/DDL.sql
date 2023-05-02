@@ -282,3 +282,8 @@ INSERT INTO USER
 VALUES
     (1,'admin','관리자','1234','admin@ssafy.com','T'),
     (2,'ssafy','김싸피','1234','ssafy@ssafy.com','T');
+LOCK TABLES `worldcup` WRITE;
+/*!40000 ALTER TABLE `worldcup` DISABLE KEYS */;
+INSERT INTO `worldcup` VALUES (1,'울릉도','여기 해산물이 그렇게 맛있대요','worldcup1.png',1),(2,'제주도','돈있으면 당연히 제주도','worldcup2.png',132),(3,'경주','수학여행 국룰 경주','worldcup3.png',70),(4,'부산','해운대 보유 도시','worldcup4.png',57),(5,'울산','대충 울산 홍보문구','worldcup5.png',12),(6,'강릉','대충 강릉 홍보문구','worldcup6.png',48),(7,'여수','여수 밤바다~ 이 조명에 담긴~','worldcup7.png',35),(8,'해남','대충 해남 홍보문구','worldcup8.png',12);
+/*!40000 ALTER TABLE `worldcup` ENABLE KEYS */;
+UNLOCK TABLES;
