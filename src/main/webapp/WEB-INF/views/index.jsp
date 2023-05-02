@@ -67,7 +67,7 @@
                     <li class="nav-item"><a class="nav-link" aria-current="page"
                                             href="/user/logout" id="logout">로그아웃</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page"
-                                            onclick="return load(`#mypage`);">
+                                            onclick="return mypage();">
                         마이페이지</a></li>
                 </ul>
             </c:if>
@@ -319,14 +319,18 @@
             <div class="tab-pane fade show active" id="userInfo" role="tabpanel"
                  aria-labelledby="userInfo-tab">
                 <table class="table">
+                    <thead>
+                    <tr>
+                        <th>아이디</th>
+                        <th>이름</th>
+                        <th>이메일</th>
+                    </tr>
+                    </thead>
                     <tbody>
                     <tr>
-                        <th scope="row">아이디</th>
-                        <td colspan="2" id="userid">${user.userId }</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">닉네임</th>
-                        <td colspan="2" id="nickname">${user.userName }</td>
+                        <td id="mypageId">${user.userId}</td>
+                        <td id="mypageName">${user.userName}</td>
+                        <td id="mypageEmail">${user.email}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -344,7 +348,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr style="text-align: center;" onclick="moveContent()">
+                        <tr style="text-align: center;">
                             <td>1</td>
                             <td>제목입니다</td>
                             <td>김석주</td>
@@ -356,47 +360,55 @@
             </div>
             <div class="tab-pane fade" id="changeData" role="tabpanel"
                  aria-labelledby="changeData-tab">
-
-                <div class="col-lg-12">
-                    <form method="post" action="${root}/main">
-                        <input type="hidden" name="action" value="updateUser">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <label for="originalpw">기존 비밀번호</label> <input type="text"
-                                                                               class="form-control" id="originalpw"
-                                                                               name="originalpw"
-                                                                               placeholder="" value="" required/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <label for="changpw">새 비밀번호</label> <input type="text"
-                                                                           class="form-control" id="changpw"
-                                                                           name="changpw" placeholder=""
-                                                                           value="" required/>
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="changpw2">새 비밀번호 확인</label> <input type="text"
-                                                                               class="form-control" id="changpw2"
-                                                                               name="changpw2"
-                                                                               placeholder="" value="" required/>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-5 col-md">
-                            <button class="btn btn-primary btn-lg btn-block m-1"
-                                    id="changePW">비밀번호 변경
-                            </button>
-                        </div>
+                <div class="col-12">
+                    <form method="post" action="/user/update">
+                        <input type="hidden" name="userId" value="${user.userId}">
+                        <table class="table table-borderless display-flex p-3"
+                               style="text-align: center; vertical-align: middle">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <label for="originalpw">기존 비밀번호</label>
+                                    <input type="text" class="form-control" id="originalpw" name="originalpw"
+                                           placeholder="" value="" required/>
+                                </td>
+                                <td rowspan="2">
+                                    <button class="btn btn-primary btn-lg btn-block m-1"
+                                            id="changePW">비밀번호 변경
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="changpw">새 비밀번호</label>
+                                    <input type="text" class="form-control" id="changpw" name="changpw" placeholder=""
+                                           value="" required/>
+                                </td>
+                                <td>
+                                    <label for="changpw2">새 비밀번호 확인</label>
+                                    <input type="text" class="form-control" id="changpw2" name="changpw2" placeholder=""
+                                           value="" required/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </form>
-                    <form method="post" action="${root}/main">
-                        <input type="hidden" name="action" value="deleteUser">
-                        <div class="col-lg-5 col-md">
+
+                    <div class="col-md">
+                        <form method="get" action="/user/delete">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input"
+                                       id="deleteConfirm" required/>
+                                <label class="custom-control-label" for="deleteConfirm">회원 탈퇴시 저장된 회원 정보가 사라지는 것을
+                                    이해했으며, 회원 탈퇴에 동의합니다.</label>
+                            </div>
                             <button class="btn btn-primary btn-lg btn-danger btn-block m-1"
-                                    id="login">회원 탈퇴
+                                    id="deleteUser">회원 탈퇴
                             </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
 
             </div>

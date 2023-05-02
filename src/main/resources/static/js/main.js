@@ -1,10 +1,14 @@
 
-async function load(selected) {
+function load(selected) {
     let contents = document.querySelectorAll("#maindiv>div");
     contents.forEach(item => {
         item.style = "display:none";
     });
     document.querySelector(selected).style = "display:inline"
+}
+
+async function mypage(){
+    load("#mypage");
 }
 
 load("#maincarousel");
