@@ -10,13 +10,24 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema enjoytrip
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `enjoytrip` ;
+
+DROP SCHEMA IF EXISTS `enjoytrip`;
 
 -- -----------------------------------------------------
 -- Schema enjoytrip
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `enjoytrip` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE `enjoytrip` ;
+
+-- -----------------------------------------------------
+-- Table `enjoytrip`.`content_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`content_type` (
+                                                          `content_type_id` INT NOT NULL,
+                                                          `content_type_name` VARCHAR(45) NULL,
+                                                          PRIMARY KEY (`content_type_id`))
+    ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `enjoytrip`.`sido`
@@ -117,29 +128,33 @@ CREATE TABLE IF NOT EXISTS `enjoytrip`.`attraction_detail` (
 
 
 -- -----------------------------------------------------
--- Table `enjoytrip`.`user`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `enjoytrip`.`user` (
-                                                  `user_no` INT NOT NULL AUTO_INCREMENT,
-                                                  `user_id` VARCHAR(16) NOT NULL UNIQUE,
-                                                  `user_name` VARCHAR(100) NOT NULL,
-                                                  `user_pwd` VARCHAR(100) NOT NULL,
-                                                  `email` VARCHAR(100) NOT NULL,
-                                                  `is_admin` ENUM('T', 'F') NOT NULL DEFAULT 'F',
-                                                  PRIMARY KEY (`user_no`))
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
 -- Table `enjoytrip`.`board_info`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `enjoytrip`.`board_info` (
                                                         `board_type` ENUM('review', 'free', 'notice', 'team', 'plan') NOT NULL,
                                                         `board_title` VARCHAR(45) NOT NULL,
                                                         PRIMARY KEY (`board_type`))
-    ENGINE = InnoDB;
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `enjoytrip`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`user` (
+                                                  `user_no` INT NOT NULL AUTO_INCREMENT,
+                                                  `user_id` VARCHAR(16) NOT NULL,
+                                                  `user_name` VARCHAR(100) NOT NULL,
+                                                  `user_pwd` VARCHAR(100) NOT NULL,
+                                                  `email` VARCHAR(100) NOT NULL,
+                                                  `is_admin` ENUM('T', 'F') NOT NULL DEFAULT 'F',
+                                                  PRIMARY KEY (`user_no`),
+                                                  UNIQUE INDEX `user_id` (`user_id` ASC) VISIBLE)
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 5
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -148,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `enjoytrip`.`board_info` (
 CREATE TABLE IF NOT EXISTS `enjoytrip`.`board` (
                                                    `post_id` INT NOT NULL AUTO_INCREMENT,
                                                    `title` VARCHAR(40) NOT NULL,
-                                                   `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
+                                                   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                                    `content` VARCHAR(100) NOT NULL,
                                                    `user_no` INT NOT NULL,
                                                    `board_type` ENUM('review', 'free', 'notice', 'team', 'plan') NOT NULL,
@@ -156,16 +171,50 @@ CREATE TABLE IF NOT EXISTS `enjoytrip`.`board` (
                                                    PRIMARY KEY (`post_id`),
                                                    INDEX `board_to_board_info_board_type_fk_idx` (`board_type` ASC) VISIBLE,
                                                    INDEX `board_to_user_user_no_fk_idx` (`user_no` ASC) VISIBLE,
-                                                   CONSTRAINT `board_to_user_user_no_fk`
-                                                       FOREIGN KEY (`user_no`)
-                                                           REFERENCES `enjoytrip`.`user` (`user_no`)
-                                                           ON DELETE NO ACTION
-                                                           ON UPDATE NO ACTION,
                                                    CONSTRAINT `board_to_board_info_board_type_fk`
                                                        FOREIGN KEY (`board_type`)
-                                                           REFERENCES `enjoytrip`.`board_info` (`board_type`)
-                                                           ON DELETE NO ACTION
-                                                           ON UPDATE NO ACTION)
+                                                           REFERENCES `enjoytrip`.`board_info` (`board_type`),
+                                                   CONSTRAINT `board_to_user_user_no_fk`
+                                                       FOREIGN KEY (`user_no`)
+                                                           REFERENCES `enjoytrip`.`user` (`user_no`))
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `enjoytrip`.`board_attraction_map`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`board_attraction_map` (
+                                                                  `post_id` INT NOT NULL,
+                                                                  `content_id` INT NULL DEFAULT NULL,
+                                                                  PRIMARY KEY (`post_id`),
+                                                                  INDEX `map_to_attraction_info_content_id_fk_idx` (`content_id` ASC) VISIBLE,
+                                                                  CONSTRAINT `map_to_attraction_info_content_id_fk`
+                                                                      FOREIGN KEY (`content_id`)
+                                                                          REFERENCES `enjoytrip`.`attraction_info` (`content_id`),
+                                                                  CONSTRAINT `map_to_board_post_id_fk`
+                                                                      FOREIGN KEY (`post_id`)
+                                                                          REFERENCES `enjoytrip`.`board` (`post_id`))
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `enjoytrip`.`user_details`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `enjoytrip`.`user_details` (
+                                                          `user_no` INT NOT NULL,
+                                                          `gugun_code` INT NULL DEFAULT NULL,
+                                                          PRIMARY KEY (`user_no`),
+                                                          INDEX `user_details_to_gugun_gugun_code_fk_idx` (`gugun_code` ASC) VISIBLE,
+                                                          CONSTRAINT `user_details_to_gugun_gugun_code_fk`
+                                                              FOREIGN KEY (`gugun_code`)
+                                                                  REFERENCES `enjoytrip`.`gugun` (`gugun_code`),
+                                                          CONSTRAINT `user_details_to_user_user_no_fk`
+                                                              FOREIGN KEY (`user_no`)
+                                                                  REFERENCES `enjoytrip`.`user` (`user_no`))
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
@@ -185,48 +234,6 @@ CREATE TABLE IF NOT EXISTS `enjoytrip`.`worldcup` (
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
-
--- -----------------------------------------------------
--- Table `enjoytrip`.`board_attraction_map`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `enjoytrip`.`board_attraction_map` (
-                                                                  `post_id` INT NOT NULL,
-                                                                  `content_id` INT NULL,
-                                                                  PRIMARY KEY (`post_id`),
-                                                                  INDEX `map_to_attraction_info_content_id_fk_idx` (`content_id` ASC) VISIBLE,
-                                                                  CONSTRAINT `map_to_board_post_id_fk`
-                                                                      FOREIGN KEY (`post_id`)
-                                                                          REFERENCES `enjoytrip`.`board` (`post_id`)
-                                                                          ON DELETE NO ACTION
-                                                                          ON UPDATE NO ACTION,
-                                                                  CONSTRAINT `map_to_attraction_info_content_id_fk`
-                                                                      FOREIGN KEY (`content_id`)
-                                                                          REFERENCES `enjoytrip`.`attraction_info` (`content_id`)
-                                                                          ON DELETE NO ACTION
-                                                                          ON UPDATE NO ACTION)
-    ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `enjoytrip`.`user_details`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `enjoytrip`.`user_details` (
-                                                          `user_no` INT NOT NULL,
-                                                          `gugun_code` INT NULL,
-                                                          PRIMARY KEY (`user_no`),
-                                                          INDEX `user_details_to_gugun_gugun_code_fk_idx` (`gugun_code` ASC) VISIBLE,
-                                                          CONSTRAINT `user_details_to_user_user_no_fk`
-                                                              FOREIGN KEY (`user_no`)
-                                                                  REFERENCES `enjoytrip`.`user` (`user_no`)
-                                                                  ON DELETE NO ACTION
-                                                                  ON UPDATE NO ACTION,
-                                                          CONSTRAINT `user_details_to_gugun_gugun_code_fk`
-                                                              FOREIGN KEY (`gugun_code`)
-                                                                  REFERENCES `enjoytrip`.`gugun` (`gugun_code`)
-                                                                  ON DELETE NO ACTION
-                                                                  ON UPDATE NO ACTION)
-    ENGINE = InnoDB;
-
 USE `enjoytrip` ;
 
 -- -----------------------------------------------------
@@ -244,24 +251,27 @@ CREATE TABLE IF NOT EXISTS `enjoytrip`.`user_cummon` (`user_no` INT, `user_id` I
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `enjoytrip`.`user_admin`;
 USE `enjoytrip`;
-CREATE  OR REPLACE VIEW `user_admin` AS
-SELECT *
-FROM user
-WHERE is_admin = 'T';
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`ssafy`@`localhost` SQL SECURITY DEFINER VIEW `enjoytrip`.`user_admin` AS select `enjoytrip`.`user`.`user_no` AS `user_no`,`enjoytrip`.`user`.`user_id` AS `user_id`,`enjoytrip`.`user`.`user_name` AS `user_name`,`enjoytrip`.`user`.`user_pwd` AS `user_pwd`,`enjoytrip`.`user`.`email` AS `email`,`enjoytrip`.`user`.`is_admin` AS `is_admin` from `enjoytrip`.`user` where (`enjoytrip`.`user`.`is_admin` = 'T');
 
 -- -----------------------------------------------------
 -- View `enjoytrip`.`user_cummon`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `enjoytrip`.`user_cummon`;
 USE `enjoytrip`;
-CREATE  OR REPLACE VIEW `user_cummon` AS
-SELECT *
-FROM user
-WHERE is_admin = 'T';
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`ssafy`@`localhost` SQL SECURITY DEFINER VIEW `enjoytrip`.`user_cummon` AS select `enjoytrip`.`user`.`user_no` AS `user_no`,`enjoytrip`.`user`.`user_id` AS `user_id`,`enjoytrip`.`user`.`user_name` AS `user_name`,`enjoytrip`.`user`.`user_pwd` AS `user_pwd`,`enjoytrip`.`user`.`email` AS `email`,`enjoytrip`.`user`.`is_admin` AS `is_admin` from `enjoytrip`.`user` where (`enjoytrip`.`user`.`is_admin` = 'T');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+insert into content_type values(12,'관광지');
+insert into content_type values(14,'문화시설');
+insert into content_type values(15,'축제공연행사');
+insert into content_type values(25,'여행코스');
+insert into content_type values(28,'레포츠');
+insert into content_type values(32,'숙박');
+insert into content_type values(38,'쇼핑');
+insert into content_type values(39,'음식점');
 
 INSERT INTO USER
 (user_id,user_name,user_pwd,email,is_admin)
