@@ -16,26 +16,24 @@
     <select id="select" parameterType="int" resultMap="BoardMap" >
         select *
         from board
-        where post_id = #{postId};
+        where post_id = #{postId}
     </select>
 
     <select id="selectAll" resultMap="BoardMap" >
         select *
-        from board limit 100;
+        from board
     </select>
 
     <select id="selectAllType" parameterType="string" resultMap="BoardMap" >
         select *
         from board
         where board_type = #{type}
-        limit 100;
     </select>
 
     <select id="selectAllTypeAndUser" parameterType="map" resultMap="BoardMap" >
         select *
         from board
         where board_type = #{type} and user_no = #{userNo}
-        limit 100;
     </select>
 
     <insert id="insert" parameterType="board">
@@ -45,7 +43,7 @@
         </selectKey>
         insert into board
         (title, content, user_no, board_type)
-            values (#{title},#{content},#{userNo},#{boardType});
+            values (#{title},#{content},#{userNo},#{boardType})
     </insert>
 
     <update id="update" parameterType="board">
@@ -57,7 +55,7 @@
     <delete id="delete" parameterType="int" >
         delete
         from board
-        where post_id = #{postId};
+        where post_id = #{postId}
     </delete>
 
 </mapper>

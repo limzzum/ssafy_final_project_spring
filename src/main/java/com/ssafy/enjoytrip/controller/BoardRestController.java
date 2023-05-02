@@ -6,6 +6,7 @@ import com.ssafy.enjoytrip.model.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -23,7 +24,7 @@ public class BoardRestController {
         this.service = service;
     }
 
-    @GetMapping("/list/{type}")
+    @GetMapping("/list/{type}/{page}")
     public ResponseEntity<Map<String, Object>> list(@PathVariable String type){
 
         List<Board> list = service.getAll(type);

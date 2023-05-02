@@ -1,5 +1,7 @@
 package com.ssafy.enjoytrip.model.mapper;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.ssafy.enjoytrip.model.dto.Board;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -92,5 +94,13 @@ class BoardMapperTest {
 
         assertEquals(selected.getContent(), "change");
 
+    }
+
+    @Test
+    void pageTest(){
+        int perPage = 10;
+        PageHelper.startPage(1,perPage);
+        Page<Board> p = mapper.selectAll();
+        System.out.println(p);
     }
 }

@@ -10,7 +10,6 @@ function load(selected) {
 }
 
 
-
 function taplist(e) {
     document.querySelectorAll(".tap").forEach(function (item) {
         item.classList.remove("active");
