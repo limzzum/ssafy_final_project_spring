@@ -1,7 +1,5 @@
 package com.ssafy.enjoytrip.model.service;
 
-import java.sql.SQLException;
-
 import com.ssafy.enjoytrip.model.dto.User;
 import com.ssafy.enjoytrip.model.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +33,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int delete(User user) {
-		return 0;
+		return mapper.delete(user.getUserId());
 	}
 
 	@Override
 	public int update(User user) {
-		return 0;
+		return mapper.update(user);
 	}
 
 }

@@ -1,10 +1,8 @@
 package com.ssafy.enjoytrip.model.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.ssafy.enjoytrip.model.dto.Board;
-import com.ssafy.enjoytrip.model.dto.User;
 import com.ssafy.enjoytrip.model.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

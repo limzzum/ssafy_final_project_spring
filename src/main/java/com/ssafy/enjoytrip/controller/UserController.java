@@ -4,10 +4,7 @@ import com.ssafy.enjoytrip.model.dto.User;
 import com.ssafy.enjoytrip.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -52,6 +49,29 @@ public class UserController {
                 msg = "오류 발생! 잠시 후 다시 시도해주세요.";
         }
         redirectAttributes.addFlashAttribute("msg", msg);
+        return "redirect:/";
+    }
+
+    @PostMapping("/update")
+    String update(@ModelAttribute User user, @RequestParam String newPwd, RedirectAttributes redirectAttributes) {
+        User check = service.login(user);
+        String msg = "비밀번호 변경 성공";
+        if(check==null) msg="비밀번호가 일치하지 않습니다";
+        else{
+            check.setUserPwd(newPwd);
+            int result = service.update(check);
+            if(result!=1) msg="비밀번호 변경 실패";
+        }
+        redirectAttributes.addFlashAttribute("msg", msg);
+        redirectAttributes.addFlashAttribute("view", "mypage");
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete")
+    String delete(@ModelAttribute User user, HttpSession session, RedirectAttributes redirectAttributes){
+        service.delete(user);
+        session.invalidate();
+        redirectAttributes.addFlashAttribute("msg", "정상적으로 탈퇴되었습니다.");
         return "redirect:/";
     }
 

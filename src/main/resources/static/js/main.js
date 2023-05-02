@@ -4,18 +4,23 @@ function load(selected) {
     contents.forEach(item => {
         item.style = "display:none";
     });
-    document.querySelector(selected).style = "display:inline"
+    selected.forEach(item=>{
+        document.querySelector("#"+item).style = "display:inline"
+    })
 }
 
-async function mypage(){
-    load("#mypage");
-}
 
-load("#maincarousel");
 
 function taplist(e) {
     document.querySelectorAll(".tap").forEach(function (item) {
         item.classList.remove("active");
     });
     e.classList.add("active");
+}
+
+function registUser(){
+    let pw = document.querySelector("#newPw");
+    let check = document.querySelector("#newPwCheck");
+    if(pw.value==check.value) document.querySelector("#userUpdateForm").submit();
+    else alert("새 비밀번호가 일치하지 않습니다");
 }

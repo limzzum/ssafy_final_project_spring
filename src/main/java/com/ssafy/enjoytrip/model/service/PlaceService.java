@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import com.ssafy.enjoytrip.model.dto.Place;
 
 public interface PlaceService {
-	ArrayList<Place> searchPlace(int sido, int type, String keyword) throws SQLException;
-	Place getPlace(String id) throws SQLException;
+	ArrayList<Place> searchPlace(int sido, int type, String keyword);
+	Place getPlace(String id);
 
 }
