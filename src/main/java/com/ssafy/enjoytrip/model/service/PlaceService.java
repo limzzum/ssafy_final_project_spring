@@ -2,11 +2,13 @@ package com.ssafy.enjoytrip.model.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ssafy.enjoytrip.model.dto.Place;
+import com.ssafy.enjoytrip.model.dto.SearchPlace;
 
 public interface PlaceService {
-	ArrayList<Place> searchPlace(int sido, int type, String keyword);
-	Place getPlace(String id);
+	List<Place> searchPlace(SearchPlace searchPlace);
+	Place getPlace(int contentId);
 
 }
