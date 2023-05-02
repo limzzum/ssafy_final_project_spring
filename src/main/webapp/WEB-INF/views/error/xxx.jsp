@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>에러</title>
-</head>
-<body>
-<h1>Error : 알 수 없는 오류</h1>
-</body>
-</html>
+         pageEncoding="UTF-8" %>
+<%@ include file="/WEB-INF/views/error/errorhead.jsp"%>
+
+<div class="container text-center">
+    <h1>알 수 없는 오류입니다</h1>
+    <a href="/" ><img src="/img/tba.jpg" style="border: navy"/></a>
+</div>
+
+<%@ include file="/WEB-INF/views/error/errorfooter.jsp"%>
