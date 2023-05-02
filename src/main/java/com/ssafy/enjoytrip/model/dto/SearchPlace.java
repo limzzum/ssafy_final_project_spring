@@ -9,13 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Place {
-	int id;
-	int type;
-	String title;
-	String addr1;
-	String image;
-	int sido;
-	double lat;
-	double lng;
+public class SearchPlace {
+    int sido;
+    int type;
+    String keyword;
 }
