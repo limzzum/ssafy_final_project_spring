@@ -45,7 +45,7 @@
                 <li class="nav-item"><a class="nav-link" aria-current="page"
                                         onclick="return load([`recommend`]);">맛집 뽑기</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page"
-                                        onclick="return load([`boardview`]);">게시판</a></li>
+                                        onclick="return board();">게시판</a></li>
             </ul>
             <%--main contents link end--%>
 
@@ -278,7 +278,7 @@
                 </a>
             </div>
             <div class="carousel-item">
-                <a onclick="return load([`boardview`]);"  class="stretched-link">
+                <a onclick="return board();"  class="stretched-link">
                     <img src="/img/005.jpg" alt="게시판" class="d-block"
                          style="min-width: 100%; min-height: 200px"/>
                     <div class="opacity-75 carousel-caption bg-light p-2 rounded-3 text-dark">
@@ -800,7 +800,7 @@
             <!-- 게시판 내용 start -->
             <div class="col-8">
                 <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="list-board1"
+                    <div class="tab-pane fade show active text-center" id="list-board1"
                          role="tabpanel" aria-labelledby="board1-list">
                         <h3>공지사항</h3>
                         <table class="table table-hover" id="boardtable">
