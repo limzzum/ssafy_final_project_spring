@@ -394,17 +394,14 @@
     <div id="themetrip">
         <!-- Map start -->
         <div class="container text-center" style="text-align: center">
-            <center>
-                <div id="map" style="width: 100%; height: 500px"></div>
-            </center>
-
+            <div id="map" style="width: 100%; height: 500px"></div>
         </div>
 
         <!-- Map end -->
 
         <!-- 검색 결과 start -->
         <div class="container text-center">
-            <table class="table table-striped">
+            <table class="table table-hover">
                 <thead>
                 <tr>
                     <th>대표이미지</th>
@@ -452,7 +449,7 @@
 
                 <!-- 검색 결과 start -->
                 <div class="container text-center">
-                    <table class="table table-striped">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
                             <th>대표이미지</th>
@@ -537,17 +534,17 @@
             <h2 class="align-middle col-12 border border-primary bg-primary-subtle p-3" style="text-align: center;" id="worldcuptitle"></h2>
         </div>
         <div class="row justify-content-center">
-            <div class="align-middle col-4 p-5 m-5" style="text-align: center;" id="sel1" ></div>
-            <div class="col-6 p-3" style="text-align: center;" id="res1" >
+            <div class="align-middle col-3" style="text-align: center; vertical-align: center" id="sel1" ></div>
+            <div class="col-9 p-3 border border-primary" style="text-align: center;" id="res1" >
                 <h2 style="text-align: center;">다른 사람들의 선택은...</h2>
-                <table class="table table-striped">
+                <table class="table table-hover align-middle">
                     <thead>
                     <tr>
                         <th>이미지</th>
                         <th>관광지명</th>
                         <th>설명</th>
                         <th>1등 횟수</th>
-                        <th>비율</th>
+                        <th style="width:35%">비율</th>
                     </tr>
                     </thead>
                     <tbody id="others">
@@ -644,6 +641,7 @@
 </script>
 <script src="/js/worldcup.js">
 </script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00a97d244434a3292c2f2c25d767ace3"></script>
 <script>
     <c:if test="${empty view}">
     load(["themesearch", "maincarousel"]);
@@ -656,6 +654,8 @@
     <c:if test="${!empty msg}">
     alert("${msg}");
     </c:if>
+    kakaoMap("map");
+    kakaoMap("planmap");
 </script>
 <script>
 </script>

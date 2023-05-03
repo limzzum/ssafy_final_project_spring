@@ -27,8 +27,8 @@ async function worldcup(){
 async function worldcupResult(id){
     document.querySelector("#worldcuptitle").innerHTML=`🛫나의 마음 속 1등 관광지는 바로 ${worldcups[0].title }입니다!!!🛫`;
     document.querySelector("#sel1").innerHTML =
-        `<img src="/img/${worldcups[0].img}" class="align-middle img-className rounded-3" />
-        <h2 style="text-align: center;" >${worldcups[0].content}</h2>`
+        `<div class="border border-primary bg-primary-subtle p-3"><img src="/img/${worldcups[0].img}" class="align-middle img-fluid rounded-3" />
+        <h2 style="text-align: center;" >${worldcups[0].content}</h2></div>`
     let config = {
         method : "get",
     };
@@ -43,6 +43,7 @@ async function worldcupResult(id){
         totalWin+=i.wins;
     }
     json.result.forEach(item=>{
+        let percent = parseInt((100*item.wins/totalWin).toFixed(0));
         others.innerHTML += `<tr>
         <td className="align-middle"><img src="/img/${item.img }"
                                           className="img-fluid rounded-3 img-thumbnail" style="width:100px;"/></td>
@@ -50,7 +51,7 @@ async function worldcupResult(id){
         <td className="align-middle">${item.content}</td>
         <td className="align-middle">${item.wins}</td>
         <td className="align-middle"><div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="${(100*item.wins/totalWin).toFixed(0)}" aria-valuemin="0" aria-valuemax="100">${(100*item.wins/totalWin).toFixed(0)}%</div>
+        <div class="progress-bar progress-bar-striped ${item.id===worldcups[0].id?"bg-success progress-bar-animated":"bg-warning"}" role="progressbar" style="width: ${10+percent}%" aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100">${percent}%</div>
         </div>
         </td>
     </tr>`;
