@@ -79,9 +79,7 @@ async function searchPlace(page){
     let sido = document.getElementById(page+"search-area").value
     let type = document.getElementById(page+"search-content-id").value
     let keyword = document.getElementById(page+"search-keyword").value
-    console.log(sido);
-    console.log(type);
-    console.log(keyword);
+
     if(!sido || !type || !keyword){
         alert("null값 안돼요");
         return;
@@ -121,7 +119,7 @@ async function searchPlace(page){
     markers = [];
     var bounds = new kakao.maps.LatLngBounds();
     result.forEach(place =>{
-        let trip = `<tr>
+        let trip = `<tr onclick=addMyPlane(${place.id})>
                     <td><img src="${place.image}" alt="" height="100px" onerror="this.src=/img/김민섭.PNG"/></td>
                     <td>${place.title}</td>
                     <td>${place.addr1}</td>
@@ -194,8 +192,27 @@ async function getContent() {
 
 getContent();
 
-document.querySelector("#trip-list").addEventListener("change", (e) => {
+let myList = document.querySelector("#my-list");
+async function addMyPlane(id){
+    let config = {
+        method:"GET"
+    };
+    let response = await fetch("/api/place/"+id, config);
+    let json = await response.json();
+    let result = json.result;
+    console.log(json.result)
 
-});
+    // let add = `<tr>
+    //                         <td><img src="\${result.image}"></td>
+    //                         <td>\${result.title}</td>
+    //                         <td>\${result.addr1}</td>
+    //                         <td></td>
+    //                   </tr>`;
+    // myList.append(add);
+}
+// document.querySelector("#placeOne").addEventListener("click", (e) => {
+//
+//     myList.append()
+// });
 
 
