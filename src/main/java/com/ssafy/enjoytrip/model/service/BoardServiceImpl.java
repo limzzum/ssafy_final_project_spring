@@ -1,7 +1,9 @@
 package com.ssafy.enjoytrip.model.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.github.pagehelper.Page;
 import com.ssafy.enjoytrip.model.dto.Board;
 import com.ssafy.enjoytrip.model.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +13,14 @@ import org.springframework.stereotype.Service;
 public class BoardServiceImpl implements BoardService {
 
 	private BoardMapper mapper;
+
 	@Autowired
 	public BoardServiceImpl(BoardMapper mapper){
 		this.mapper = mapper;
 	}
 
 	@Override
-	public int add(Board board) {
+	public int insert(Board board) {
 		return mapper.insert(board);
 	}
 
@@ -32,24 +35,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Board get(int postId) {
+	public Board select(int postId) {
 		return mapper.select(postId);
 	}
 
 	@Override
-	public List<Board> getAll() {
-		return mapper.selectAll();
+	public Page<Board> search(Map<String,Object> keys) {
+		return mapper.search(keys);
 	}
-
-	@Override
-	public List<Board> getAll(String type) {
-		return mapper.selectAllType(type);
-	}
-
-	@Override
-	public List<Board> getAll(String type, int userNo) {
-		return mapper.selectAllTypeAndUser(type,userNo);
-	}
-
 
 }

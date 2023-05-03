@@ -272,11 +272,11 @@ insert into content_type values(28,'레포츠');
 insert into content_type values(32,'숙박');
 insert into content_type values(38,'쇼핑');
 insert into content_type values(39,'음식점');
-insert into board_info values ('review', 'reviewPage');
-insert into board_info values ('free', 'freePage');
-insert into board_info values ('notice', 'noticePage');
-insert into board_info values ('team', 'teamPage');
-insert into board_info values ('plan', 'planPage');
+insert into board_info values ('review', '여행 후기');
+insert into board_info values ('free', '자유게시판');
+insert into board_info values ('notice', '공지사항');
+insert into board_info values ('team', '일행 구하기');
+insert into board_info values ('plan', '여행 코스');
 INSERT INTO USER
 (user_no,user_id,user_name,user_pwd,email,is_admin)
 VALUES
@@ -286,4 +286,42 @@ LOCK TABLES `worldcup` WRITE;
 /*!40000 ALTER TABLE `worldcup` DISABLE KEYS */;
 INSERT INTO `worldcup` VALUES (1,'울릉도','여기 해산물이 그렇게 맛있대요','worldcup1.png',1),(2,'제주도','돈있으면 당연히 제주도','worldcup2.png',132),(3,'경주','수학여행 국룰 경주','worldcup3.png',70),(4,'부산','해운대 보유 도시','worldcup4.png',57),(5,'울산','대충 울산 홍보문구','worldcup5.png',12),(6,'강릉','대충 강릉 홍보문구','worldcup6.png',48),(7,'여수','여수 밤바다~ 이 조명에 담긴~','worldcup7.png',35),(8,'해남','대충 해남 홍보문구','worldcup8.png',12);
 /*!40000 ALTER TABLE `worldcup` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `board` WRITE;
+/*!40000 ALTER TABLE `board` DISABLE KEYS */;
+INSERT INTO `board`
+(title,create_time,content,user_no,board_type,hits)
+VALUES
+    ("여행어때 사이트 오픈!!",now(),"우리나라의 여러 관광지들을 검색하고 계획, 리뷰, 추천 등 여행 정보 수집에 도움을 주는 여행어때 사이트를 오픈했습니다!! 많은 관심과 사랑 부탁드려요",1,"notice",12),
+    ("관광지 검색 방법",now(),"잘 해보세요",1,"notice",12),
+    ("나만의 여행 계획을 등록하고 다른 사람에게 공유해보세요",now(),"추첨을 통해 조용준 교수님의 디버깅 5회 쿠폰을 증정합니다",1,"notice",12),
+    ("관광지 월드컵 기능 업데이트",now(),"여러 관광지 중 나만의 베스트 1픽을 골라보세요",1,"notice",12),
+    ("맛집 뽑기 기능 업데이트",now(),"선택장애를 위한 맛집 추천",1,"notice",12),
+    ("제주도 관광 후기",now(),"제주도 관광 후기",2,"review",12),
+    ("울릉도 관광 후기",now(),"울릉도 관광 후기",2,"review",1),
+    ("제주도 관광 후기2",now(),"제주도 관광 후기",2,"review",12),
+    ("울릉도 관광 후기2",now(),"울릉도 관광 후기",2,"review",1),
+    ("제주도 관광 후기3",now(),"제주도 관광 후기",2,"review",12),
+    ("울릉도 관광 후기3",now(),"울릉도 관광 후기",2,"review",1),
+    ("제주도 관광 후기4",now(),"제주도 관광 후기",2,"review",12),
+    ("울릉도 관광 후기4",now(),"울릉도 관광 후기",2,"review",1),
+    ("제주도 관광 후기5",now(),"제주도 관광 후기",2,"review",12),
+    ("울릉도 관광 후기5",now(),"울릉도 관광 후기",2,"review",1),
+    ("제주도 관광 후기6",now(),"제주도 관광 후기",2,"review",12),
+    ("울릉도 관광 후기6",now(),"울릉도 관광 후기",2,"review",1),
+    ("제주도 관광 후기7",now(),"제주도 관광 후기",2,"review",12),
+    ("울릉도 관광 후기7",now(),"울릉도 관광 후기",2,"review",1),
+    ("제주도 관광 후기8",now(),"제주도 관광 후기",2,"review",12),
+    ("울릉도 관광 후기8",now(),"울릉도 관광 후기",2,"review",1),
+    ("제주도 관광 후기9",now(),"제주도 관광 후기",2,"review",12),
+    ("울릉도 관광 후기9",now(),"울릉도 관광 후기",2,"review",1),
+    ("제주도 관광 후기10",now(),"제주도 관광 후기",2,"review",12),
+    ("울릉도 관광 후기10",now(),"울릉도 관광 후기",2,"review",1),
+    ("제주도 관광 후기11",now(),"제주도 관광 후기",2,"review",12),
+    ("울릉도 관광 후기11",now(),"울릉도 관광 후기",2,"review",1),
+    ("제주도 관광 후기12",now(),"제주도 관광 후기",2,"review",12),
+    ("울릉도 관광 후기12",now(),"울릉도 관광 후기",2,"review",1)
+;
+/*!40000 ALTER TABLE `board` ENABLE KEYS */;
 UNLOCK TABLES;
