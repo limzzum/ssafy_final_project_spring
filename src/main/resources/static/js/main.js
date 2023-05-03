@@ -48,11 +48,14 @@ async function kakaoMap(){
 
 //관광지 search
 
-async function searchPlace(){
+async function searchPlace(page){
+    if(!page){
+        page = "";
+    }
     console.log("search")
-    let sido = document.getElementById("search-area").value
-    let type = document.getElementById("search-content-id").value
-    let keyword = document.getElementById("search-keyword").value
+    let sido = document.getElementById(page+"search-area").value
+    let type = document.getElementById(page+"search-content-id").value
+    let keyword = document.getElementById(page+"search-keyword").value
     console.log(sido);
     console.log(type);
     console.log(keyword);
@@ -75,9 +78,13 @@ async function searchPlace(){
     let json = await response.json();
     let result = json.result
     console.log(result);
-    load([`themesearch`,`themetrip`]);
-    let tripList = document.querySelector("#trip-list")
-    let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    if(!page) {
+        load([`themesearch`, `themetrip`]);
+    }else {
+        load(['themesearch','myplan'])
+    }
+    let tripList = document.querySelector("#"+page+"trip-list")
+    let container = document.getElementById(page+'map'); //지도를 담을 영역의 DOM 레퍼런스
     let options = { //지도를 생성할 때 필요한 기본 옵션
         center: new kakao.maps.LatLng(37.55998551, 126.9752993), //지도의 중심좌표.
         level: 3 //지도의 레벨(확대, 축소 정도)
@@ -113,9 +120,7 @@ async function searchPlace(){
     })
     map.setBounds(bounds);
     // document.querySelector("#trip-list").innerHTML = tripList;
-
 }
-
 
 async function getRegion() {
     let regionUrl = "/api/place/region";
@@ -126,13 +131,17 @@ async function getRegion() {
     let json = await response.json();
 
     let regions = json.result;
-    let area = document.querySelector("#search-area");
-    regions.forEach((data) => {
-        let option = document.createElement("option");
-        option.value = data.code;
-        option.innerHTML = data.name;
-        area.append(option);
-    });
+    let area = document.querySelectorAll("#search-area, #plansearch-area");
+    console.log(area)
+    area.forEach(a => {
+        regions.forEach((data) => {
+            let option = document.createElement("option");
+            option.value = data.code;
+            option.innerHTML = data.name;
+            a.append(option);
+        });
+    })
+
 }
 getRegion();
 
@@ -147,14 +156,17 @@ async function getContent() {
 
     console.log(json);
     let guguns = json.result;
-    let area = document.querySelector("#search-content-id");
+    let area = document.querySelectorAll("#search-content-id, #plansearch-content-id");
     // area.innerHTML = `<option value="0" selected>구/군 선택</option>`;
-    guguns.forEach((data) => {
-        let option = document.createElement("option");
-        option.value = data.id;
-        option.innerHTML = data.content;
-        area.append(option);
-    });
+    area.forEach(a=>{
+        guguns.forEach((data) => {
+            let option = document.createElement("option");
+            option.value = data.id;
+            option.innerHTML = data.content;
+            a.append(option);
+        });
+    })
+
 }
 
 getContent();
