@@ -3,6 +3,7 @@ package com.ssafy.enjoytrip.model.mapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.ssafy.enjoytrip.model.dto.Board;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,12 +14,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
+@Slf4j
 class BoardMapperTest {
 
     @Autowired
@@ -46,29 +50,12 @@ class BoardMapperTest {
     }
 
     @Test
-    void selectAll() {
-        List<Board> boards = mapper.selectAll();
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = { "review", "free", "notice", "team"})
-    void selectAll(String type) {
-        List<Board> boards = mapper.selectAllType(type);
-        int max = Math.min(10, boards.size());
-        for (int i = 0; i < max; i++) {
-            assertEquals(boards.get(i).getBoardType(), type);
-        }
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = { "review,1", "free,1", "notice,2", "team,2"})
-    void selectAll(String type, int userNo) {
-        List<Board> boards = mapper.selectAllTypeAndUser(type, userNo);
-        int max = Math.min(10, boards.size());
-        for (int i = 0; i < max; i++) {
-            assertEquals(boards.get(i).getBoardType(), type);
-            assertEquals(boards.get(i).getUserNo(), userNo);
-        }
+    void search(){
+        Map<String,Object> keys = new HashMap<>();
+        keys.put("title","제주도");
+        keys.put("boardType","review");
+        keys.put("userId",2);
+        log.info("search Test : "+mapper.search(keys));
     }
 
 
@@ -100,7 +87,7 @@ class BoardMapperTest {
     void pageTest(){
         int perPage = 10;
         PageHelper.startPage(1,perPage);
-        Page<Board> p = mapper.selectAll();
+        Page<Board> p = mapper.search(new HashMap<>());
         System.out.println(p);
     }
 }

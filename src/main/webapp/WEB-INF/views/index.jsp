@@ -650,7 +650,7 @@
         <!-- start -->
         <div class="row justify-content-center">
             <div class="col-12 ">
-                <h2 style="text-align: center;" id="title">국내 관광지 월드컵 8강 (1/4)</h2>
+                <h2 style="text-align: center;" id="worldtitle">국내 관광지 월드컵 8강 (1/4)</h2>
             </div>
             <div class="row justify-content-center">
                 <div
@@ -703,7 +703,7 @@
                         return;
                     }
                 }
-                document.getElementById("title").innerHTML= (round==2)?`국내 관광지 월드컵 결승`:`국내 관광지 월드컵 <%="${round }"%>강 (<%="${step++ }"%>/<%="${round/2 }"%>)`;
+                document.getElementById("worldtitle").innerHTML= (round==2)?`국내 관광지 월드컵 결승`:`국내 관광지 월드컵 <%="${round }"%>강 (<%="${step++ }"%>/<%="${round/2 }"%>)`;
                 document.getElementById("s1").innerHTML= `
 				<img src="${root }/assets/img/<%="${worldcups[0].img }"%>" class="img-fluid rounded-3" id="img1" />
 				<h2 style="text-align: center;" id="text1"><%="${worldcups[0].content }"%></h2>`;

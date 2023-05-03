@@ -28,8 +28,9 @@ public class BoardRestController {
     @GetMapping("/{type}/{page}")
     public ResponseEntity<Map<String, Object>> list(@PathVariable String type,@PathVariable int page){
         PageHelper.startPage(page,10);
-        List<Board> list = service.getAll(type);
-        Map<String, Object> map = new HashMap<>();
+        Map<String,Object> keys = new HashMap<>(), map = new HashMap<>();
+        keys.put("type",type);
+        List<Board> list = service.search(keys);
         map.put("result", list);
 
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
@@ -38,8 +39,10 @@ public class BoardRestController {
     @GetMapping("/{type}/my")
     public ResponseEntity<Map<String, Object>> list(@PathVariable String type, HttpSession session){
         User loginUser = (User) session.getAttribute("loginUser");
-        List<Board> list = service.getAll(type, loginUser.getUserNo());
-        Map<String, Object> map = new HashMap<>();
+        Map<String,Object> keys = new HashMap<>(), map = new HashMap<>();
+        keys.put("type",type);
+        keys.put("userNo",loginUser.getUserNo());
+        List<Board> list = service.search(keys);
         map.put("result", list);
 
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
@@ -49,7 +52,7 @@ public class BoardRestController {
     public ResponseEntity<Map<String, Object>> add(@RequestBody Board board, HttpSession session){
         User loginUser = (User) session.getAttribute("loginUser");
         board.setUserNo(loginUser.getUserNo());
-        int result = service.add(board);
+        int result = service.insert(board);
         Map<String, Object> map = new HashMap<>();
         map.put("result", result);
 

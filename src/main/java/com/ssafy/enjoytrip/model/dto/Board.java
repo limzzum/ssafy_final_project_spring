@@ -20,5 +20,6 @@ public class Board {
 	int userNo;
 	String boardType;
 	int hits;
-
+	String userName;
+	String boardTitle;
 }
