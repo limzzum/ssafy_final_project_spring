@@ -41,7 +41,7 @@
                 <li class="nav-item"><a class="nav-link" aria-current="page"
                                         onclick="return load([`myplan`]);">나의 여행 계획</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page"
-                                        onclick="return load([`worldcup`]);">관광지 월드컵</a></li>
+                                        onclick="return worldcup();">관광지 월드컵</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page"
                                         onclick="return load([`recommend`]);">맛집 뽑기</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page"
@@ -233,7 +233,7 @@
                 </a>
             </div>
             <div class="carousel-item">
-                <a onclick="return load([`worldcup`]);"  class="stretched-link">
+                <a onclick="return worldcup();"  class="stretched-link">
                     <img src="/img/003.jpg" alt="관광지 월드컵"
                          class="d-block" style="min-width: 100%; min-height: 200px"/>
                     <div class="bg-opacity-50 carousel-caption bg-light p-2 rounded-3 text-dark">
@@ -394,17 +394,14 @@
     <div id="themetrip">
         <!-- Map start -->
         <div class="container text-center" style="text-align: center">
-            <center>
-                <div id="map" style="width: 100%; height: 500px"></div>
-            </center>
-
+            <div id="map" style="width: 100%; height: 500px"></div>
         </div>
 
         <!-- Map end -->
 
         <!-- 검색 결과 start -->
         <div class="container text-center">
-            <table class="table table-striped">
+            <table class="table table-hover">
                 <thead>
                 <tr>
                     <th>대표이미지</th>
@@ -452,7 +449,7 @@
 
                 <!-- 검색 결과 start -->
                 <div class="container text-center">
-                    <table class="table table-striped">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
                             <th>대표이미지</th>
@@ -527,61 +524,6 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript">
-            var worldcups = [], selected = [];
-            var round = 8, step = 1;
-            <c:forEach var="worldcup" items="${worldcups}">
-            worldcups.push({
-                id:"${worldcup.id}",
-                title:"${worldcup.title}",
-                img:"${worldcup.img}",
-                content:"${worldcup.content}",
-                wins:"${worldcup.wins}"
-            });
-            </c:forEach>
-            show();
-            console.log(worldcups);
-            function shuffle(array) {
-                for (let index = array.length - 1; index > 0; index--) {
-                    const randomPosition = Math.floor(Math.random() * (index + 1));
-                    const temporary = array[index];
-                    array[index] = array[randomPosition];
-                    array[randomPosition] = temporary;
-                }
-            }
-            function show(){
-                if(worldcups.length == 0){
-                    if(round>1){
-                        shuffle(selected);
-                        worldcups = selected;
-                        selected = [];
-                        round/=2;
-                        step = 1;
-                    }
-                    if(round==1){
-                        location.href = `${root }/main?action=worldcup&selected=<%="${worldcups[0].id }"%>`;
-                        return;
-                    }
-                }
-                document.getElementById("worldtitle").innerHTML= (round==2)?`국내 관광지 월드컵 결승`:`국내 관광지 월드컵 <%="${round }"%>강 (<%="${step++ }"%>/<%="${round/2 }"%>)`;
-                document.getElementById("s1").innerHTML= `
-				<img src="${root }/assets/img/<%="${worldcups[0].img }"%>" class="img-fluid rounded-3" id="img1" />
-				<h2 style="text-align: center;" id="text1"><%="${worldcups[0].content }"%></h2>`;
-                document.getElementById("s2").innerHTML= `
-				<img src="${root }/assets/img/<%="${worldcups[1].img }"%>" class="img-fluid rounded-3" id="img1" />
-				<h2 style="text-align: center;" id="text1"><%="${worldcups[1].content }"%></h2>`;
-            }
-            function select1(){
-                selected.push(worldcups.shift());
-                worldcups.shift();
-                show();
-            }
-            function select2(){
-                worldcups.shift();
-                selected.push(worldcups.shift());
-                show();
-            }
-        </script>
         <!-- end -->
     </div>
     <!-- 이상형월드컵 end -->
@@ -589,36 +531,24 @@
     <!-- 이상형월드컵 결과 start -->
     <div id="worldcup-result">
         <div class="col-12 justify-content-center" style="text-align: center;">
-            <h2 class="align-middle col-12 border border-primary bg-primary-subtle p-3" style="text-align: center;" id="worldcuptitle">🛫나의 마음 속 1등 관광지는 바로 ${selectedWorldcup.title }입니다!!!🛫</h2>
-
+            <h2 class="align-middle col-12 border border-primary bg-primary-subtle p-3" style="text-align: center;" id="worldcuptitle"></h2>
         </div>
         <div class="row justify-content-center">
-            <div class="align-middle col-4 p-5 m-5" style="text-align: center;" id="sel1" >
-                <img src="${root }/assets/img/${selectedWorldcup.img }" class="align-middle img-fluid rounded-3" id="img1" />
-                <h2 style="text-align: center;" id="text1">${selectedWorldcup.content }</h2>
-            </div>
-            <div class="col-6 p-3" style="text-align: center;" id="res1" >
+            <div class="align-middle col-3" style="text-align: center; vertical-align: center" id="sel1" ></div>
+            <div class="col-9 p-3 border border-primary" style="text-align: center;" id="res1" >
                 <h2 style="text-align: center;">다른 사람들의 선택은...</h2>
-                <table class="table table-striped">
+                <table class="table table-hover align-middle">
                     <thead>
                     <tr>
                         <th>이미지</th>
                         <th>관광지명</th>
                         <th>설명</th>
                         <th>1등 횟수</th>
-                        <th>비율</th>
+                        <th style="width:35%">비율</th>
                     </tr>
                     </thead>
-                    <tbody id="worldcup-list">
-                    <c:forEach var = "worldcup" items="${worldcups }">
-                        <tr>
-                            <td class="align-middle"><img src="${root }/assets/img/${worldcup.img }" class="img-fluid rounded-3 img-thumbnail"  style="width:100px;" /></td>
-                            <td class="align-middle">${worldcup.title}</td>
-                            <td class="align-middle">${worldcup.content}</td>
-                            <td class="align-middle">${worldcup.wins}</td>
-                            <td class="align-middle"><fmt:formatNumber value="${(worldcup.wins/totalWin)}" type="percent"/></td>
-                        </tr>
-                    </c:forEach>
+                    <tbody id="others">
+
                     </tbody>
                 </table>
             </div>
@@ -709,6 +639,9 @@
 
 <script src="/js/main.js">
 </script>
+<script src="/js/worldcup.js">
+</script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00a97d244434a3292c2f2c25d767ace3"></script>
 <script>
     <c:if test="${empty view}">
     load(["themesearch", "maincarousel"]);
@@ -721,6 +654,8 @@
     <c:if test="${!empty msg}">
     alert("${msg}");
     </c:if>
+    kakaoMap("map");
+    kakaoMap("planmap");
 </script>
 <script>
 </script>

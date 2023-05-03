@@ -4,7 +4,8 @@
 <mapper namespace="com.ssafy.enjoytrip.model.mapper.WorldcupMapper">
 
     <select id="selectAll" resultType="worldcup">
-        select * from worldcup;
+        select * from worldcup
+        order by wins desc;
     </select>
 
     <select id="select" parameterType="int" resultType="worldcup">
