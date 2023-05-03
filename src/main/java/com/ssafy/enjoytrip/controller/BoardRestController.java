@@ -1,9 +1,11 @@
 package com.ssafy.enjoytrip.controller;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.ssafy.enjoytrip.model.dto.Board;
 import com.ssafy.enjoytrip.model.dto.User;
 import com.ssafy.enjoytrip.model.service.BoardService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/board")
+@Slf4j
 public class BoardRestController {
     private final BoardService service;
 
@@ -29,27 +32,16 @@ public class BoardRestController {
     public ResponseEntity<Map<String, Object>> list(@PathVariable String type,@PathVariable int page){
         PageHelper.startPage(page,10);
         Map<String,Object> keys = new HashMap<>(), map = new HashMap<>();
-        keys.put("type",type);
-        List<Board> list = service.search(keys);
+        keys.put("boardType",type);
+        log.info("search : "+keys);
+        Page<Board> list = service.search(keys);
         map.put("result", list);
-
+        map.put("pages",list.getPages());
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/{type}/my")
-    public ResponseEntity<Map<String, Object>> list(@PathVariable String type, HttpSession session){
-        User loginUser = (User) session.getAttribute("loginUser");
-        Map<String,Object> keys = new HashMap<>(), map = new HashMap<>();
-        keys.put("type",type);
-        keys.put("userNo",loginUser.getUserNo());
-        List<Board> list = service.search(keys);
-        map.put("result", list);
-
-        return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
-    }
-
-    @PostMapping("/add")
-    public ResponseEntity<Map<String, Object>> add(@RequestBody Board board, HttpSession session){
+    @PostMapping("/regist")
+    public ResponseEntity<Map<String, Object>> regist(@RequestBody Board board, HttpSession session){
         User loginUser = (User) session.getAttribute("loginUser");
         board.setUserNo(loginUser.getUserNo());
         int result = service.insert(board);

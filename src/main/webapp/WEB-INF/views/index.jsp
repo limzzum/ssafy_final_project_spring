@@ -713,16 +713,16 @@
             <div class="col-4">
                 <div class="list-group" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active"
-                       id="board1-list" data-bs-toggle="list" href="#list-board1"
+                       id="board1-list" data-bs-toggle="list"
                        role="tab" aria-controls="list-board1" onclick="return board(`notice`,1);">공지사항</a> <a
                         class="list-group-item list-group-item-action" id="board2-list"
-                        data-bs-toggle="list" href="#list-board1" role="tab"
+                        data-bs-toggle="list" role="tab"
                         aria-controls="list-board1" onclick="return board(`review`,1);">여행 후기</a> <a
                         class="list-group-item list-group-item-action" id="board3-list"
-                        data-bs-toggle="list" href="#list-board1" role="tab"
+                        data-bs-toggle="list" role="tab"
                         aria-controls="list-board1" onclick="return board(`free`,1);">자유게시판</a> <a
                         class="list-group-item list-group-item-action" id="board4-list"
-                        data-bs-toggle="list" href="#list-board1" role="tab"
+                        data-bs-toggle="list" role="tab"
                         aria-controls="list-board1" onclick="return board(`team`,1);">일행 구하기</a>
                 </div>
             </div>

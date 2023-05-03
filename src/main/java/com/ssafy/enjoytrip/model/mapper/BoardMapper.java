@@ -11,7 +11,6 @@ import java.util.Map;
 
 @Mapper
 public interface BoardMapper {
-    int count();
     int insert(Board board);
     Board select(int postId);
     Page<Board> search(Map<String,Object> keys);
