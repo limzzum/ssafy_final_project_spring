@@ -14,22 +14,9 @@ async function board(type, page) {
     json.result.forEach( item => {
         text += `<tr><td>${item.postId}</td><td>${item.title}</td><td>${item.userName}</td><td>${item.hits}</td></tr>`;
     });
-    text += `</tbody></table><nav><ul class="pagination justify-content-center">`;
-    text += `<li class="page-item"><a class="page-link" onclick="return board('${type}',1);">처음</a></li>`;
-    if(Math.max(1,page-5)!=1){
-        text += `<li class="page-item"><a class="page-link disabled">...</a></li>`;
-    }
-    for(let i=Math.max(1,page-5);i<page;i++){
-        text += `<li class="page-item"><a class="page-link" onclick="return board('${type}',${i});">${i}</a></li>`;
-    }
-    text += `<li class="page-item"><a class="page-link active" onclick="return board('${type}',${page});">${page}</a></li>`;
-    for(let i=page+1;i<=Math.min(json.pages,page+5);i++){
-        text += `<li class="page-item"><a class="page-link" onclick="return board('${type}',${i});">${i}</a></li>`;
-    }
-    if(Math.min(json.pages,page+5)!=json.pages){
-        text += `<li class="page-item"><a class="page-link disabled">...</a></li>`;
-    }
-    text += `<li class="page-item"><a class="page-link" onclick="return board('${type}',${json.pages});">끝</a></li>`;
-    text+=`</ul></nav>`
+    text += `</tbody></table>`;
+
+    text += pageHtml(`return board('${type}'`,`);`,page,json.pages);
+
     resDiv.innerHTML = text;
 }

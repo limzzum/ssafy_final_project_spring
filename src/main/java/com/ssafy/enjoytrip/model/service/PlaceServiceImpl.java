@@ -1,8 +1,8 @@
 package com.ssafy.enjoytrip.model.service;
 
+import com.github.pagehelper.Page;
 import com.ssafy.enjoytrip.model.dto.ContentType;
 import com.ssafy.enjoytrip.model.dto.Place;
-import com.ssafy.enjoytrip.model.dto.SearchPlace;
 import com.ssafy.enjoytrip.model.dto.Sido;
 import com.ssafy.enjoytrip.model.mapper.PlaceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +19,24 @@ public class PlaceServiceImpl implements PlaceService{
     public PlaceServiceImpl(PlaceMapper mapper){
         this.mapper = mapper;
     }
+
     @Override
-    public List<Place> searchPlace(SearchPlace searchPlace) {
-        return mapper.selectAll(searchPlace);
+    public Page<Place> search(Place place) {
+        return mapper.search(place);
     }
 
     @Override
-    public Place getPlace(int contentId) {
+    public Place select(int contentId) {
         return mapper.select(contentId);
     }
 
     @Override
     public List<ContentType> getContents() {
-        return mapper.selectAllContent();
+        return mapper.getContents();
     }
 
     @Override
     public List<Sido> getRegions() {
-        return mapper.selectAllSido();
+        return mapper.getRegions();
     }
 }

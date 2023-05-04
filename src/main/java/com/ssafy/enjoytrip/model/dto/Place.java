@@ -10,12 +10,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Place {
-	int id;
-	int type;
+	int contentId;
+	int contentTypeId;
 	String title;
 	String addr1;
-	String image;
-	int sido;
-	double lat;
-	double lng;
+	String firstImage;
+	int sidoCode;
+	int gugunCode;
+	double latitude;
+	double longitude;
+
+	String overview;
+	String contentTypeName;
+	String sidoName;
+
 }

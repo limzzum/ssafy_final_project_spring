@@ -4,46 +4,48 @@
 <mapper namespace="com.ssafy.enjoytrip.model.mapper.PlaceMapper">
 
     <resultMap type="place" id="PlaceMap">
-        <id column="content_id" property="id"/>
-        <result column="content_type_id" property="type"/>
+        <id column="content_id" property="contentId"/>
+        <result column="content_type_id" property="contentTypeId"/>
         <result column="title" property="title"/>
         <result column="addr1" property="addr1"/>
-        <result column="first_image" property="image"/>
-        <result column="sido_code" property="sido"/>
-        <result column="latitude" property="lat"/>
-        <result column="longitude" property="lng"/>
-    </resultMap>
-
-    <resultMap type="contentType" id="ContentMap">
-        <id column="content_type_id" property="id"/>
-        <result column="content_type_name" property="content"/>
-    </resultMap>
-
-    <resultMap type="sido" id="SidoMap">
-        <id column="sido_code" property="code"/>
-        <result column="sido_name" property="name"/>
+        <result column="first_image" property="firstImage"/>
+        <result column="sido_code" property="sidoCode"/>
+        <result column="gugun_code" property="gugunCode"/>
+        <result column="latitude" property="latitude"/>
+        <result column="longitude" property="longitude"/>
+        <result column="overview" property="overview"/>
+        <result column="content_type_name" property="contentTypeName"/>
+        <result column="sido_name" property="sidoName"/>
     </resultMap>
 
     <select id="select" parameterType="int" resultMap="PlaceMap" >
-        select content_id, content_type_id, title, addr1, first_image, sido_code, latitude, longitude
-        from attraction_info
-        where content_id = #{contentId};
+        select *
+        from attraction_info a left join attraction_description ad on a.content_id = ad.content_id left join content_type ct on ct.content_type_id = a.content_type_id left join sido s on s.sido_code = a.sido_code
+        where a.content_id = #{contentId};
     </select>
 
-    <select id="selectAll" parameterType="searchPlace" resultMap="PlaceMap" >
-        select content_id, content_type_id, title, addr1, first_image, sido_code, latitude, longitude
-        from attraction_info
-        where sido_code = #{sido} and content_type_id = #{type}
-          and title like CONCAT('%',#{keyword},'%')
-            limit 100;
+    <select id="search" parameterType="place" resultMap="PlaceMap" >
+        select *
+        from attraction_info a left join attraction_description ad on a.content_id = ad.content_id left join content_type ct on ct.content_type_id = a.content_type_id left join sido s on s.sido_code = a.sido_code
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="sidoCode!=null">
+                and a.sido_code = #{sidoCode}
+            </if>
+            <if test="contentTypeId!=null">
+                and a.content_type_id = #{contentTypeId}
+            </if>
+            <if test="title!=null">
+                and title like CONCAT('%',#{title},'%')
+            </if>
+        </trim>
     </select>
 
-    <select id="selectAllContent" resultMap="ContentMap" >
+    <select id="getContents" resultMap="PlaceMap" >
         select *
         from content_type
     </select>
 
-    <select id="selectAllSido" resultMap="SidoMap" >
+    <select id="getRegions" resultMap="PlaceMap" >
         select *
         from sido
     </select>
