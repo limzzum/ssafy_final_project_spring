@@ -151,13 +151,15 @@ async function addMyPlane(id){
 	let result = json.result;
 	console.log(json.result)
 
-	// let add = `<tr>
-	//                         <td><img src="\${result.image}"></td>
-	//                         <td>\${result.title}</td>
-	//                         <td>\${result.addr1}</td>
-	//                         <td></td>
-	//                   </tr>`;
+	 let add = `<tr>
+	                        <td><img height="100" width="100" src="${result.image}"/></td>
+	                        <td>${result.title}</td>
+	                        <td>${result.addr1}</td>
+	                       
+	                  </tr>`;
+
 	// myList.append(add);
+	document.querySelector("#my-list").innerHTML += add
 }
 
 
