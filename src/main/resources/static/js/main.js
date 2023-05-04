@@ -38,7 +38,7 @@ function recommend(){
 
 // prefix + ", page" + suffix 를 onclick 메소드로 가지는 페이지 html 리턴
 function pageHtml(prefix, suffix, page, pages){
-    let text = `<nav><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" onclick="${prefix} ,1 ${suffix}">처음</a></li>`;
+    let text = `<nav><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" style="width: 55px" onclick="${prefix} ,1 ${suffix}">처음</a></li>`;
     if(Math.max(1,page-5)!=1){
         text += `<li class="page-item"><a class="page-link disabled">...</a></li>`;
     }
