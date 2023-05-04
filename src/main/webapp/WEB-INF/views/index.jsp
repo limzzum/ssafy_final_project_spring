@@ -474,7 +474,6 @@
                             <th>대표이미지</th>
                             <th>관광지명</th>
                             <th>주소</th>
-                            <th></th>
                         </tr>
                         </thead>
                         <tbody id="my-list"></tbody>
