@@ -13,14 +13,18 @@ function initMap(container){
 }
 
 function themetrip(){
-	document.querySelector("#trip-list").innerHTML="";
+	let table= document.querySelector("#trip-list");
+	table.innerHTML="";
+	table.parentNode.style = "display:none";
 	load([`themesearch`,`themetrip`]);
 	let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	initMap(container).then(item=>item.relayout());
 }
 
 async function myplan(){
-	document.querySelector("#plantrip-list").innerHTML="";
+	let table= document.querySelector("#plantrip-list");
+	table.innerHTML="";
+	table.parentNode.style = "display:none";
 	load([`myplan`]);
 	let container = document.getElementById('planmap'); //지도를 담을 영역의 DOM 레퍼런스
 	initMap(container).then(item=>item.relayout());
@@ -56,6 +60,7 @@ async function searchPlace(page){
 	let result = json.result
 
 	let tripList = document.querySelector("#"+page+"trip-list")
+	tripList.parentNode.style = "display:inline";
 	let container = document.getElementById(page+'map'); //지도를 담을 영역의 DOM 레퍼런스
 	let map = initMap(container); //지도 생성 및 객체 리턴
 	let markers = [];
