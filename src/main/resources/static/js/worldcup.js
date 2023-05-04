@@ -50,7 +50,7 @@ async function worldcupResult(id){
         <td className="align-middle">${item.title}</td>
         <td className="align-middle">${item.content}</td>
         <td className="align-middle">${item.wins}</td>
-        <td className="align-middle"><div class="progress">
+        <td className="align-middle"><div class="progress" style="height: 40px;">
         <div class="progress-bar progress-bar-striped ${item.id===worldcups[0].id?"bg-success progress-bar-animated":"bg-warning"}" role="progressbar" style="width: ${10+percent}%" aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100">${percent}%</div>
         </div>
         </td>
