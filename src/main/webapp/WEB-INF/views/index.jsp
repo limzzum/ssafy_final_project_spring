@@ -37,13 +37,13 @@
             <%--main contents link start--%>
             <ul class="navbar-nav me-auto mb-lg-0">
                 <li class="nav-item"><a class="nav-link" aria-current="page"
-                                        onclick="return load([`themesearch`,`themetrip`]);">테마 여행</a></li>
+                                        onclick="return themetrip();">테마 여행</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page"
-                                        onclick="return load([`myplan`]);">나의 여행 계획</a></li>
+                                        onclick="return myplan();">나의 여행 계획</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page"
                                         onclick="return worldcup();">관광지 월드컵</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page"
-                                        onclick="return load([`recommend`]);">맛집 뽑기</a></li>
+                                        onclick="return recommend();">맛집 뽑기</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page"
                                         onclick="return board(`notice`,1);">게시판</a></li>
             </ul>
@@ -213,7 +213,7 @@
         <!-- The slideshow/carousel -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <a onclick="return load([`themesearch`,`themetrip`]);" class="stretched-link"> <img
+                <a onclick="return themetrip()" class="stretched-link"> <img
                         src="/img/001.jpg" alt="테마 여행" class="d-block"
                         style="min-width: 100%; min-height: 200px"/>
                     <div class="bg-opacity-50 carousel-caption bg-light p-2 rounded-3 text-dark">
@@ -223,7 +223,7 @@
                 </a>
             </div>
             <div class="carousel-item">
-                <a onclick="return load([`myplan`]);" class="stretched-link"> <img
+                <a onclick="return myplan()" class="stretched-link"> <img
                         src="/img/002.jpg" alt="나의 여행 계획" class="d-block"
                         style="min-width: 100%; min-height: 200px"/>
                     <div class="bg-opacity-50 carousel-caption bg-light p-2 rounded-3 text-dark">
@@ -243,7 +243,7 @@
                 </a>
             </div>
             <div class="carousel-item">
-                <a onclick="return load([`recommend`]);"  class="stretched-link">
+                <a onclick="return recommend();"  class="stretched-link">
                     <img src="/img/004.jpg" alt="맛집 뽑기" class="d-block"
                          style="min-width: 100%; min-height: 200px"/>
                     <div class="bg-opacity-50 carousel-caption bg-light p-2 rounded-3 text-dark">
@@ -641,6 +641,10 @@
 </script>
 <script src="/js/worldcup.js">
 </script>
+<script src="/js/map.js">
+</script>
+<script src="/js/board.js">
+</script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00a97d244434a3292c2f2c25d767ace3"></script>
 <script>
     <c:if test="${empty view}">
@@ -654,8 +658,6 @@
     <c:if test="${!empty msg}">
     alert("${msg}");
     </c:if>
-    kakaoMap("map");
-    kakaoMap("planmap");
 </script>
 <script>
 </script>
