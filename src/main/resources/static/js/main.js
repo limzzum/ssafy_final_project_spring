@@ -1,3 +1,10 @@
+function index(){
+
+    getRegion();
+    getContent();
+    load([`themesearch`,`maincarousel`]);
+}
+
 function load(selected) {
     let contents = document.querySelectorAll("#maindiv>div");
     contents.forEach(item => {

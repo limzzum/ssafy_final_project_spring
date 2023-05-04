@@ -24,7 +24,7 @@
 <!-- 상단 navbar start -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
     <div class="container">
-        <a class="navbar-brand text-primary fw-bold" onclick="return load([`themesearch`,`maincarousel`]);"> <img
+        <a class="navbar-brand text-primary fw-bold" onclick="return index();"> <img
                 src="/img/trip_logo.png" alt="여행어때" width="100"/> </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
@@ -401,7 +401,7 @@
 
         <!-- 검색 결과 start -->
         <div class="container text-center">
-            <table class="table table-hover">
+            <table class="table table-hover align-middle">
                 <thead>
                 <tr>
                     <th>대표이미지</th>
@@ -449,12 +449,12 @@
 
                 <!-- 검색 결과 start -->
                 <div class="container text-center">
-                    <table class="table table-hover">
+                    <table class="table table-hover align-middle">
                         <thead>
                         <tr>
-                            <th>대표이미지</th>
-                            <th>관광지명</th>
-                            <th>주소</th>
+                            <th style="width:20%">대표이미지</th>
+                            <th style="width:35%">관광지명</th>
+                            <th style="width:45%">주소</th>
                         </tr>
                         </thead>
                         <tbody id="plantrip-list">
@@ -637,6 +637,7 @@
 
 </body>
 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00a97d244434a3292c2f2c25d767ace3"></script>
 <script src="/js/main.js">
 </script>
 <script src="/js/worldcup.js">
@@ -645,10 +646,9 @@
 </script>
 <script src="/js/board.js">
 </script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00a97d244434a3292c2f2c25d767ace3"></script>
 <script>
     <c:if test="${empty view}">
-    load(["themesearch", "maincarousel"]);
+    index();
     </c:if>
     <c:if test="${!empty view}">
     load(["${view}"]);
