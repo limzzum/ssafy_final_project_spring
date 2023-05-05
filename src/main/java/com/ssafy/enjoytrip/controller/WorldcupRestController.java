@@ -1,8 +1,5 @@
 package com.ssafy.enjoytrip.controller;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.ssafy.enjoytrip.model.dto.Board;
 import com.ssafy.enjoytrip.model.dto.Worldcup;
 import com.ssafy.enjoytrip.model.service.WorldcupService;
 import org.springframework.beans.factory.annotation.Autowired;

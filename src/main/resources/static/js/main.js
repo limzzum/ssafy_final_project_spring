@@ -2,10 +2,18 @@ function index(){
 
     getRegion();
     getContent();
-    load([`themesearch`,`maincarousel`]);
+    load([`themesearch`,`maincarousel`],false);
+    if(sessionStorage.getItem("islogin")==="true"){
+        document.querySelector("#navbar-logout").style="display:none; white-space:nowrap;";
+        document.querySelector("#navbar-login").style="display:flex; white-space:nowrap;";
+    }
 }
 
-function load(selected) {
+function load(selected, checkLogin = true) {
+    if(checkLogin&&sessionStorage.getItem("islogin")!="true"){
+        alert("먼저 로그인해주세요");
+        return;
+    }
     let contents = document.querySelectorAll("#maindiv>div");
     contents.forEach(item => {
         item.style = "display:none";
@@ -23,12 +31,7 @@ function taplist(e) {
     e.classList.add("active");
 }
 
-function registUser() {
-    let pw = document.querySelector("#newPw");
-    let check = document.querySelector("#newPwCheck");
-    if (pw.value == check.value) document.querySelector("#userUpdateForm").submit();
-    else alert("새 비밀번호가 일치하지 않습니다");
-}
+
 
 function recommend(){
     load([`recommend`]);

@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User login(User user) {
 		User check = mapper.select(user.getUserId());
+		if(check==null) return null;
 		return (check.getUserPwd()!=null&&check.getUserPwd().equals(user.getUserPwd()))?check:null;
 	}
 

@@ -18,7 +18,7 @@ function themetrip() {
     table.parentNode.style = "display:none";
     load([`themesearch`, `themetrip`]);
     let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-    initMap(container).then(item => item.relayout());
+    initMap(container).relayout();
 }
 
 async function myplan() {
@@ -27,7 +27,7 @@ async function myplan() {
     table.parentNode.style = "display:none";
     load([`myplan`]);
     let container = document.getElementById('planmap'); //지도를 담을 영역의 DOM 레퍼런스
-    initMap(container).then(item => item.relayout());
+    initMap(container).relayout();
 }
 
 

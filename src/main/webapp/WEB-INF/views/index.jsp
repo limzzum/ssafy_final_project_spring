@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %><%-- jstl 사용하기 위한 코드 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- 프로젝트의 context 경로를 편하게 사용하기 위한 코드 --%>
-<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,27 +47,23 @@
             <%--main contents link end--%>
 
             <%--user 회원가입, 로그인, 로그아웃, 마이페이지 링크 start--%>
-            <c:if test="${empty user }">
-                <ul class="navbar-nav mb-2 me-2 mb-lg-0" id="navbar-logout"
-                    style="display: flex; white-space: nowrap">
-                    <li class="nav-item"><a class="nav-link" aria-current="page"
-                                            href="#" data-bs-toggle="modal" data-bs-target="#registerModal">회원가입</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" aria-current="page"
-                                            href="#" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a>
-                    </li>
-                </ul>
-            </c:if>
-            <c:if test="${!empty user }">
-                <ul class="navbar-nav mb-2 me-2 mb-lg-0" id="navbar-login"
-                    style="display: flex; white-space: nowrap">
-                    <li class="nav-item"><a class="nav-link" aria-current="page"
-                                            href="/user/logout" id="logout">로그아웃</a></li>
-                    <li class="nav-item"><a class="nav-link" aria-current="page"
-                                            onclick="return load([`mypage`]);">
-                        마이페이지</a></li>
-                </ul>
-            </c:if>
+            <ul class="navbar-nav mb-2 me-2 mb-lg-0" id="navbar-logout"
+                style="display:flex; white-space: nowrap;">
+                <li class="nav-item"><a class="nav-link" aria-current="page"
+                                        href="#" data-bs-toggle="modal" data-bs-target="#registerModal">회원가입</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" aria-current="page"
+                                        href="#" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 me-2 mb-lg-0" id="navbar-login"
+                style="display:none; white-space: nowrap;">
+                <li class="nav-item"><a class="nav-link" aria-current="page"
+                                        onclick="return logout();" id="logout">로그아웃</a></li>
+                <li class="nav-item"><a class="nav-link" aria-current="page"
+                                        onclick="return load([`mypage`]);">
+                    마이페이지</a></li>
+            </ul>
             <%--user 회원가입, 로그인, 로그아웃, 마이페이지 링크 start--%>
 
         </div>
@@ -91,7 +84,7 @@
             </div>
             <div class="modal-body">
                 <div class="input-form-backgroud row">
-                    <form class="input-form col-md-12 mx-auto" method="post" action="/user/regist">
+                    <form class="input-form col-md-12 mx-auto">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="regId">아이디</label>
@@ -127,7 +120,7 @@
                                 수집 및 이용에 동의합니다.</label>
                         </div>
                         <div class="mb-4"></div>
-                        <button class="btn btn-primary btn-lg btn-block" id="register">
+                        <button class="btn btn-primary btn-lg btn-block" onclick="return registUser()" id="register">
                             가입 완료
                         </button>
                     </form>
@@ -149,7 +142,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
             </div>
-            <form action="/user/login" method="post">
+            <form>
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="loginId">아이디</label>
@@ -165,7 +158,7 @@
                     </div>
                 </div>
                 <div class="modal-footer flex">
-                    <button class="btn btn-primary btn-lg btn-block" id="login">
+                    <button type="button" class="btn btn-primary" onclick="return login();" data-bs-dismiss="modal">
                         로그인
                     </button>
                 </div>
@@ -633,20 +626,10 @@
 </script>
 <script src="/js/board.js">
 </script>
-<script>
-    <c:if test="${empty view}">
-    index();
-    </c:if>
-    <c:if test="${!empty view}">
-    load(["${view}"]);
-    </c:if>
-
-    //request 객체에 msg가 들어있을 때 해당 내용 알림창 띄우기
-    <c:if test="${!empty msg}">
-    alert("${msg}");
-    </c:if>
+<script src="/js/user.js">
 </script>
 <script>
+    index();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
