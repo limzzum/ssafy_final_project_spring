@@ -22,6 +22,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User select(String userId) {
+		return mapper.select(userId);
+	}
+
+	@Override
 	public int regist(User user) {
 		User check = mapper.select(user.getUserId());
 
@@ -33,8 +38,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int delete(User user) {
-		return mapper.delete(user.getUserId());
+	public int delete(String userId) {
+		return mapper.delete(userId);
 	}
 
 	@Override

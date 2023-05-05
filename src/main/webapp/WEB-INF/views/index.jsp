@@ -61,7 +61,7 @@
                 <li class="nav-item"><a class="nav-link" aria-current="page"
                                         onclick="return logout();" id="logout">로그아웃</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page"
-                                        onclick="return load([`mypage`]);">
+                                        onclick="return mypage();">
                     마이페이지</a></li>
             </ul>
             <%--user 회원가입, 로그인, 로그아웃, 마이페이지 링크 start--%>
@@ -112,16 +112,9 @@
                                    placeholder="you@example.com" required/>
                             <div class="invalid-feedback">이메일을 입력해주세요.</div>
                         </div>
-                        <hr class="mb-4"/>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input"
-                                   id="aggrement" required/>
-                            <label class="custom-control-label" for="aggrement">개인정보
-                                수집 및 이용에 동의합니다.</label>
-                        </div>
                         <div class="mb-4"></div>
-                        <button class="btn btn-primary btn-lg btn-block" onclick="return registUser()" id="register">
-                            가입 완료
+                        <button class="btn btn-primary btn-lg btn-block" onclick="return registUser()" id="register" data-bs-dismiss="modal">
+                            회원가입
                         </button>
                     </form>
                 </div>
@@ -284,7 +277,7 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="userInfo" role="tabpanel"
                  aria-labelledby="userInfo-tab">
-                <table class="table">
+                <table class="table table-hover align-middle">
                     <thead>
                     <tr>
                         <th>아이디</th>
@@ -294,9 +287,9 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td id="mypageId">${user.userId}</td>
-                        <td id="mypageName">${user.userName}</td>
-                        <td id="mypageEmail">${user.email}</td>
+                        <td id="mypageId"></td>
+                        <td id="mypageName"></td>
+                        <td id="mypageEmail"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -327,8 +320,7 @@
             <div class="tab-pane fade" id="changeData" role="tabpanel"
                  aria-labelledby="changeData-tab">
                 <div class="col-12">
-                    <form method="post" action="/user/update" id="userUpdateForm">
-                        <input type="hidden" name="userId" value="${user.userId}">
+                    <form>
                         <table class="table table-borderless display-flex p-3"
                                style="text-align: center; vertical-align: middle">
                             <thead>
@@ -342,7 +334,7 @@
                                 </td>
                                 <td rowspan="2">
                                     <button type="button" class="btn btn-primary btn-lg btn-block m-1"
-                                            id="changePW" onclick="registUser();">비밀번호 변경
+                                            id="changePW" onclick="return updateUser();">비밀번호 변경
                                     </button>
                                 </td>
                             </tr>
@@ -363,8 +355,7 @@
                     </form>
 
                     <div class="col-md">
-                        <form method="get" action="/user/delete">
-                            <input type="hidden" name="userId" value="${user.userId}">
+                        <form>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input"
                                        id="deleteConfirm" required/>
@@ -461,7 +452,7 @@
             <form class="col-6" action="${root }/main">
                 <div class="container text-center">
                     <h3>나의 여행계획</h3>
-                    <table class="table table-striped align-middle">
+                    <table class="table table-hover align-middle">
                         <thead>
                         <tr>
                             <th>대표이미지</th>

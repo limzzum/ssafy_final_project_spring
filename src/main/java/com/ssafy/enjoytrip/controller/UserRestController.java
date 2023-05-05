@@ -71,7 +71,7 @@ public class UserRestController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<Map<String, Object>> update(@ModelAttribute User user, @RequestParam String newPwd, RedirectAttributes redirectAttributes) {
+    public ResponseEntity<Map<String, Object>> update(@RequestBody User user, @RequestBody String newPwd) {
         User check = service.login(user);
         String msg = "비밀번호 변경 성공";
         if(check==null) msg="비밀번호가 일치하지 않습니다";
@@ -85,13 +85,20 @@ public class UserRestController {
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/delete")
-    public ResponseEntity<Map<String, Object>> delete(@ModelAttribute User user, HttpSession session){
-        service.delete(user);
+    @GetMapping("/delete/{userId}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable String userId, HttpSession session){
+        service.delete(userId);
         session.invalidate();
         Map<String, Object> map = new HashMap<>();
         map.put("msg","정상적으로 탈퇴되었습니다.");
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/select/{userId}")
+    public ResponseEntity<Map<String, Object>> select(@PathVariable String userId){
+        User user = service.select(userId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("user",user);
+        return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
+    }
 }
