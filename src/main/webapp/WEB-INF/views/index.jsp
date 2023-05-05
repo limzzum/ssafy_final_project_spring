@@ -468,7 +468,7 @@
             <form class="col-6" action="${root }/main">
                 <div class="container text-center">
                     <h3>나의 여행계획</h3>
-                    <table class="table table-striped">
+                    <table class="table table-striped align-middle">
                         <thead>
                         <tr>
                             <th>대표이미지</th>

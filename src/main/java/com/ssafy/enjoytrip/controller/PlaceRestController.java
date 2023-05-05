@@ -39,7 +39,7 @@ public class PlaceRestController {
     public ResponseEntity<Map<String, Object>> detail(@PathVariable int id){
         Place place = service.select(id);
         Map<String, Object> map = new HashMap<>();
-        System.out.println(place);
+        log.info("place detail : "+place);
         map.put("result", place);
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
