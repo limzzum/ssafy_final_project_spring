@@ -30,7 +30,6 @@ async function myplan() {
     initMap(container).relayout();
 }
 
-
 async function searchPlace(plan, page = 1) {
     if (!plan) {
         plan = "";
@@ -39,10 +38,9 @@ async function searchPlace(plan, page = 1) {
         load([`myplan`]);
     }
     console.log("search")
-    let sidoCode = document.getElementById(plan + "search-area").value
-    let contentTypeId = document.getElementById(plan + "search-content-id").value
-    let title = document.getElementById(plan + "search-keyword").value
-
+    let sidoCode = document.getElementById(plan + "search-area").value;
+    let contentTypeId = document.getElementById(plan + "search-content-id").value;
+    let title = document.getElementById(plan + "search-keyword").value;
     let config = {
         method: "POST",
         headers: {
@@ -71,10 +69,10 @@ async function searchPlace(plan, page = 1) {
     markers = [];
     var bounds = new kakao.maps.LatLngBounds();
     result.forEach(place => {
-        let trip = `<tr onclick="return addMyPlane(${place.contentId});" style="height: 110px">
-                    <td><img src="${place.firstImage}" class = "img-fluid img-thumbnail" style="max-height: 100px; max-width: 100px" onerror="this.src=/img/김민섭.PNG"/></td>
-                    <td>${place.title}</td>
-                    <td>${place.addr1}</td>`;
+        let trip = plan ?`<tr onclick="return addMyPlane(${place.contentId});" style="height: 110px">`:`<tr style="height: 110px">`;
+        trip += `<td><img src="${place.firstImage}" class = "img-fluid img-thumbnail" style="max-height: 100px; max-width: 100px" onerror="this.src=/img/김민섭.PNG"/></td>
+                <td>${place.title}</td>
+                <td>${place.addr1}</td>`;
         let suffix = plan ? `</tr>` : `<td>${place.overview.length > 70 ? place.overview.substring(0, 70) + "..." : place.overview}</td></tr>`;
         tripList.innerHTML += trip + suffix;
         let pos = new kakao.maps.LatLng(place.latitude, place.longitude);
