@@ -3,7 +3,22 @@ async function registUser() {
     let userName = document.querySelector("#regName").value;
     let userPwd = document.querySelector("#regpw").value;
     let email = document.querySelector("#regEmail").value;
-    console.log(userId,userPwd);
+    if(!userId){
+        alert("아이디를 입력하세요");
+        return;
+    }
+    if(!userName){
+        alert("이름을 입력하세요");
+        return;
+    }
+    if(!userPwd){
+        alert("비밀번호를 입력하세요");
+        return;
+    }
+    if(!email){
+        alert("이메일을 입력하세요");
+        return;
+    }
     let config = {
         method: "POST",
         headers: {

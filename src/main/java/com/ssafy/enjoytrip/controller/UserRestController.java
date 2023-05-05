@@ -53,7 +53,7 @@ public class UserRestController {
     @PostMapping("/regist")
     public ResponseEntity<Map<String, Object>> regist(@RequestBody User user) {
         int result = service.regist(user);
-        String msg = "";
+        String msg;
         switch (result){
             case -1:
                 msg = "해당 아이디로 등록된 회원이 존재합니다. 다른 아이디로 다시 시도해주세요";
