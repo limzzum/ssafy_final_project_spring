@@ -1,4 +1,7 @@
-
+async function notice(){
+    bootstrap.Tab.getInstance(document.querySelector("#board1-list")).show();
+    await board('notice',1);
+}
 
 async function board(type, page) {
     load([`boardview`]);

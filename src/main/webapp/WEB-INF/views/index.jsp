@@ -42,7 +42,7 @@
                 <li class="nav-item"><a class="nav-link" aria-current="page"
                                         onclick="return recommend();">맛집 뽑기</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page"
-                                        onclick="return board(`notice`,1);">게시판</a></li>
+                                        onclick="return notice();">게시판</a></li>
             </ul>
             <%--main contents link end--%>
 
@@ -239,7 +239,7 @@
                 </a>
             </div>
             <div class="carousel-item">
-                <a onclick="return board(`notice`,1);"  class="stretched-link">
+                <a onclick="return notice();"  class="stretched-link">
                     <img src="/img/005.jpg" alt="게시판" class="d-block"
                          style="min-width: 100%; min-height: 200px"/>
                     <div class="opacity-75 carousel-caption bg-light p-2 rounded-3 text-dark">

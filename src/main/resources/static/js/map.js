@@ -16,6 +16,7 @@ function themetrip() {
     let table = document.querySelector("#trip-list");
     table.innerHTML = "";
     table.parentNode.style = "display:none";
+    document.querySelector("#placepage").innerHTML="";
     load([`themesearch`, `themetrip`]);
     let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
     initMap(container).relayout();
@@ -25,6 +26,7 @@ async function myplan() {
     let table = document.querySelector("#plantrip-list");
     table.innerHTML = "";
     table.parentNode.style = "display:none";
+    document.querySelector("#planplacepage").innerHTML="";
     load([`myplan`]);
     let container = document.getElementById('planmap'); //지도를 담을 영역의 DOM 레퍼런스
     initMap(container).relayout();
