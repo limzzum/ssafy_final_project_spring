@@ -71,7 +71,7 @@ async function searchPlace(plan, page = 1) {
     markers = [];
     var bounds = new kakao.maps.LatLngBounds();
     result.forEach(place => {
-        let trip = plan ?`<tr onclick="return addMyPlane(${place.contentId});" style="height: 110px">`:`<tr onclick="detail(${place.contentId})" style="height: 110px">`;
+        let trip = plan ?`<tr onclick="addMyPlane(${place.contentId});" style="height: 110px">`:`<tr onclick="detail(${place.contentId})" style="height: 110px">`;
         trip += `<td><img src="${place.firstImage}" class = "img-fluid img-thumbnail" style="max-height: 100px; max-width: 100px" onerror="this.src=/img/김민섭.PNG"/></td>
                 <td>${place.title}</td>
                 <td>${place.addr1}</td>`;
@@ -174,12 +174,12 @@ async function detail(contentId) {
     console.log(json.result)
 
     let add = `<div onclick="load([\`themesearch\`, \`themetrip\`]);">
-	                        <div><img src="${result.firstImage}" class = "img-fluid img-thumbnail" style="width: 80%; height: 300px" onerror="this.src=/img/김민섭.PNG"/></div>
-	                        <div>${result.title}</div>
-	                        <div>${result.addr1}</div>
-	                        <div>${result.overview}</div>
-	                        <div>${result.contentTypeName}</div>
-	                        <div>${result.sidoName}</div>
+	                        <div><img src= "${result.firstImage}" class = "img-fluid img-thumbnail" style="width: 100%; height: 300px" onerror="this.src=/img/김민섭.PNG"/></div>
+	                        <div>이름 : ${result.title}</div>
+	                        <div>주소 : ${result.addr1}</div>
+	                        <div>설명 : ${result.overview}</div>
+	                        <div>유형 : ${result.contentTypeName}</div>
+	                        <div>지역 : ${result.sidoName}</div>
 	                 </div>
 	                 
 `;
