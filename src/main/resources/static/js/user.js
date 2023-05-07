@@ -79,6 +79,9 @@ async function login(){
         document.querySelector("#loginModal")["area-hidden"]="true";
         document.querySelector("#navbar-logout").style="display:none; white-space:nowrap;";
         document.querySelector("#navbar-login").style="display:flex; white-space:nowrap;";
+        document.querySelector("#mypageId").innerHTML = sessionStorage.getItem("userId");
+        document.querySelector("#mypageName").innerHTML = sessionStorage.getItem("userName");
+        document.querySelector("#mypageEmail").innerHTML = sessionStorage.getItem("email");
     }
 }
 
@@ -97,13 +100,5 @@ async function logout(){
 }
 
 async function mypage(){
-    let config = {
-        method: "GET",
-    };
-    let response = await fetch("/api/user/logout", config);
-    let json = await response.json();
-    document.querySelector("#mypageId").value = json.user.userId;
-    document.querySelector("#mypageName").value = json.user.userName;
-    document.querySelector("#mypageEmail").value = json.user.email;
     load([`mypage`]);
 }
