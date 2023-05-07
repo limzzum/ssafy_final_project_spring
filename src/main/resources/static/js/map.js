@@ -71,7 +71,7 @@ async function searchPlace(plan, page = 1) {
     markers = [];
     var bounds = new kakao.maps.LatLngBounds();
     result.forEach(place => {
-        let trip = plan ?`<tr onclick="return addMyPlane(${place.contentId});" style="height: 110px">`:`<tr style="height: 110px">`;
+        let trip = plan ?`<tr onclick="return addMyPlane(${place.contentId});" style="height: 110px">`:`<tr onclick="detail(${place.contentId})" style="height: 110px">`;
         trip += `<td><img src="${place.firstImage}" class = "img-fluid img-thumbnail" style="max-height: 100px; max-width: 100px" onerror="this.src=/img/김민섭.PNG"/></td>
                 <td>${place.title}</td>
                 <td>${place.addr1}</td>`;
@@ -164,9 +164,30 @@ async function addMyPlane(id) {
     document.querySelector("#my-list").innerHTML += add
 }
 
+async function detail(contentId) {
+    let config = {
+        method: "GET"
+    };
+    let response = await fetch("/api/place/" + contentId, config);
+    let json = await response.json();
+    let result = json.result;
+    console.log(json.result)
 
-// document.querySelector("#placeOne").addEventListener("click", (e) => {
-//
-//     myList.append()
-// });
+    let add = `<div onclick="load([\`themesearch\`, \`themetrip\`]);">
+	                        <div><img src="${result.firstImage}" class = "img-fluid img-thumbnail" style="width: 80%; height: 300px" onerror="this.src=/img/김민섭.PNG"/></div>
+	                        <div>${result.title}</div>
+	                        <div>${result.addr1}</div>
+	                        <div>${result.overview}</div>
+	                        <div>${result.contentTypeName}</div>
+	                        <div>${result.sidoName}</div>
+	                 </div>
+	                 
+`;
+
+    // myList.append(add);
+    document.querySelector("#detailPlace").innerHTML = add
+    load([`tripDetailPage`]);
+}
+
+
 
