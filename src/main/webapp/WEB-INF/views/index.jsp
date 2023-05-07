@@ -548,8 +548,8 @@
     <div id="boardview">
         <div class="row">
             <!-- 게시판 리스트 목록 start -->
-            <div class="col-4">
-                <div class="list-group" id="list-tab" role="tablist">
+            <div class="col-2">
+                <div class="list-group text-center" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active"
                        id="board1-list" data-bs-toggle="list"
                        role="tab" aria-controls="list-board1" onclick="return board(`notice`,1);">공지사항</a> <a
@@ -567,7 +567,7 @@
             <!-- 게시판 리스트 목록 end -->
 
             <!-- 게시판 내용 start -->
-            <div class="col-8">
+            <div class="col-10">
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active text-center" id="list-board1"
                          role="tabpanel" aria-labelledby="board1-list">
