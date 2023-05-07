@@ -408,7 +408,7 @@
     <div id="tripDetailPage">
 
         <div class="container text-center">
-            <div id="detailPlace"></div>
+            <div style="text-align: left" id="detailPlace"></div>
         </div>
 
     </div>
