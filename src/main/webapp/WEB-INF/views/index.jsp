@@ -404,6 +404,16 @@
     </div>
     <!-- 테마여행 end -->
 
+    <!-- 관광지 상세페이지 start -->
+    <div id="tripDetailPage">
+
+        <div class="container text-center">
+            <div id="detailPlace"></div>
+        </div>
+
+    </div>
+    <!-- 관광지 상세페이지 end -->
+
     <!-- 여행계획 start -->
     <div id="myplan">
         <div class="row">
