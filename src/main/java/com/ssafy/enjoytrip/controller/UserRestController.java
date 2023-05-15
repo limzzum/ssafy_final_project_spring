@@ -2,13 +2,13 @@ package com.ssafy.enjoytrip.controller;
 
 import com.ssafy.enjoytrip.model.dto.User;
 import com.ssafy.enjoytrip.model.service.UserService;
+import com.ssafy.enjoytrip.security.SecurityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -20,21 +20,24 @@ import java.util.Map;
 @Slf4j
 public class UserRestController {
 
-    private UserService service;
+    private final UserService service;
+    private final SecurityService securityService;
 
     @Autowired
-    public UserRestController(UserService service) {
+    public UserRestController(UserService service, SecurityService securityService) {
         this.service = service;
+        this.securityService = securityService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody User user, HttpSession session){
+    public ResponseEntity<Map<String, Object>> login(@RequestBody User user){
         user = service.login(user);
         log.info("login : "+user);
         Map<String, Object> map = new HashMap<>();
         if(user != null){
-            session.setAttribute("user",user);
             map.put("user", user);
+            String token = securityService.createToken(user.getUserId(), 30 * 1000 * 60);
+            map.put("result", token);
             map.put("msg",user.getUserName()+"님 환영합니다");
         }else{
             map.put("msg","로그인 실패");
