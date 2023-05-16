@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +41,7 @@ public class UserRestController {
         Map<String, Object> map = new HashMap<>();
         if(user != null){
             map.put("user", user);
-            String token = securityService.createToken(user.getUserId(), 30 * 1000 * 60);
+            String token = securityService.createJwtToken(user.getUserId());
             map.put("result", token);
             map.put("msg",user.getUserName()+"님 환영합니다");
         }else{
