@@ -4,6 +4,7 @@ import com.ssafy.enjoytrip.interceptor.LoginCheckInterCeptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -16,7 +17,7 @@ public class MVCConfig implements WebMvcConfigurer {
                 .order(1)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/", "/api/user/regist", "/api/user/login", "/api/user/logout",
-                        "/css/**", "/*.ico", "/error/**");
+                        "/css/**", "/*.ico", "/error/**", "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**");
     }
     @Bean
     public LoginCheckInterCeptor loginCheckInterCeptor(){
@@ -28,5 +29,12 @@ public class MVCConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
     }
+
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+////        registry.addResourceHandler("/swagger-ui/**")
+////                .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/");
+//        registry.addResourceHandler("/swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/swagger-ui.html");
+//    }
 
 }
