@@ -12,28 +12,38 @@
         <result column="is_admin" property="isAdmin"/>
     </resultMap>
 
-    <select id="select" parameterType="string" resultMap="userBasic">
+    <select id="selectById" parameterType="int" resultMap="userBasic">
+        select *
+        from user
+        where user_no = #{id};
+    </select>
+
+    <select id="selectByUserId" parameterType="string" resultMap="userBasic">
         select *
         from user
         where user_id = #{id};
     </select>
 
     <insert id="insert" parameterType="user">
+        <selectKey order="AFTER" keyProperty="userNo" resultType="int">
+            select max(user_no)
+            from user
+        </selectKey>
         insert into user
         (user_id,user_name,user_pwd,email)
         values
         (#{userId},#{userName},#{userPwd},#{email});
     </insert>
 
-    <delete id="delete" parameterType="string">
+    <delete id="delete" parameterType="int">
         delete from user
-        where user_id = #{userId};
+        where user_no = #{userNo};
     </delete>
 
     <update id="update" parameterType="user">
         update user
         set user_name = #{userName}, user_pwd = #{userPwd}, email = #{email}
-        where user_id = #{userId};
+        where user_no = #{userNo};
     </update>
 
 </mapper>
