@@ -1,6 +1,7 @@
 package com.ssafy.enjoytrip.model.service;
 
 import com.ssafy.enjoytrip.model.dto.User;
+import com.ssafy.enjoytrip.model.dto.valid.LoginForm;
 import com.ssafy.enjoytrip.model.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,20 +16,25 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User login(User user) {
-		User check = mapper.select(user.getUserId());
+	public User login(LoginForm loginForm) {
+		User check = mapper.selectByUserId(loginForm.getUserId());
 		if(check==null) return null;
-		return (check.getUserPwd()!=null&&check.getUserPwd().equals(user.getUserPwd()))?check:null;
+		return (check.getUserPwd()!=null&&check.getUserPwd().equals(loginForm.getUserPwd()))?check:null;
 	}
 
 	@Override
-	public User select(String userId) {
-		return mapper.select(userId);
+	public User selectById(int userNo) {
+		return mapper.selectById(userNo);
+	}
+
+	@Override
+	public User selectByUserId(String userId) {
+		return mapper.selectByUserId(userId);
 	}
 
 	@Override
 	public int regist(User user) {
-		User check = mapper.select(user.getUserId());
+		User check = mapper.selectByUserId(user.getUserId());
 
 		// 중복 아이디 회원이 존재하는 경우 -1 리턴
 		if(check!=null) return -1;
@@ -38,13 +44,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int delete(String userId) {
-		return mapper.delete(userId);
+	public int delete(int userNo) {
+		return mapper.delete(userNo);
 	}
 
 	@Override
 	public int update(User user) {
 		return mapper.update(user);
 	}
+
 
 }
