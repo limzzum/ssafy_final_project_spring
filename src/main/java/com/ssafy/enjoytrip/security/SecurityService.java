@@ -3,6 +3,7 @@ package com.ssafy.enjoytrip.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -12,9 +13,20 @@ import java.util.Date;
 
 @Service
 public class SecurityService {
-    private static final String SECRET_KEY = "wfaijelwfwwfajelwwlfjaleifajldcmsaqpoifejeliajwlfqpopoppoeimac";
+    @Value("${jwt.expmin}")
+    private Long expireMin;
 
-    public String createToken(String subject, long expTime){
+    @Value("${jwt.key}")
+    private String SECRET_KEY;
+
+    public String createRefreshToken(){
+        return create("refreshToken", expireMin*5);
+    }
+    public String createJwtToken(String subject){
+        return create(subject, expireMin);
+    }
+
+    public String create(String subject, long expTime){
         if(expTime<=0){
             throw new RuntimeException("만려시간은 0이상");
         }
