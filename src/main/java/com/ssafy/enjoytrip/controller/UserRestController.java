@@ -54,8 +54,7 @@ public class UserRestController {
 
     @ApiOperation(value = "로그아웃",response = Map.class)
     @GetMapping("/logout")
-    public ResponseEntity<Map<String, Object>> logout(HttpSession session){
-        session.invalidate();
+    public ResponseEntity<Map<String, Object>> logout(){
         Map<String, Object> map = new HashMap<>();
         map.put("msg","로그아웃 되었습니다");
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
@@ -108,9 +107,8 @@ public class UserRestController {
 
     @ApiOperation(value = "회원 탈퇴", notes = "탈퇴 성공 메시지 반환", response = Map.class)
     @GetMapping("/delete/{userNo}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable @ApiParam(value = "user no", required = true) int userNo, HttpSession session){
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable @ApiParam(value = "user no", required = true) int userNo){
         int result = service.delete(userNo);
-        session.invalidate();
         Map<String, Object> map = new HashMap<>();
         String msg = "정상적으로 탈퇴되었습니다.";;
         if(result == 1){
