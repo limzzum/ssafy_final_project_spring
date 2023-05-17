@@ -3,16 +3,20 @@ package com.ssafy.enjoytrip.model.service;
 import com.ssafy.enjoytrip.model.dto.User;
 import com.ssafy.enjoytrip.model.dto.valid.LoginForm;
 import com.ssafy.enjoytrip.model.mapper.UserMapper;
+import com.ssafy.enjoytrip.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
 	private UserMapper mapper;
+	private RedisUtil redisUtil;
 
 	@Autowired
-	public UserServiceImpl(UserMapper mapper) {
+	public UserServiceImpl(UserMapper mapper, RedisUtil redisUtil) {
+
 		this.mapper = mapper;
+		this.redisUtil = redisUtil;
 	}
 
 	@Override
@@ -20,6 +24,11 @@ public class UserServiceImpl implements UserService {
 		User check = mapper.selectByUserId(loginForm.getUserId());
 		if(check==null) return null;
 		return (check.getUserPwd()!=null&&check.getUserPwd().equals(loginForm.getUserPwd()))?check:null;
+	}
+
+	@Override
+	public void logout(String accessToken, int userNo) {
+		redisUtil.setExcludeList(accessToken,"accessToken");
 	}
 
 	@Override
