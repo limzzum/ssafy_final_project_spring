@@ -1,8 +1,10 @@
 package com.ssafy.enjoytrip.security;
 
+import com.ssafy.enjoytrip.util.RedisUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,10 @@ import java.util.Date;
 
 @Service
 public class SecurityService {
+
+    @Autowired
+    private RedisUtil redisUtil;
+
     @Value("${jwt.expmin}")
     private Long expireMin;
 
@@ -23,7 +29,7 @@ public class SecurityService {
         return create("refreshToken", expireMin*5);
     }
     public String createJwtToken(String subject){
-        return create(subject, expireMin);
+        return create(subject, expireMin*1000*60);
     }
 
     public String create(String subject, long expTime){
@@ -43,6 +49,10 @@ public class SecurityService {
     }
 
     public String getSubject(String token){
+        if(redisUtil.hasKeyExcludeList(token)){
+            System.out.println("로그아웃함");
+            throw new RuntimeException("이미 로그아웃하였습니다");
+        }
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
                 .build()
