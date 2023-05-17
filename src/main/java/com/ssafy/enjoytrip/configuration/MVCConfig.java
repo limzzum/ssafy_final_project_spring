@@ -17,7 +17,8 @@ public class MVCConfig implements WebMvcConfigurer {
                 .order(1)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/", "/api/user/regist", "/api/user/login", "/api/user/logout","/api/place/**",
-                        "/**/*.css","/**/*.jpg","/**/*.jpeg","/**/*.png","/**/*.peg", "/**/*.js", "/error/**", "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**");
+                        "/**/*.css","/**/*.jpg","/**/*.jpeg","/**/*.png","/**/*.peg", "/**/*.js", "/error/**",
+                        "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**");
     }
     @Bean
     public LoginCheckInterCeptor loginCheckInterCeptor(){
