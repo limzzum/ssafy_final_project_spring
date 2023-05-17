@@ -25,7 +25,7 @@ public class PlaceRestController {
 
     @PostMapping("/search/{page}")
     public ResponseEntity<Map<String, Object>> list(@RequestBody Place place, @PathVariable int page){
-        PageHelper.startPage(page,5);
+        PageHelper.startPage(page,10);
         log.info("list condition : "+place);
         Page<Place> list = service.search(place);
         log.info("list result : "+list);

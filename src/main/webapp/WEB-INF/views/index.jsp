@@ -433,7 +433,11 @@
                 </div>
                 <!-- 검색창 end -->
 
+                <!-- Map start -->
+                <div class="container text-center" style="text-align: center">
+                    <div id="planmap" style="width: 100%; height: 200px"></div>
 
+                </div>
 
                 <!-- Map end -->
 
@@ -458,11 +462,6 @@
             <form class="col-6" action="${root }/main">
                 <div class="container text-center">
                     <h3>나의 여행계획</h3>
-                    <!-- Map start -->
-                    <div class="container text-center" style="text-align: center">
-                        <div id="planmap" style="width: 100%; height: 200px"></div>
-
-                    </div>
                     <table class="table table-hover align-middle">
                         <thead>
                         <tr>
@@ -596,38 +595,6 @@
         </div>
     </div>
     <!-- 게시판 end -->
-    <!-- 글 상세 start -->
-    <div class="container" id="postview">
-
-        <table class="table table-bordered" id="posttable"
-               style="text-align: center;">
-            <thead>
-            <tr>
-                <th>제목</th>
-                <td colspan="5">제목입니다.</td>
-            </tr>
-            <tr>
-                <th>번호</th>
-                <td>1</td>
-                <th>작성자</th>
-                <td>김석주</td>
-                <th>조회수</th>
-                <td>1</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr style="text-align: left;">
-                <td colspan="6" >내용입니다 내용</td>
-            </tr>
-            </tbody>
-        </table>
-        <div style="text-align: right;">
-            <button type="button" class="btn btn-primary">수정</button>
-            <button type="button" class="btn btn-danger">삭제</button>
-        </div>
-
-    </div>
-    <!-- 글 상세 end -->
 
 </div>
 <!-- main div -->

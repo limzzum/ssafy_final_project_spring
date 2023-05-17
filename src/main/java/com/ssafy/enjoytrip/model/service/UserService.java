@@ -1,18 +1,18 @@
 package com.ssafy.enjoytrip.model.service;
 
-import java.sql.SQLException;
-
 import com.ssafy.enjoytrip.model.dto.User;
+import com.ssafy.enjoytrip.model.dto.valid.LoginForm;
 
 
 public interface UserService {
-	User login(User user);
+	User login(LoginForm loginForm);
 
-	User select(String userId);
+	User selectById(int userNo);
+	User selectByUserId(String userId);
 	
 	int regist(User user);
 	
-	int delete(String userId);
+	int delete(int userNo);
 	
 	int update(User user);
 	

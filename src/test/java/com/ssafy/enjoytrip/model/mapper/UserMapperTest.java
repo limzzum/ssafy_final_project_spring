@@ -1,7 +1,6 @@
 package com.ssafy.enjoytrip.model.mapper;
 
 import com.ssafy.enjoytrip.model.dto.User;
-import com.ssafy.enjoytrip.model.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +21,7 @@ public class UserMapperTest {
 
     @Test
     void selectTest(){
-        User u = mapper.select("admin");
+        User u = mapper.selectByUserId("admin");
         assertEquals(u.getUserPwd(),"1234");
     }
 
@@ -31,7 +30,7 @@ public class UserMapperTest {
     void insertTest(){
         User u = User.builder().userId("testUser").userName("김테스트").userPwd("1234").email("test@ssafy.com").build();
         mapper.insert(u);
-        assertEquals("1234",mapper.select("testUser").getUserPwd());
+        assertEquals("1234",mapper.selectByUserId("testUser").getUserPwd());
     }
 
     @Test
@@ -39,9 +38,9 @@ public class UserMapperTest {
     void deleteTest(){
         User u = User.builder().userId("testUser").userName("김테스트").userPwd("1234").email("test@ssafy.com").build();
         mapper.insert(u);
-        assertNotNull(mapper.select(u.getUserId()));
-        mapper.delete(u.getUserId());
-        assertNull(mapper.select(u.getUserId()));
+        assertNotNull(mapper.selectByUserId(u.getUserId()));
+        mapper.delete(u.getUserNo());
+        assertNull(mapper.selectByUserId(u.getUserId()));
     }
 
     @Test
@@ -49,11 +48,11 @@ public class UserMapperTest {
     void updateTest(){
         User u = User.builder().userId("testUser").userName("김테스트").userPwd("1234").email("test@ssafy.com").build();
         mapper.insert(u);
-        assertEquals(mapper.select(u.getUserId()).getUserName(),"김테스트");
+        assertEquals(mapper.selectByUserId(u.getUserId()).getUserName(),"김테스트");
         u.setUserName("수정됨");
-        assertNotEquals(mapper.select(u.getUserId()).getUserName(),"수정됨");
+        assertNotEquals(mapper.selectByUserId(u.getUserId()).getUserName(),"수정됨");
         mapper.update(u);
-        assertEquals(mapper.select(u.getUserId()).getUserName(),"수정됨");
+        assertEquals(mapper.selectByUserId(u.getUserId()).getUserName(),"수정됨");
     }
 
 }
