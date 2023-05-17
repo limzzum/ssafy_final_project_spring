@@ -6,6 +6,7 @@ import com.ssafy.enjoytrip.model.dto.valid.LoginForm;
 
 public interface UserService {
 	User login(LoginForm loginForm);
+	void logout(String accessToken, int userNo);
 
 	User selectById(int userNo);
 	User selectByUserId(String userId);
