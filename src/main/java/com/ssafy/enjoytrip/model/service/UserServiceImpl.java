@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void logout(String accessToken, int userNo) {
+		redisUtil.delete(String.valueOf(userNo));
 		redisUtil.setExcludeList(accessToken,"accessToken");
 	}
 
