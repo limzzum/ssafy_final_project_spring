@@ -18,6 +18,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/board")
 @Slf4j
+@CrossOrigin(origins = "*")
 public class BoardRestController {
     private final BoardService service;
 
@@ -26,6 +27,42 @@ public class BoardRestController {
         this.service = service;
     }
 
+    @GetMapping("/{postId}")
+    public ResponseEntity<Map<String, Object>> list(@PathVariable int postId){
+        Map<String,Object> map = new HashMap<>();
+        Board select = service.select(postId);
+        map.put("result", select);
+
+        return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
+    }
+    @PostMapping("/")
+    public ResponseEntity<Map<String, Object>> modify(@RequestBody Board board){
+        log.info("modify");
+        Map<String,Object> map = new HashMap<>();
+        int update = service.update(board);
+        String msg = "success";
+        if(update==1){
+            map.put("msg",msg);
+            return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
+        }
+        msg = "fail";
+        map.put("msg",msg);
+        return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+    }
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable int postId){
+        log.info("delete");
+        Map<String,Object> map = new HashMap<>();
+        int delete = service.delete(postId);
+        String msg = "success";
+        if(delete==1){
+            map.put("msg",msg);
+            return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
+        }
+        msg = "fail";
+        map.put("msg",msg);
+        return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+    }
     @GetMapping("/{type}/{page}")
     public ResponseEntity<Map<String, Object>> list(@PathVariable String type,@PathVariable int page){
         PageHelper.startPage(page,10);
