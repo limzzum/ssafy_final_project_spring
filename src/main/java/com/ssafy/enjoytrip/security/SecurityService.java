@@ -25,7 +25,9 @@ public class SecurityService {
     @Value("${jwt.key}")
     private String SECRET_KEY;
 
-    public String createRefreshToken(){
+    public String createRefreshToken(int userNo){
+        String refreshToken = create("refreshToken", expireMin * 5);
+        redisUtil.set(String.valueOf(userNo), refreshToken, (int) (expireMin*5));
         return create("refreshToken", expireMin*5);
     }
     public String createJwtToken(String subject){
@@ -34,7 +36,7 @@ public class SecurityService {
 
     public String create(String subject, long expTime){
         if(expTime<=0){
-            throw new RuntimeException("만려시간은 0이상");
+            throw new RuntimeException("만료시간은 0이상");
         }
 
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
