@@ -22,6 +22,7 @@ import java.util.Map;
 @RequestMapping("/api/user")
 @Slf4j
 @Api(tags = "USER REST API")
+@CrossOrigin(origins = "*")
 public class UserRestController {
 
     private final UserService service;
@@ -41,8 +42,10 @@ public class UserRestController {
         Map<String, Object> map = new HashMap<>();
         if(user != null){
             map.put("user", user);
-            String token = securityService.createJwtToken(user.getUserId());
-            map.put("result", token);
+            String accessToken = securityService.createJwtToken(user.getUserId());
+            String refreshToken = securityService.createRefreshToken(user.getUserNo());
+            map.put("accessToken", accessToken);
+            map.put("refreshToken", refreshToken);
             map.put("msg",user.getUserName()+"님 환영합니다");
         }else{
             map.put("msg","로그인 실패");
