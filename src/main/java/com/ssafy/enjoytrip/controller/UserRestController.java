@@ -79,22 +79,25 @@ public class UserRestController {
     }
 
     @ApiOperation(value = "회원가입", notes = "회원가입 성공시 환영인사, 실패시 오류메시지",response = Map.class)
-    @PostMapping("/regist")
+    @PostMapping
     public ResponseEntity<Map<String, Object>> regist(@RequestBody @ApiParam(value = "회원가입 유저 정보", required = true) User user) {
-        int result = service.regist(user);
-        String msg;
-        switch (result){
+        int regist = service.regist(user);
+        String msg="success";
+        String result="";
+        switch (regist){
             case -1:
-                msg = "해당 아이디로 등록된 회원이 존재합니다. 다른 아이디로 다시 시도해주세요";
+                result = "해당 아이디로 등록된 회원이 존재합니다. 다른 아이디로 다시 시도해주세요";
+                msg = "fail";
                 break;
             case 1:
-                msg = user.getUserName()+"님, 회원가입을 환영합니다!";
+                msg = "success";
                 break;
             case 0:
             default:
-                msg = "오류 발생! 잠시 후 다시 시도해주세요.";
+                msg = "fail";
         }
         Map<String, Object> map = new HashMap<>();
+        map.put("result", result);
         map.put("msg",msg);
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
