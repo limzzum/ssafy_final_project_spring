@@ -19,6 +19,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/place")
 @Slf4j
+@CrossOrigin(origins = "*")
 public class PlaceRestController {
     @Autowired
     PlaceService service;
