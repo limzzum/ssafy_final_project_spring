@@ -23,4 +23,11 @@ public class ErrorRestController {
         map.put("result","로그인이 필요합니다");
         return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
     }
+
+    @GetMapping("/access-token")
+    public ResponseEntity<Map<String, Object>> accessToken(){
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.put("result","access 토큰이 만료되었습니다");
+        return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+    }
 }
