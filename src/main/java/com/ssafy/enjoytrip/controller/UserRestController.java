@@ -44,11 +44,11 @@ public class UserRestController {
             map.put("user", user);
             String accessToken = securityService.createJwtToken(user.getUserId());
             String refreshToken = securityService.createRefreshToken(user.getUserNo());
-            map.put("accessToken", accessToken);
-            map.put("refreshToken", refreshToken);
-            map.put("msg",user.getUserName()+"님 환영합니다");
+            map.put("access-token", accessToken);
+            map.put("refresh-token", refreshToken);
+            map.put("msg","success");
         }else{
-            map.put("msg","로그인 실패");
+            map.put("msg","fail");
             return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
@@ -62,7 +62,6 @@ public class UserRestController {
         map.put("msg","로그아웃 되었습니다");
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
-
 
     @ApiOperation(value = "회원가입", notes = "회원가입 성공시 환영인사, 실패시 오류메시지",response = Map.class)
     @PostMapping("/regist")
@@ -124,15 +123,16 @@ public class UserRestController {
     }
 
     @ApiOperation(value = "유저 정보 가져오기", notes = "유저가 존재하면 유저정보 반환, 실패시 오류메시지 반환",response = Map.class)
-    @GetMapping("/select/{userNo}")
-    public ResponseEntity<Map<String, Object>> select(@PathVariable @ApiParam(value = "user no", required = true) int userNo){
-        User user = service.selectById(userNo);
+    @GetMapping("/select/{userId}")
+    public ResponseEntity<Map<String, Object>> select(@PathVariable String userId){
+        User user = service.selectByUserId(userId);
         Map<String, Object> map = new HashMap<>();
         if(user == null){
-            map.put("msg","유저정보를 불러오지 못하였습니다");
+            map.put("msg","fail");
             return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
         }
         map.put("user", user);
+        map.put("msg", "success");
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 }
