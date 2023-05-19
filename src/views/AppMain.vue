@@ -1,11 +1,14 @@
 <template>
-  <b-container> Main </b-container>
+  <b-container> Main <TheSearchbar /></b-container>
 </template>
 
 <script>
+import TheSearchbar from "@/components/TheSearchbar.vue";
 export default {
   name: "AppMain",
-  components: {},
+  components: {
+    TheSearchbar,
+  },
   data() {
     return {
       message: "",
