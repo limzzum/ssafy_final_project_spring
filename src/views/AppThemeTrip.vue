@@ -1,16 +1,16 @@
 <template>
-  <b-container> Theme Trip
-    <search-bar></search-bar>
-    
-    </b-container>
+  <b-container>
+    Theme Trip
+    <TheSearchbar />
+  </b-container>
 </template>
 
 <script>
-import SearchBar from "@/components/themetrip/SearchBar.vue";
+import TheSearchbar from "@/components/TheSearchbar.vue";
 export default {
   name: "AppThemeTrip",
   components: {
-    SearchBar
+    TheSearchbar,
   },
   data() {
     return {
