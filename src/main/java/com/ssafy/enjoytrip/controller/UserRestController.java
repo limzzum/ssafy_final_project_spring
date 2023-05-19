@@ -86,7 +86,7 @@ public class UserRestController {
     }
 
     @ApiOperation(value = "유저 정보 수정", notes = "변경에 성공하면 성공메시지, 실패하면 실패메시지 반환",response = Map.class)
-    @PostMapping("/update")
+    @PutMapping
     public ResponseEntity<Map<String, Object>> update(@RequestBody @ApiParam(value = "유저 아이디와 비밀번호", required = true) LoginForm loginForm,
                                                       @RequestBody @ApiParam(value = "새로운 비밀번호", required = true) String newPwd) {
         User user = service.login(loginForm);
@@ -109,7 +109,7 @@ public class UserRestController {
     }
 
     @ApiOperation(value = "회원 탈퇴", notes = "탈퇴 성공 메시지 반환", response = Map.class)
-    @GetMapping("/delete/{userNo}")
+    @DeleteMapping("/{userNo}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable @ApiParam(value = "user no", required = true) int userNo){
         int result = service.delete(userNo);
         Map<String, Object> map = new HashMap<>();
