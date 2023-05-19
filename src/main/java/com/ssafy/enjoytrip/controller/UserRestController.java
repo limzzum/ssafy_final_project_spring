@@ -42,7 +42,7 @@ public class UserRestController {
         Map<String, Object> map = new HashMap<>();
         if(user != null){
             map.put("user", user);
-            String accessToken = securityService.createJwtToken(user.getUserNo());
+            String accessToken = securityService.createJwtToken(String.valueOf(user.getUserNo()));
             String refreshToken = securityService.createRefreshToken(user.getUserNo());
             map.put("access-token", accessToken);
             map.put("refresh-token", refreshToken);
@@ -53,25 +53,21 @@ public class UserRestController {
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
-//    @ApiOperation(value = "access토큰 재발급 요청", notes = "유효한 refreshToken이라면 accessToken을 재발급한다.",response = Map.class)
-//    @PostMapping("/refreshToken")
-//    public ResponseEntity<Map<String, Object>> refreshToken(@RequestHeader @ApiParam(value = "refresh", required = true)String refreshToken){
-//
-//        Map<String, Object> map = new HashMap<>();
-//
-//
-//        if(user != null){
-//            map.put("user", user);
-//            String accessToken = securityService.createJwtToken(user.getUserNo());
-//            String refreshToken = securityService.createRefreshToken(user.getUserNo());
-//            map.put("accessToken", accessToken);
-//            map.put("refreshToken", refreshToken);
-//            map.put("msg","success");
-//        }else{
-//            map.put("msg","fail");
-//        }
-//        return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
-//    }
+    @ApiOperation(value = "access토큰 재발급 요청", notes = "유효한 refreshToken이라면 accessToken을 재발급한다.",response = Map.class)
+    @PostMapping("/refreshToken")
+    public ResponseEntity<Map<String, Object>> refreshToken(@RequestHeader @ApiParam(value = "refresh", required = true) String refreshToken){
+        Map<String, Object> map = new HashMap<>();
+       try{
+           String accessToken = securityService.reCreateJwtToken(refreshToken);
+           map.put("access-token", accessToken);
+           map.put("msg","success");
+       }catch (Exception e){
+           e.printStackTrace();
+           map.put("msg","fail");
+       }
+        return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
+
+    }
 
     @ApiOperation(value = "로그아웃",response = Map.class)
     @GetMapping("/logout/{userNo}")
