@@ -42,22 +42,42 @@ public class UserRestController {
         Map<String, Object> map = new HashMap<>();
         if(user != null){
             map.put("user", user);
-            String accessToken = securityService.createJwtToken(user.getUserId());
+            String accessToken = securityService.createJwtToken(user.getUserNo());
             String refreshToken = securityService.createRefreshToken(user.getUserNo());
             map.put("access-token", accessToken);
             map.put("refresh-token", refreshToken);
             map.put("msg","success");
         }else{
             map.put("msg","fail");
-            return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
+//    @ApiOperation(value = "access토큰 재발급 요청", notes = "유효한 refreshToken이라면 accessToken을 재발급한다.",response = Map.class)
+//    @PostMapping("/refreshToken")
+//    public ResponseEntity<Map<String, Object>> refreshToken(@RequestHeader @ApiParam(value = "refresh", required = true)String refreshToken){
+//
+//        Map<String, Object> map = new HashMap<>();
+//
+//
+//        if(user != null){
+//            map.put("user", user);
+//            String accessToken = securityService.createJwtToken(user.getUserNo());
+//            String refreshToken = securityService.createRefreshToken(user.getUserNo());
+//            map.put("accessToken", accessToken);
+//            map.put("refreshToken", refreshToken);
+//            map.put("msg","success");
+//        }else{
+//            map.put("msg","fail");
+//        }
+//        return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
+//    }
+
     @ApiOperation(value = "로그아웃",response = Map.class)
     @GetMapping("/logout/{userNo}")
-    public ResponseEntity<Map<String, Object>> logout(@RequestHeader String token, @PathVariable int userNo){
-        service.logout(token, userNo);
+    public ResponseEntity<Map<String, Object>> logout( @PathVariable int userNo){
+//        TODO : 토큰 삭제
+//        service.logout(token, userNo);
         Map<String, Object> map = new HashMap<>();
         map.put("msg","로그아웃 되었습니다");
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
@@ -93,14 +113,12 @@ public class UserRestController {
         String msg = "비밀번호 변경 성공";
         if(user==null){
             msg="비밀번호가 일치하지 않습니다";
-            return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
         }
         else{
             user.setUserPwd(newPwd);
             int result = service.update(user);
             if(result!=1){
                 msg="비밀번호 변경 실패";
-                return new ResponseEntity<>(map, HttpStatus.SERVICE_UNAVAILABLE);
             }
         }
         map.put("msg",msg);
@@ -119,17 +137,17 @@ public class UserRestController {
         }
         msg = "탈퇴 실패.";
         map.put("msg",msg);
-        return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
     @ApiOperation(value = "유저 정보 가져오기", notes = "유저가 존재하면 유저정보 반환, 실패시 오류메시지 반환",response = Map.class)
-    @GetMapping("/select/{userId}")
-    public ResponseEntity<Map<String, Object>> select(@PathVariable String userId){
-        User user = service.selectByUserId(userId);
+    @GetMapping("/select/{userNo}")
+    public ResponseEntity<Map<String, Object>> select(@PathVariable int userNo){
+        User user = service.selectById(userNo);
         Map<String, Object> map = new HashMap<>();
         if(user == null){
             map.put("msg","fail");
-            return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
         }
         map.put("user", user);
         map.put("msg", "success");
