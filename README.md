@@ -1,92 +1,85 @@
-# Tp S09 S09 Final Spring Enjoytrip_곽민규_임정현
+# 관통프로젝트: TP_S09_S09_Vue_EnjoyTrip_곽민규_임정현
+### 제출일: 2023.05.17
 
+### 참여 페어
+- 홍길동(조장), 임꺽정
 
+### 처리된 요구사항 목록
 
-## Getting started
+|난이도|구현기능|세부|작성여부(O/X)|
+|:---:|---|---|:---:|
+|기본|QnA 게시판 Vue.js를 적용한 웹페이지|게시글 목록|X|
+|기본|QnA 게시판 Vue.js를 적용한 웹페이지|게시글 등록|X|
+|기본|QnA 게시판 Vue.js를 적용한 웹페이지|게시글 수정|X|
+|기본|QnA 게시판 Vue.js를 적용한 웹페이지|게시글 상세 검색|X|
+|기본|서버측 구현|게시글 목록|X|
+|기본|서버측 구현|게시글 등록|X|
+|기본|서버측 구현|게시글 수정|X|
+|기본|서버측 구현|게시글 삭제|X|
+|기본|서버측 구현|게시글 상세 검색|X|
+|추가|나마의 여행계획 페이지(팀별 아이디어)||X|
+|추가|나만의 여행 계획 페이지(팀별 아이디어)||X|
+|심화|HtoPLace 관련 페이지(팀별 아이디어)||X|
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+* ERD 캡쳐는 README에서 확인할 수 있도록 첨부합니다.
+* DDL sql 파일은 프로젝트 루트에 sql 폴더를 생성 후 그 안에 ddl.sql 이라고 저장합니다.
+- DDL을 만들 때는 database를 export 해서 생성하세요.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+<span style="color:red">
+* 작성된 기능은 반드시 캡쳐되어야 합니다.<br>
+* 추가로 구현한 기능을 표에 추가시키세요.
+</span>
 
-## Add your files
+### 실행화면 캡쳐 -
+TODO: 요구사항 목록에서 완료 처리된 사항의 캡쳐 이미지를 등록하세요.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+DB 구축 : select한 결과를 캡쳐해 주세요
 
-```
-cd existing_repo
-git remote add origin https://lab.ssafy.com/chfhddl1234/tp-s09-s09-final-spring-enjoytrip.git
-git branch -M master
-git push -uf origin master
-```
+구현 기능: FrontEnd + BackEnd(Controller, Model(Dao, Service, Dto)
+<!-- ![실행화면캡쳐](./화면캡쳐/화면캡쳐_0001_주택정보_web.png) -->
+![목록](src/main/resources/static/img/캡처/목록.PNG)
+목록화면
 
-## Integrate with your tools
+![상세](src/main/resources/static/img/캡처/상세.PNG)
+상세화면
 
-- [ ] [Set up project integrations](https://lab.ssafy.com/chfhddl1234/tp-s09-s09-final-spring-enjoytrip/-/settings/integrations)
+![수정](src/main/resources/static/img/캡처/수정.PNG)
+수정화면
 
-## Collaborate with your team
+![수정완료](src/main/resources/static/img/캡처/수정완료.PNG)
+수정완료화면
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+![삭제](src/main/resources/static/img/캡처/삭제.PNG)
+삭제화면
 
-## Test and Deploy
+![삭제완료](src/main/resources/static/img/캡처/삭제완료.PNG)
+삭제완료화면
 
-Use the built-in continuous integration in GitLab.
+![삭제완료후결과목록](src/main/resources/static/img/캡처/삭제완료후결과목록.PNG)
+삭제완료후결과목록 화면
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+![글쓰기](src/main/resources/static/img/캡처/글쓰기.PNG)
+글쓰기화면
 
-***
+![글쓰기완료후목록](src/main/resources/static/img/캡처/글쓰기완료후목록.PNG)
+글쓰기완료후목록 화면
 
-# Editing this README
+구현 기능: 전체 프로그램 동작/오류 없이 전체 동작 1
+![실행화면캡쳐](./화면캡쳐/화면캡쳐_Main화면_web.png)
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+![select](
+src/main/resources/static/img/캡처/select.PNG)
+select 캡처
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+![insert](
+src/main/resources/static/img/캡처/insert.PNG)
+insert 캡처
 
-## Name
-Choose a self-explaining name for your project.
+![insert](
+src/main/resources/static/img/캡처/insert.PNG)
+insert 캡처
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+![delete](
+src/main/resources/static/img/캡처/delete.PNG)
+delete 캡처
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
