@@ -3,33 +3,26 @@ package com.ssafy.enjoytrip.configuration;
 import com.ssafy.enjoytrip.interceptor.LoginCheckInterCeptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 public class MVCConfig implements WebMvcConfigurer {
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginCheckInterCeptor())
-                .order(1)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/", "/api/user/regist", "/api/user/login", "/api/user/logout/**","/api/place/**",
-                        "/**/*.css","/**/*.jpg","/**/*.jpeg","/**/*.png","/**/*.peg", "/**/*.js", "/error/**",
-                        "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(loginCheckInterCeptor())
+//                .order(1)
+//                .addPathPatterns("/**")
+//                .excludePathPatterns("/", "/api/user/regist", "/api/user/login", "/api/user/logout/**","/api/place/**",
+//                        "/**/*.css","/**/*.jpg","/**/*.jpeg","/**/*.png","/**/*.peg", "/**/*.js", "/error/**",
+//                        "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**");
+//    }
+
     @Bean
     public LoginCheckInterCeptor loginCheckInterCeptor(){
         return new LoginCheckInterCeptor();
     }
 
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("index");
-    }
 
 //    @Override
 //    public void addResourceHandlers(ResourceHandlerRegistry registry) {
