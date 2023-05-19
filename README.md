@@ -66,3 +66,20 @@ DB 구축 : select한 결과를 캡쳐해 주세요
 
 구현 기능: 전체 프로그램 동작/오류 없이 전체 동작 1
 ![실행화면캡쳐](./화면캡쳐/화면캡쳐_Main화면_web.png)
+
+![select](
+src/main/resources/static/img/캡처/select.PNG)
+select 캡처
+
+![insert](
+src/main/resources/static/img/캡처/insert.PNG)
+insert 캡처
+
+![insert](
+src/main/resources/static/img/캡처/insert.PNG)
+insert 캡처
+
+![delete](
+src/main/resources/static/img/캡처/delete.PNG)
+delete 캡처
+
