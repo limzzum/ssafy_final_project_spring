@@ -30,9 +30,10 @@ public class SecurityService {
         redisUtil.set(String.valueOf(userNo), refreshToken, (int) (expireMin*5));
         return create("refreshToken", expireMin*5);
     }
-    public String createJwtToken(String subject){
-        return create(subject, expireMin*1000*60);
+    public String createJwtToken(int subject){
+        return create(String.valueOf(subject), expireMin*1000*60);
     }
+
 
     public String create(String subject, long expTime){
         if(expTime<=0){
