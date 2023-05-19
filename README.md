@@ -36,7 +36,33 @@ TODO: 요구사항 목록에서 완료 처리된 사항의 캡쳐 이미지를 �
 DB 구축 : select한 결과를 캡쳐해 주세요
 
 구현 기능: FrontEnd + BackEnd(Controller, Model(Dao, Service, Dto)
-![실행화면캡쳐](./화면캡쳐/화면캡쳐_0001_주택정보_web.png)
+<!-- ![실행화면캡쳐](./화면캡쳐/화면캡쳐_0001_주택정보_web.png) -->
+![목록](src/main/resources/static/img/캡처/목록.PNG)
+목록화면
+
+![상세](src/main/resources/static/img/캡처/상세.PNG)
+상세화면
+
+![수정](src/main/resources/static/img/캡처/수정.PNG)
+수정화면
+
+![수정완료](src/main/resources/static/img/캡처/수정완료.PNG)
+수정완료화면
+
+![삭제](src/main/resources/static/img/캡처/삭제.PNG)
+삭제화면
+
+![삭제완료](src/main/resources/static/img/캡처/삭제완료.PNG)
+삭제완료화면
+
+![삭제완료후결과목록](src/main/resources/static/img/캡처/삭제완료후결과목록.PNG)
+삭제완료후결과목록 화면
+
+![글쓰기](src/main/resources/static/img/캡처/글쓰기.PNG)
+글쓰기화면
+
+![글쓰기완료후목록](src/main/resources/static/img/캡처/글쓰기완료후목록.PNG)
+글쓰기완료후목록 화면
 
 구현 기능: 전체 프로그램 동작/오류 없이 전체 동작 1
 ![실행화면캡쳐](./화면캡쳐/화면캡쳐_Main화면_web.png)
