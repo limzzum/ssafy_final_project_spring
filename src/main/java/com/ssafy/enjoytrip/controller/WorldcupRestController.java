@@ -2,6 +2,8 @@ package com.ssafy.enjoytrip.controller;
 
 import com.ssafy.enjoytrip.model.dto.Worldcup;
 import com.ssafy.enjoytrip.model.service.WorldcupService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@Api(tags = "WORLDCUP REST API")
 @RequestMapping("/api/worldcup")
 public class WorldcupRestController {
     private WorldcupService service;
@@ -24,6 +27,7 @@ public class WorldcupRestController {
         this.service = service;
     }
 
+    @ApiOperation(value = "월드컵 리스트 요청", notes = "월드컵 후보 리스트를 반환한다.",response = ResponseEntity.class)
     @GetMapping
     public ResponseEntity<Map<String, Object>> selectAll(){
         Map<String,Object> map = new HashMap<>();
@@ -31,6 +35,8 @@ public class WorldcupRestController {
         map.put("result", list);
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
+
+    @ApiOperation(value = "우승지역 우승횟수 업데이트 요청", notes = "업데이트 후 리스트 결과 반환",response = ResponseEntity.class)
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> update(@PathVariable int id){
         Map<String,Object> map = new HashMap<>();
