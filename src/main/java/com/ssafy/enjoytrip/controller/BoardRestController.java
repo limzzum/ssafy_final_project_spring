@@ -18,7 +18,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/board")
 @Slf4j
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class BoardRestController {
     private final BoardService service;
 
@@ -35,7 +35,8 @@ public class BoardRestController {
 
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
-    @PostMapping("/")
+
+    @PutMapping
     public ResponseEntity<Map<String, Object>> modify(@RequestBody Board board){
         log.info("modify");
         Map<String,Object> map = new HashMap<>();
@@ -75,17 +76,20 @@ public class BoardRestController {
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/regist")
-    public ResponseEntity<Map<String, Object>> regist(@RequestBody Board board, HttpSession session){
-        User loginUser = (User) session.getAttribute("loginUser");
-        board.setUserNo(loginUser.getUserNo());
+    @PostMapping
+    public ResponseEntity<Map<String, Object>> regist(@RequestBody Board board){
+        log.info(String.valueOf(board.getUserNo()));
+        log.info(board.getBoardType());
         int result = service.insert(board);
         Map<String, Object> map = new HashMap<>();
-        map.put("result", result);
+        String  msg = "success";
 
         if(result == 1){
+            map.put("msg", msg);
             return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
         }
+        msg="fail";
+        map.put("msg", msg);
         return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
     }
 
