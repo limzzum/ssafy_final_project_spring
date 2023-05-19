@@ -3,7 +3,6 @@ import VueRouter from "vue-router";
 import AppMain from "@/views/AppMain.vue";
 import AppThemeTrip from "@/views/AppThemeTrip.vue";
 import AppMyPlan from "@/views/AppMyPlan.vue";
-import AppWorldcup from "@/views/AppWorldcup.vue";
 import AppBoard from "@/views/AppBoard.vue";
 import AppRecommend from "@/views/AppRecommend.vue";
 
@@ -48,11 +47,6 @@ const routes = [
     component: AppMyPlan,
   },
   {
-    path: "/worldcup",
-    name: "worldcup",
-    component: AppWorldcup,
-  },
-  {
     path: "/recommend",
     name: "recommend",
     component: AppRecommend,
@@ -87,6 +81,31 @@ const routes = [
         beforeEnter: onlyAuthUser,
         component: () =>
           import(/* webpackChunkName: "user" */ "@/components/user/UserMyPage"),
+      },
+    ],
+  },
+  {
+    path: "/worldcup",
+    name: "worldcup",
+    component: () =>
+      import(/* webpackChunkName: "user" */ "@/views/AppWorldcup.vue"),
+    redirect: "/worldcup/progress",
+    children: [
+      {
+        path: "progress",
+        name: "progress",
+        component: () =>
+          import(
+            /* webpackChunkName: "user" */ "@/components/worldcup/WorldcupProgress.vue"
+          ),
+      },
+      {
+        path: "result",
+        name: "result",
+        component: () =>
+          import(
+            /* webpackChunkName: "user" */ "@/components/worldcup/WorldcupResult.vue"
+          ),
       },
     ],
   },

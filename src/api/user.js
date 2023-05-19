@@ -1,7 +1,6 @@
 import { apiInstance } from "./index.js";
 
 const api = apiInstance();
-// TODO : 이 파일 프로젝트에 맞게 수정
 
 async function login(user, success, fail) {
   await api.post(`/user/login`, JSON.stringify(user)).then(success).catch(fail);
