@@ -24,11 +24,17 @@ public class MVCConfig implements WebMvcConfigurer {
     }
 
 
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-////        registry.addResourceHandler("/swagger-ui/**")
-////                .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/");
-//        registry.addResourceHandler("/swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/swagger-ui.html");
-//    }
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("redirect:/swagger-ui/index.html");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/")
+//        registry.addResourceHandler("/swagger-ui/**")
+//                .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/");
+//        registry.addResourceHandler("/sw").addResourceLocations("/swagger-ui/index.html");
+    }
 
 }
