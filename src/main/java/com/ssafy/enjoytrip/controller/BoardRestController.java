@@ -74,7 +74,7 @@ public class BoardRestController {
     }
 
     @ApiOperation(value = "board 리스트 요청", notes = "option값을 json으로 전달: title, content, boardType, user_no 전달 가능 ",response = ResponseEntity.class)
-    @PostMapping("/{page}")
+    @PostMapping("/search/{page}")
     public ResponseEntity<Map<String, Object>> list(@RequestBody @ApiParam(value = "boardList option값", required = true) Map<String,Object> body,
                                                     @ApiParam(value = "page") @PathVariable int page){
         PageHelper.startPage(page,10);
