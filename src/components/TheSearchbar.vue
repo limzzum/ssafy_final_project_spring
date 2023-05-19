@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: "",
+  name: "TheSearchbar",
   components: {},
   data() {
     return {

@@ -1,6 +1,12 @@
 import jwtDecode from "jwt-decode";
 import router from "@/router";
-import { login, findById, tokenRegeneration, logout } from "@/api/member";
+import {
+  login,
+  findByUserNo,
+  tokenRegeneration,
+  logout,
+  regist,
+} from "@/api/user";
 
 const userStore = {
   namespaced: true,
@@ -38,7 +44,8 @@ const userStore = {
       await login(
         user,
         ({ data }) => {
-          if (data.message === "success") {
+          console.log(data);
+          if (data.msg === "success") {
             let accessToken = data["access-token"];
             let refreshToken = data["refresh-token"];
             // console.log("login success token created!!!! >> ", accessToken, refreshToken);
@@ -51,6 +58,7 @@ const userStore = {
             commit("SET_IS_LOGIN", false);
             commit("SET_IS_LOGIN_ERROR", true);
             commit("SET_IS_VALID_TOKEN", false);
+            console.log("userStore.js -> userConfirm : 로그인 실패");
           }
         },
         (error) => {
@@ -58,15 +66,38 @@ const userStore = {
         }
       );
     },
+    async userRegist({ commit }, user) {
+      console.log(commit);
+      console.log("userStore.js에서...");
+      console.log(user);
+      let msg = null;
+      await regist(
+        user,
+        ({ data }) => {
+          console.log(data);
+          if (data.msg === "success") {
+            msg = "success";
+          } else {
+            msg = data.result;
+          }
+        },
+        async (error) => {
+          console.log("대충 서버 오류");
+          console.log(error);
+          msg = "통신 오류 : 잠시 후 다시 시도해보세요";
+        }
+      );
+      return msg;
+    },
     async getUserInfo({ commit, dispatch }, token) {
       let decodeToken = jwtDecode(token);
-      // console.log("2. getUserInfo() decodeToken :: ", decodeToken);
-      await findById(
-        decodeToken.userid,
+      console.log("2. getUserInfo() decodeToken :: ", decodeToken);
+      await findByUserNo(
+        decodeToken.sub,
         ({ data }) => {
-          if (data.message === "success") {
-            commit("SET_USER_INFO", data.userInfo);
-            // console.log("3. getUserInfo data >> ", data);
+          if (data.msg === "success") {
+            commit("SET_USER_INFO", data.user);
+            console.log("3. getUserInfo data >> ", data);
           } else {
             console.log("유저 정보 없음!!!!");
           }
@@ -125,11 +156,14 @@ const userStore = {
         }
       );
     },
-    async userLogout({ commit }, userid) {
+    async userLogout({ commit }, userNo) {
+      console.log("userStore.js : logout 시도");
       await logout(
-        userid,
+        userNo,
         ({ data }) => {
-          if (data.message === "success") {
+          console.log("userLogout 성공 : ");
+          console.log(data);
+          if (data.msg === "success") {
             commit("SET_IS_LOGIN", false);
             commit("SET_USER_INFO", null);
             commit("SET_IS_VALID_TOKEN", false);

@@ -40,9 +40,9 @@
             <b-nav-item class="align-self-center">
               <b-avatar
                 variant="primary"
-                v-text="userInfo.userid.charAt(0).toUpperCase()"
+                v-text="userInfo.userId.charAt(0).toUpperCase()"
               ></b-avatar>
-              {{ userInfo.username }}({{ userInfo.userid }})님 환영합니다.
+              {{ userInfo.userName }}({{ userInfo.userId }})님 환영합니다.
             </b-nav-item>
             <b-nav-item class="align-self-center">
               <router-link
@@ -86,9 +86,6 @@ import { mapState, mapGetters, mapActions } from "vuex";
 const userStore = "userStore";
 export default {
   name: "TheNavbar",
-  data() {
-    return {};
-  },
   computed: {
     ...mapState(userStore, ["isLogin", "userInfo"]),
     ...mapGetters(["checkUserInfo"]),
@@ -101,11 +98,11 @@ export default {
       // this.SET_USER_INFO(null);
       // sessionStorage.removeItem("access-token");
       // if (this.$route.path != "/") this.$router.push({ name: "main" });
-      console.log(this.userInfo.userid);
+      console.log(this.userInfo.userNo);
       //vuex actions에서 userLogout 실행(Backend에 저장 된 리프레시 토큰 없애기
       //+ satate에 isLogin, userInfo 정보 변경)
       // this.$store.dispatch("userLogout", this.userInfo.userid);
-      this.userLogout(this.userInfo.userid);
+      this.userLogout(this.userInfo.userNo);
       sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
       sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
       if (this.$route.path != "/") this.$router.push({ name: "main" });
