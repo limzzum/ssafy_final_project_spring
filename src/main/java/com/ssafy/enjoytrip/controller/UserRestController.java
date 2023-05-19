@@ -22,7 +22,7 @@ import java.util.Map;
 @RequestMapping("/api/user")
 @Slf4j
 @Api(tags = "USER REST API")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserRestController {
 
     private final UserService service;
