@@ -1,5 +1,7 @@
 <template>
-  <b-container> Trip Worldcup </b-container>
+  <b-container>
+    <router-view></router-view>
+  </b-container>
 </template>
 
 <script>
