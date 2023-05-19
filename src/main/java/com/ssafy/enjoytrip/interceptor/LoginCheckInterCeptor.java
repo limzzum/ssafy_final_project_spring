@@ -1,6 +1,7 @@
 package com.ssafy.enjoytrip.interceptor;
 
 import com.ssafy.enjoytrip.security.SecurityService;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,20 +24,25 @@ public class LoginCheckInterCeptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle( HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String token = request.getHeader("token");
-        if(token == null){
+        String accessToken = request.getHeader("access-token");
+        if(accessToken == null){
             log.info("미인증 사용자 요청");
             response.sendRedirect("/error/login");
             return false;
         }
         try{
-            String subject = securityService.getSubject(token);
+            String subject = securityService.getSubject(accessToken);
             log.info(subject);
             return true;
+        }catch (ExpiredJwtException e){
+            e.printStackTrace();
+            response.sendRedirect("/error/access-token");
+            return false;
         }catch (Exception e){
             e.printStackTrace();
+            response.sendRedirect("/error/login");
         }
-        response.sendRedirect("/error/login");
+
         return false;
     }
 
