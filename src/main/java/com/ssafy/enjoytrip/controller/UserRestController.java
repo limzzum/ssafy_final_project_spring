@@ -75,11 +75,10 @@ public class UserRestController {
 
     @ApiOperation(value = "로그아웃",response = Map.class)
     @GetMapping("/logout/{userNo}")
-    public ResponseEntity<Map<String, Object>> logout( @PathVariable int userNo){
-//        TODO : 토큰 삭제
-//        service.logout(token, userNo);
+    public ResponseEntity<Map<String, Object>> logout(@RequestHeader(name = "access-token") String accessToken, @PathVariable int userNo){
+        service.logout(accessToken, userNo);
         Map<String, Object> map = new HashMap<>();
-        map.put("msg","로그아웃 되었습니다");
+        map.put("msg","success");
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
