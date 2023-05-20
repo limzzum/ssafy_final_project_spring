@@ -45,6 +45,7 @@ const placeStore = {
       await getRegions(
         ({ data }) => {
           console.log(data);
+          commit("CLEAR_REGION_LIST");
           commit("SET_REGION_LIST", data.result);
         },
         (error) => {
@@ -55,6 +56,7 @@ const placeStore = {
     async getContentInfo({ commit }) {
       await getContents(
         ({ data }) => {
+          commit("CLEAR_CONTENT_LIST");
           commit("SET_CONTENT_LIST", data.result);
         },
         (error) => {
