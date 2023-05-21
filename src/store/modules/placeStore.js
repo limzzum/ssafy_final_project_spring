@@ -76,10 +76,13 @@ const placeStore = {
       );
     },
     async searchPlace({ commit }, condition) {
+      console.log(condition);
       await searchPlace(
+        { page: 1 },
         condition,
         ({ data }) => {
-          commit("SET_PLACE_LIST", data);
+          console.log(data.result);
+          commit("SET_PLACE_LIST", data.result);
         },
         (error) => {
           console.log(error);
