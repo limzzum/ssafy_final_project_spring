@@ -40,6 +40,25 @@ const routes = [
     path: "/themetrip",
     name: "themetrip",
     component: AppThemeTrip,
+    redirect: "/themetrip/list",
+    children: [
+      {
+        path: "list",
+        name: "placeList",
+        component: () =>
+          import(
+            /* webpackChunkName: "themetrip" */ "@/components/themetrip/ThemeList"
+          ),
+      },
+      {
+        path: "view/:contentId",
+        name: "placeview",
+        component: () =>
+          import(
+            /* webpackChunkName: "themetrip" */ "@/components/themetrip/ThemeView"
+          ),
+      },
+    ],
   },
   {
     path: "/myplan",
