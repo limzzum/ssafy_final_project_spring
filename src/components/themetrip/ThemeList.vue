@@ -43,15 +43,16 @@
 </template>
 
 <script>
-import { searchPlace } from "@/api/place";
+// import { searchPlace } from "@/api/place";
 // import ThemeListItem from "./ThemeListItem.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {},
   name: "ThemeList",
   data() {
     return {
-      places: [],
+      // places: [],
       // isLoginError: false,
       condition: {
         contentTypeId: 0,
@@ -67,22 +68,25 @@ export default {
       ],
     };
   },
-  created() {
-    let param = {
-      page: 1,
-    };
-    searchPlace(
-      param,
-      this.condition,
-      ({ data }) => {
-        console.log("data111 " + data.result);
-        this.places = data.result;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+  computed: {
+    ...mapState("placeStore", ["places"]),
   },
+  // created() {
+  //   let param = {
+  //     page: 1,
+  //   };
+  //   searchPlace(
+  //     param,
+  //     this.condition,
+  //     ({ data }) => {
+  //       console.log("data111 " + data.result);
+  //       this.places = data.result;
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // },
   // computed: {
   //   ...mapState(placeStore, ["isLogin", "isLoginError", "userInfo"]),
   // },
