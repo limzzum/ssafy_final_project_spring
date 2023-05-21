@@ -1,16 +1,5 @@
 <template>
   <b-container class="bv-example-row mt-3">
-    <!-- <theme-list-item
-      v-for="(place, index) in places"
-      :key="index"
-      :contentId="place.contentId"
-      :title="place.title"
-      :firstImage="place.firstImage"
-      :sidoName="place.sidoName"
-      :contentTypeName="place.contentTypeName"
-    >
-    </theme-list-item> -->
-
     <b-row>
       <b-col>
         <b-table
@@ -29,30 +18,22 @@
               alt="이미지 없음"
             />
           </template>
-          <!-- <template #cell(title)="data">
-            <router-link
-              :to="{ name: 'placeview', params: { id: data.item.contentId } }"
-            >
-              {{ data.item.title }}
-            </router-link>
-          </template> -->
         </b-table>
       </b-col>
     </b-row>
+    <the-pagenation />
   </b-container>
 </template>
 
 <script>
-// import { searchPlace } from "@/api/place";
-// import ThemeListItem from "./ThemeListItem.vue";
 import { mapState } from "vuex";
+import ThePagenation from "../ThePagenation.vue";
 
 export default {
-  components: {},
+  components: { ThePagenation },
   name: "ThemeList",
   data() {
     return {
-      // places: [],
       // isLoginError: false,
       condition: {
         contentTypeId: 0,
@@ -71,42 +52,19 @@ export default {
   computed: {
     ...mapState("placeStore", ["places"]),
   },
-  // created() {
-  //   let param = {
-  //     page: 1,
-  //   };
-  //   searchPlace(
-  //     param,
-  //     this.condition,
-  //     ({ data }) => {
-  //       console.log("data111 " + data.result);
-  //       this.places = data.result;
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // },
+
   // computed: {
   //   ...mapState(placeStore, ["isLogin", "isLoginError", "userInfo"]),
   // },
-  // methods: {
-  //   ...mapActions(placeStore, ["userConfirm", "getUserInfo"]),
-  //   async confirm() {
-  //     await this.userConfirm(this.user);
-  //     console.log("userConfirm 끝");
-  //     let token = sessionStorage.getItem("access-token");
-  //     console.log("1. confirm() token >> " + token);
-  //     if (this.isLogin) {
-  //       await this.getUserInfo(token);
-  //       console.log("4. confirm() userInfo :: ", this.userInfo);
-  //       this.$router.push({ name: "main" });
-  //     }
-  //   },
-  //   movePage() {
-  //     this.$router.push({ name: "join" });
-  //   },
-  // },
+  methods: {
+    // ...mapActions(placeStore, ["userConfirm", "getUserInfo"]),
+    viewPlace(place) {
+      this.$router.push({
+        name: "placeview",
+        params: { contentId: place.contentId },
+      });
+    },
+  },
 };
 </script>
 
