@@ -15,23 +15,11 @@ async function getContents(success, fail) {
   await api.get(`/place/content`).then(success).catch(fail);
 }
 
-async function searchPlace(condition, success, fail) {
-  // condition :
-  // {
-  //   "addr1": "string",
-  //   "contentId": 0,
-  //   "contentTypeId": 0,
-  //   "contentTypeName": "string",
-  //   "firstImage": "string",
-  //   "gugunCode": 0,
-  //   "latitude": 0,
-  //   "longitude": 0,
-  //   "overview": "string",
-  //   "sidoCode": 0,
-  //   "sidoName": "string",
-  //   "title": "string"
-  // }
-  await api.get(`/worldcup`).then(success).catch(fail);
+async function searchPlace(param, condition, success, fail) {
+  await api
+    .post(`/place/search/${param.page}`, JSON.stringify(condition))
+    .then(success)
+    .catch(fail);
 }
 
 export { placeDetail, getRegions, getContents, searchPlace };
