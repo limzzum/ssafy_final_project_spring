@@ -9,12 +9,12 @@
       </b-col>
       <b-col cols="3">
         <b-form-select
-          v-model="condition.contentId"
+          v-model="condition.contentTypeId"
           :options="contents"
         ></b-form-select> </b-col
       ><b-col cols="4">
         <b-form-input
-          v-model="condition.content"
+          v-model="condition.title"
           type="text"
           placeholder="관광지 이름"
         ></b-form-input>
@@ -38,9 +38,9 @@ export default {
   data() {
     return {
       condition: {
-        contentId: null,
-        sidoCode: null,
-        title: null,
+        contentTypeId: 0,
+        sidoCode: "",
+        title: "",
       },
     };
   },
@@ -55,8 +55,27 @@ export default {
     ...mapState(placeStore, ["regions", "contents"]),
   },
   methods: {
-    ...mapActions(placeStore, ["getRegionInfo", "getContentInfo"]),
+    ...mapActions(placeStore, [
+      "getRegionInfo",
+      "getContentInfo",
+      "searchPlace",
+    ]),
     async search() {
+      // let param = {
+      //   page: 1,
+      // };
+
+      this.searchPlace(
+        this.condition,
+        ({ data }) => {
+          console.log("data111 " + data.result);
+        },
+        (error) => {
+          console.log(this.condition);
+          console.log(error);
+        }
+      );
+      // },
       // TODO : search 후 /themetrip 이동 구현
     },
   },
