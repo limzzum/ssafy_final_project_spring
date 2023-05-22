@@ -39,6 +39,7 @@ public class PlaceRestController {
         Map<String, Object> map = new HashMap<>();
         map.put("result", list);
         map.put("pages",list.getPages());
+        map.put("totalNum",list.getTotal());
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 

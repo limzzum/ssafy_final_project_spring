@@ -84,6 +84,7 @@ public class BoardRestController {
             Page<Board> list = service.search(body);
             map.put("result", list);
             map.put("pages",list.getPages());
+            map.put("totalNum",list.getTotal());
             map.put("msg", "success");
             return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
         }catch (Exception e){
