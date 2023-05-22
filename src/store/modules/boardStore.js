@@ -47,6 +47,7 @@ const boardStore = {
     },
     SET_TOTAL_PAGE_NUM(state, num) {
       state.totalPageNum = num;
+      console.log("board store set totalnum ", state.totalPageNum)
     },
     
   },
@@ -90,9 +91,9 @@ const boardStore = {
         state.currentPage,
         { boardType: state.boardType },
         ({ data }) => {
-          console.log(data.result);
+          console.log(data);
           commit("SET_ARTICLE_LIST", data.result);
-          commit("SET_TOTAL_PAGE_NUM", data.pages);
+          commit("SET_TOTAL_PAGE_NUM", data.totalNum);
         },
         (error) => {
           console.log(error);
@@ -106,7 +107,7 @@ const boardStore = {
         ({ data }) => {
           console.log(data.result);
           commit("SET_PLACE_LIST", data.result);
-          commit("SET_TOTAL_PAGE_NUM", data.pages);
+          commit("SET_TOTAL_PAGE_NUM", data.totalNum);
         },
         (error) => {
           console.log(error);
