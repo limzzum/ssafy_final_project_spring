@@ -50,7 +50,6 @@ const boardStore = {
           if (data.msg === "success") {
             msg = "등록이 완료되었습니다.";
             console.log(commit);
-            this.searchArticle();
             
           }
           alert(msg);
