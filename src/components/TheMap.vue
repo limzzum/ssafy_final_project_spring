@@ -1,12 +1,14 @@
 <template>
   <div>
-    <div id="map"></div>
+    <div style="height: 400px;" id="map"></div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+// import { mapState } from "vuex";
 export default {
-  name: "KakaoMap",
+  name: "TheMap",
   components: {},
   data() {
     return {
@@ -16,16 +18,20 @@ export default {
     };
   },
   props: {
-    chargers: [],
+    // chargers: [],
+  },
+  computed: {
+    ...mapState("placeStore", ["places"]),
   },
   watch: {
-    chargers() {
-      console.log("충전소", this.chargers);
+    places() {
+      console.log("aa")
       this.positions = [];
-      this.chargers.forEach((charger) => {
+      this.places.forEach((place) => {
+        console.log("place " + place);
         let obj = {};
-        obj.title = charger.statNm;
-        obj.latlng = new kakao.maps.LatLng(charger.lat, charger.lng);
+        obj.title = place.statNm;
+        obj.latlng = new kakao.maps.LatLng(place.latitude, place.longitude);
 
         this.positions.push(obj);
       });
@@ -35,6 +41,7 @@ export default {
   created() {},
   mounted() {
     // api 스크립트 소스 불러오기 및 지도 출력
+    console.log("mounted ");
     if (window.kakao && window.kakao.maps) {
       this.loadMap();
     } else {
@@ -47,7 +54,7 @@ export default {
       const script = document.createElement("script");
       script.src =
         "//dapi.kakao.com/v2/maps/sdk.js?appkey=" +
-        process.env.VUE_APP_KAKAO_MAP_API_KEY +
+        process.env.VUE_APP_KAKAO_MAP_API_KEY+
         "&autoload=false";
       /* global kakao */
       script.onload = () => window.kakao.maps.load(this.loadMap);

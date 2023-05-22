@@ -1,5 +1,7 @@
 <template>
   <b-container class="bv-example-row mt-3">
+    <the-searchbar/>
+    <the-map/>
     <b-row>
       <b-col>
         <b-table
@@ -27,10 +29,12 @@
 
 <script>
 import { mapState } from "vuex";
+import TheMap from "../TheMap.vue";
 import ThePagenation from "../ThePagenation.vue";
+import TheSearchbar from "../TheSearchbar.vue";
 
 export default {
-  components: { ThePagenation },
+  components: { ThePagenation, TheSearchbar, TheMap },
   name: "ThemeList",
   data() {
     return {
