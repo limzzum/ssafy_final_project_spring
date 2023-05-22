@@ -74,6 +74,41 @@ const routes = [
     path: "/board",
     name: "board",
     component: AppBoard,
+    redirect: "/board/list",
+    children: [
+      {
+        path: "list",
+        name: "list",
+        component: () =>
+          import(
+            /* webpackChunkName: "board" */ "@/components/board/BoardList"
+          ),
+      },
+      {
+        path: "write",
+        name: "boardwrite",
+        // beforeEnter: onlyAuthUser,
+        component: () => import(/* webpackChunkName: "board" */ "@/components/board/BoardWrite"),
+      },
+      {
+        path: "view/:postId",
+        name: "boardview",
+        // beforeEnter: onlyAuthUser,
+        component: () => import(/* webpackChunkName: "board" */ "@/components/board/BoardView"),
+      },
+      {
+        path: "modify",
+        name: "boardmodify",
+        // beforeEnter: onlyAuthUser,
+        component: () => import(/* webpackChunkName: "board" */ "@/components/board/BoardModify"),
+      },
+      {
+        path: "delete/:postId",
+        name: "boarddelete",
+        // beforeEnter: onlyAuthUser,
+        component: () => import(/* webpackChunkName: "board" */ "@/components/board/BoardDelete"),
+      },
+    ],
   },
   {
     path: "/user",
