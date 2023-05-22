@@ -7,6 +7,13 @@ const placeStore = {
     contents: [{ value: null, text: "선택하세요" }],
     places: [],
     place: null,
+    condition: {
+      contentTypeId: null,
+      sidoCode: null,
+      title:null
+    },
+    currentPage: 1,
+    totalPageNum: 1,
   },
   getters: {},
   mutations: {
@@ -39,7 +46,22 @@ const placeStore = {
     SET_DETAIL_PLACE(state, place) {
       state.place = place;
     },
+    SET_CONDITION(state, condition) {
+      console.log("set condition");
+      state.condition = condition;
+      console.log(state.condition)
+    },
+    SET_CURRENT_PAGE(state, page) {
+      console.log("store mutation")
+      state.currentPage = page;
+      console.log(state.currentPage)
+    },
+    SET_TOTAL_PAGE_NUM(state, num) {
+      state.totalPageNum = num;
+    },
+    
   },
+
   actions: {
     async getRegionInfo({ commit }) {
       await getRegions(
@@ -75,15 +97,16 @@ const placeStore = {
         }
       );
     },
-    async searchPlace({ commit }, condition) {
-      console.log(condition);
+    async searchPlace({ commit, state }) {
+      console.log(this.condition);
       await searchPlace(
-        { page: 1 },
-        condition,
+        { page: state.currentPage },
+        state.condition,
         ({ data }) => {
           console.log(data);
           console.log(data.result);
           commit("SET_PLACE_LIST", data.result);
+          commit("SET_TOTAL_PAGE_NUM", data.pages);
         },
         (error) => {
           console.log(error);
