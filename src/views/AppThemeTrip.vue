@@ -1,7 +1,5 @@
 <template>
   <b-container>
-    <!-- <TheSearchbar /> -->
-    <!-- <the-map /> -->
     <router-view />
   </b-container>
 </template>

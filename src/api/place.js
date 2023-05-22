@@ -7,7 +7,6 @@ async function placeDetail(id, success, fail) {
 }
 
 async function getRegions(success, fail) {
-  console.log("get regions....");
   await api.get(`/place/region`).then(success).catch(fail);
 }
 

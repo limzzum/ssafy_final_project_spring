@@ -1,7 +1,7 @@
 <template>
   <b-container class="bv-example-row mt-3">
-    <the-searchbar />
-    <the-map />
+    <TheSearchbar />
+    <TheMap />
     <b-row>
       <b-col>
         <b-table
@@ -25,7 +25,7 @@
         </b-table>
       </b-col>
     </b-row>
-    <the-pagenation />
+    <ThePagenation />
   </b-container>
 </template>
 
