@@ -49,8 +49,15 @@ export default {
       key: null,
       word: null,
     };
+    let config = {
+      title: null,
+      content: null,
+      boardType: null,
+      user_no: null
+    };
     listArticle(
       param.pg,
+      config,
       ({ data }) => {
         this.articles = data.result;
         console.log(data.result);
