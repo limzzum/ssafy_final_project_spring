@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,7 @@ public class WorldcupRestController {
     public ResponseEntity<Map<String, Object>> selectAll(){
         Map<String,Object> map = new HashMap<>();
         List<Worldcup> list = service.getWorldcupList();
+        Collections.shuffle(list);
         map.put("result", list);
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
