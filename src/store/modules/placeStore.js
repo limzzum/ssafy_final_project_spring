@@ -105,7 +105,7 @@ const placeStore = {
           console.log(data);
           console.log(data.result);
           commit("SET_PLACE_LIST", data.result);
-          commit("SET_TOTAL_PAGE_NUM", data.pages);
+          commit("SET_TOTAL_PAGE_NUM", data.totalNum);
         },
         (error) => {
           console.log(error);

@@ -4,6 +4,7 @@ import createPersistedState from "vuex-persistedstate";
 import userStore from "@/store/modules/userStore";
 import placeStore from "@/store/modules/placeStore";
 import worldcupStore from "@/store/modules/worldcupStore";
+import boardStore from "./modules/boardStore";
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     userStore,
     placeStore,
     worldcupStore,
+    boardStore,
   },
   plugins: [
     createPersistedState({
