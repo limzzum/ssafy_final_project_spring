@@ -5,7 +5,10 @@
         <b-form-select
           v-model="condition.sidoCode"
           :options="regions"
-        ></b-form-select>
+          
+        >
+      
+      </b-form-select>
       </b-col>
       <b-col cols="3">
         <b-form-select
@@ -29,7 +32,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 const placeStore = "placeStore";
 
 export default {
@@ -38,9 +41,9 @@ export default {
   data() {
     return {
       condition: {
-        contentTypeId: 0,
-        sidoCode: "",
-        title: "",
+        contentTypeId: null,
+        sidoCode: null,
+        title: null,
       },
     };
   },
@@ -55,26 +58,19 @@ export default {
     ...mapState(placeStore, ["regions", "contents"]),
   },
   methods: {
+    ...mapMutations(placeStore, ["SET_CONDITION"]),
     ...mapActions(placeStore, [
       "getRegionInfo",
       "getContentInfo",
       "searchPlace",
     ]),
+    setCondition() {
+      this.SET_CONDITION(this.condition);
+    },
     async search() {
-      // let param = {
-      //   page: 1,
-      // };
-
-      this.searchPlace(
-        this.condition,
-        ({ data }) => {
-          console.log("data111 " + data.result);
-        },
-        (error) => {
-          console.log(this.condition);
-          console.log(error);
-        }
-      );
+      console.log("search")
+      this.setCondition();
+      this.searchPlace();
       // },
       // TODO : search 후 /themetrip 이동 구현
     },
