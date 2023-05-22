@@ -10,7 +10,7 @@ const placeStore = {
     condition: {
       contentTypeId: null,
       sidoCode: null,
-      title:null
+      title: null,
     },
     currentPage: 1,
     totalPageNum: 1,
@@ -49,24 +49,23 @@ const placeStore = {
     SET_CONDITION(state, condition) {
       console.log("set condition");
       state.condition = condition;
-      console.log(state.condition)
+      console.log(state.condition);
     },
     SET_CURRENT_PAGE(state, page) {
-      console.log("store mutation")
+      console.log("store mutation");
       state.currentPage = page;
-      console.log(state.currentPage)
+      console.log(state.currentPage);
     },
     SET_TOTAL_PAGE_NUM(state, num) {
       state.totalPageNum = num;
     },
-    
   },
 
   actions: {
     async getRegionInfo({ commit }) {
       await getRegions(
         ({ data }) => {
-          console.log(data);
+          // console.log(data);
           commit("CLEAR_REGION_LIST");
           commit("SET_REGION_LIST", data.result);
         },
