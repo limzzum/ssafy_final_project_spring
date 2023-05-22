@@ -48,12 +48,14 @@ const userStore = {
           if (data.msg === "success") {
             let accessToken = data["access-token"];
             let refreshToken = data["refresh-token"];
+            let userNo = data["user"]["userNo"];
             // console.log("login success token created!!!! >> ", accessToken, refreshToken);
             commit("SET_IS_LOGIN", true);
             commit("SET_IS_LOGIN_ERROR", false);
             commit("SET_IS_VALID_TOKEN", true);
             sessionStorage.setItem("access-token", accessToken);
             sessionStorage.setItem("refresh-token", refreshToken);
+            sessionStorage.setItem("userNo", userNo);
           } else {
             commit("SET_IS_LOGIN", false);
             commit("SET_IS_LOGIN_ERROR", true);
