@@ -103,6 +103,7 @@ const placeStore = {
         { page: state.currentPage },
         state.condition,
         ({ data }) => {
+          console.log(data);
           console.log(data.result);
           commit("SET_PLACE_LIST", data.result);
           commit("SET_TOTAL_PAGE_NUM", data.pages);

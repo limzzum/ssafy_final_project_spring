@@ -5,9 +5,9 @@
         <b-form-select
           v-model="condition.sidoCode"
           :options="regions"
-          
+
         >
-      
+
       </b-form-select>
       </b-col>
       <b-col cols="3">
@@ -48,11 +48,11 @@ export default {
     };
   },
   async created() {
-    console.log("created");
+    // console.log("created");
     await this.getRegionInfo();
-    console.log(this.contents);
+    // console.log(this.contents);
     await this.getContentInfo();
-    console.log(this.regions);
+    // console.log(this.regions);
   },
   computed: {
     ...mapState(placeStore, ["regions", "contents"]),
