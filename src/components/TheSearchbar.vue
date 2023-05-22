@@ -1,6 +1,6 @@
 <template>
   <b-form>
-    <b-row>
+    <b-form-row class="align-items-center">
       <b-col cols="3">
         <b-form-select
           v-model="condition.sidoCode"
@@ -15,19 +15,19 @@
           v-model="condition.contentTypeId"
           :options="contents"
         ></b-form-select> </b-col
-      ><b-col cols="4">
+      ><b-col cols="5">
         <b-form-input
           v-model="condition.title"
           type="text"
           placeholder="관광지 이름"
         ></b-form-input>
       </b-col>
-      <b-col cols="2">
+      <b-col cols="1" class="text-center">
         <b-button class="m-1" type="button" variant="primary" @click="search"
           >검색</b-button
         >
       </b-col>
-    </b-row>
+    </b-form-row>
   </b-form>
 </template>
 
