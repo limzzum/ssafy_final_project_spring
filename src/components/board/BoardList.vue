@@ -2,7 +2,7 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-alert show><h3>글목록</h3></b-alert>
+        <b-alert show><h3>{{ boardType }}글목록</h3></b-alert>
       </b-col>
     </b-row>
     <b-row class="mb-1">
@@ -26,13 +26,12 @@
 </template>
 
 <script>
-import { listArticle } from "@/api/board";
-
+// import { listArticle } from "@/api/board";
+import { mapState } from "vuex";
 export default {
   name: "BoardList",
   data() {
     return {
-      articles: [],
       fields: [
         { key: "postId", label: "글번호", tdClass: "tdClass" },
         { key: "title", label: "제목", tdClass: "tdSubject" },
@@ -43,29 +42,32 @@ export default {
     };
   },
   created() {
-    let param = {
-      pg: 1,
-      spp: 20,
-      key: null,
-      word: null,
-    };
-    let option = {
-      title: null,
-      content: null,
-      boardType: null,
-      user_no: null
-    };
-    listArticle(
-      param.pg,
-      option,
-      ({ data }) => {
-        this.articles = data.result;
-        console.log(data.result);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    // let param = {
+    //   pg: 1,
+    //   spp: 20,
+    //   key: null,
+    //   word: null,
+    // };
+    // let option = {
+    //   title: null,
+    //   content: null,
+    //   boardType: 'notice',
+    //   user_no: null
+    // };
+    // listArticle(
+    //   param.pg,
+    //   option,
+    //   ({ data }) => {
+    //     this.articles = data.result;
+    //     console.log(data.result);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+  },
+  computed: {
+    ...mapState("boardStore", ["boardType", "articles", "currentPage"]),
   },
   methods: {
     moveWrite() {
