@@ -22,13 +22,16 @@
         </b-table>
       </b-col>
     </b-row>
+    <board-pagenation/>
   </b-container>
 </template>
 
 <script>
 // import { listArticle } from "@/api/board";
 import { mapState } from "vuex";
+import BoardPagenation from "./BoardPagenation.vue";
 export default {
+  components: { BoardPagenation },
   name: "BoardList",
   data() {
     return {
