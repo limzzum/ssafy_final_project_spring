@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import moment from "moment";
+// import moment from "moment";
 import { getArticle } from "@/api/board";
 // import { mapState } from "vuex";
 
@@ -85,11 +85,11 @@ export default {
       this.$router.push({ name: "boardlist" });
     },
   },
-  filters: {
-    dateFormat(createTime) {
-      return moment(new Date(createTime)).format("YY.MM.DD hh:mm:ss");
-    },
-  },
+  // filters: {
+  //   dateFormat(createTime) {
+  //     return moment(new Date(createTime)).format("YY.MM.DD hh:mm:ss");
+  //   },
+  // },
 };
 </script>
 
