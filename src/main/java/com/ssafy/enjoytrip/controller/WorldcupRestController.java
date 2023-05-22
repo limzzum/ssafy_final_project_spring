@@ -42,6 +42,7 @@ public class WorldcupRestController {
         Map<String,Object> map = new HashMap<>();
         service.updateWorldcupWins(id);
         List<Worldcup> list = service.getWorldcupList();
+        Collections.sort(list,(o1,o2)->Integer.compare(o1.getWins(),o2.getWins())*-1);
         map.put("result", list);
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
