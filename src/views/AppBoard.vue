@@ -1,5 +1,8 @@
 <template>
-  <b-container> AppBoard </b-container>
+  <b-container> AppBoard 
+
+    <router-view/>
+  </b-container>
 </template>
 
 <script>
