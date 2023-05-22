@@ -49,7 +49,7 @@ export default {
       key: null,
       word: null,
     };
-    let config = {
+    let option = {
       title: null,
       content: null,
       boardType: null,
@@ -57,7 +57,7 @@ export default {
     };
     listArticle(
       param.pg,
-      config,
+      option,
       ({ data }) => {
         this.articles = data.result;
         console.log(data.result);
