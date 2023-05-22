@@ -2,8 +2,8 @@ import { apiInstance } from "./index.js";
 
 const api = apiInstance();
 
-function listArticle(page,config, success, fail) {
-  api.post(`/board/search/${page}`, JSON.stringify(config)).then(success).catch(fail);
+function listArticle(page,option, success, fail) {
+  api.post(`/board/search/${page}`, JSON.stringify(option)).then(success).catch(fail);
 }
 
 function writeArticle(article, success, fail) {
