@@ -115,7 +115,12 @@ export default {
 #logo-img {
   height: 100px;
 }
-router-link {
+a {
   text-decoration: none;
+  color: black;
+}
+a:hover {
+  text-decoration: none;
+  color: darkslateblue;
 }
 </style>
