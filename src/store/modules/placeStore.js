@@ -81,6 +81,7 @@ const placeStore = {
         { page: 1 },
         condition,
         ({ data }) => {
+          console.log(data);
           console.log(data.result);
           commit("SET_PLACE_LIST", data.result);
         },

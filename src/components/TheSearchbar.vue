@@ -38,18 +38,18 @@ export default {
   data() {
     return {
       condition: {
-        contentTypeId: 0,
-        sidoCode: "",
-        title: "",
+        contentTypeId: null,
+        sidoCode: null,
+        title: null,
       },
     };
   },
   async created() {
-    console.log("created");
+    // console.log("created");
     await this.getRegionInfo();
-    console.log(this.contents);
+    // console.log(this.contents);
     await this.getContentInfo();
-    console.log(this.regions);
+    // console.log(this.regions);
   },
   computed: {
     ...mapState(placeStore, ["regions", "contents"]),
@@ -64,7 +64,6 @@ export default {
       // let param = {
       //   page: 1,
       // };
-
       this.searchPlace(
         this.condition,
         ({ data }) => {
@@ -75,10 +74,9 @@ export default {
           console.log(error);
         }
       );
-      // TODO : search 후 /themetrip 이동 구현
+      // TODO : search 후 이동 구현
     },
   },
 };
 </script>
-
 <style scoped></style>
