@@ -1,23 +1,25 @@
 <template>
   <b-container class="bv-example-row mt-3">
-    <the-searchbar/>
-    <the-map/>
+    <the-searchbar />
+    <the-map />
     <b-row>
       <b-col>
         <b-table
-          striped
           hover
           :items="places"
           :fields="fields"
           @row-clicked="viewPlace"
+          class="text-center align-middle"
         >
           <template v-slot:cell(firstImage)="data">
-            <img
+            <b-img
               class="img-fluid img-thumbnail"
-              :src="data.item.firstImage"
-              width="150"
-              height="150"
-              alt="이미지 없음"
+              :src="`${
+                data.item.firstImage
+                  ? data.item.firstImage
+                  : require('@/assets/img/on_error.png')
+              }`"
+              style="min-height: 100px; max-height: 100px"
             />
           </template>
         </b-table>
@@ -45,11 +47,10 @@ export default {
         title: "",
       },
       fields: [
-        { key: "firstImage", label: "이미지", tdClass: "tdClass" },
-        { key: "contentId", label: "번호", tdClass: "tdClass" },
-        { key: "title", label: "이름", tdClass: "tdSubject" },
-        { key: "contentTypeName", label: "유형", tdClass: "tdClass" },
-        { key: "sidoName", label: "지역", tdClass: "tdClass" },
+        { key: "firstImage", label: "이미지", tdClass: "tdClass col-1" },
+        { key: "title", label: "이름", tdClass: "tdSubject col-1" },
+        { key: "contentTypeName", label: "유형", tdClass: "tdClass col-1" },
+        { key: "sidoName", label: "지역", tdClass: "tdClass col-1" },
       ],
     };
   },
@@ -72,4 +73,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.table th,
+.table td {
+  vertical-align: middle;
+}
+</style>

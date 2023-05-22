@@ -15,23 +15,29 @@
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
             <b-nav-item href="#"
-              ><router-link to="/themetrip">테마 여행</router-link></b-nav-item
+              ><router-link to="/themetrip"
+                ><b-row class="p-3">테마 여행</b-row></router-link
+              ></b-nav-item
             >
             <b-nav-item href="#"
               ><router-link to="/myplan"
-                >나의 여행 계획</router-link
+                ><b-row class="p-3">나의 여행 계획</b-row></router-link
               ></b-nav-item
             >
             <b-nav-item href="#"
               ><router-link to="/worldcup"
-                >관광지 월드컵</router-link
+                ><b-row class="p-3">관광지 월드컵</b-row></router-link
               ></b-nav-item
             >
             <b-nav-item href="#"
-              ><router-link to="/recommend">맛집 뽑기</router-link></b-nav-item
+              ><router-link to="/recommend"
+                ><b-row class="p-3">맛집 뽑기</b-row></router-link
+              ></b-nav-item
             >
             <b-nav-item href="#"
-              ><router-link to="/board">게시판</router-link></b-nav-item
+              ><router-link to="/board"
+                ><b-row class="p-3">게시판</b-row></router-link
+              ></b-nav-item
             >
           </b-navbar-nav>
 

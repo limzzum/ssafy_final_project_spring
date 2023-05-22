@@ -11,7 +11,14 @@
       </b-col>
     </b-row>
     <b-row align-h="center">
-      <img :src="place.firstImage" width="80%" height="350" alt="이미지없음" />
+      <b-img
+        class="img-fluid"
+        :src="`${
+          place.firstImage
+            ? place.firstImage
+            : require('@/assets/img/on_error.png')
+        }`"
+      />
     </b-row>
     <br />
     <b-row class="mb-1">
