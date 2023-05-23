@@ -26,21 +26,26 @@ public class SecurityService {
     private String SECRET_KEY;
 
     public String createRefreshToken(int userNo){
-        String refreshToken = create("refreshToken", expireMin * 5);
+        String refreshToken = create(String.valueOf(userNo), expireMin*1000*60 * 5);
         redisUtil.set(String.valueOf(userNo), refreshToken, (int) (expireMin*5));
-        return create("refreshToken", expireMin*5);
+        return refreshToken;
     }
     public String createJwtToken(String subject){
+        create(String.valueOf(subject), expireMin*1000*60);
         return create(String.valueOf(subject), expireMin*1000*60);
     }
 
     public String reCreateJwtToken(String refreshToken){
         String key = getSubject(refreshToken);
+        System.out.println(key);
         if(redisUtil.hasKey(key)){
+            System.out.println("유효한 refreshtoken1");
             if(redisUtil.get(key).equals(refreshToken)){
+                System.out.println("유효한 refreshtoken2");
                 return createJwtToken(key);
             }
         }
+        System.out.println("유효하지않은 refreshtoken");
         return null;
     }
 
@@ -61,6 +66,7 @@ public class SecurityService {
     }
 
     public String getSubject(String token){
+        System.out.println("getSubject");
         if(redisUtil.hasKeyExcludeList(token)){
             System.out.println("로그아웃함");
             throw new RuntimeException("이미 로그아웃하였습니다");
