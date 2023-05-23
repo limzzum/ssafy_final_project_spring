@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <TheSearchbar class="m-2" />
+    <TheSearchbar class="m-2" route="themetrip" />
     <TheCarousel />
   </b-container>
 </template>

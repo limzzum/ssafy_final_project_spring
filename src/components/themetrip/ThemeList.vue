@@ -1,6 +1,6 @@
 <template>
   <b-container class="bv-example-row mt-3">
-    <TheSearchbar />
+    <TheSearchbar route="themetrip" />
     <TheMap />
     <b-row>
       <b-col>
