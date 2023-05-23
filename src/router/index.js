@@ -14,10 +14,8 @@ const onlyAuthUser = async (to, from, next) => {
   const checkUserInfo = store.getters["userStore/checkUserInfo"];
   const checkToken = store.getters["userStore/checkToken"];
   let token = sessionStorage.getItem("access-token");
-  console.log("로그인 처리 전", checkUserInfo, token);
 
   if (checkUserInfo != null && token) {
-    console.log("토큰 유효성 체크하러 가자!!!!");
     await store.dispatch("userStore/getUserInfo", token);
   }
   if (!checkToken || checkUserInfo === null) {
@@ -25,7 +23,6 @@ const onlyAuthUser = async (to, from, next) => {
     // next({ name: "login" });
     router.push({ name: "login" }).catch(() => { }) ;
   } else {
-    console.log("로그인 했다!!!!!!!!!!!!!.");
     next();
   }
 };
