@@ -70,8 +70,6 @@ const userStore = {
     },
     async userRegist({ commit }, user) {
       console.log(commit);
-      console.log("userStore.js에서...");
-      console.log(user);
       let msg = null;
       await regist(
         user,
@@ -84,7 +82,6 @@ const userStore = {
           }
         },
         async (error) => {
-          console.log("대충 서버 오류");
           console.log(error);
           msg = "통신 오류 : 잠시 후 다시 시도해보세요";
         }
@@ -115,15 +112,10 @@ const userStore = {
       );
     },
     async tokenRegeneration({ commit, state }) {
-      console.log(
-        "토큰 재발급 >> 기존 토큰 정보 : {}",
-        sessionStorage.getItem("refresh-token")
-      );
       await tokenRegeneration(
         ({ data }) => {
           if (data.msg === "success") {
             let accessToken = data["access-token"];
-            console.log("재발급 완료 >> 새로운 토큰 : {}", accessToken);
             sessionStorage.setItem("access-token", accessToken);
             commit("SET_IS_VALID_TOKEN", true);
           } else {
