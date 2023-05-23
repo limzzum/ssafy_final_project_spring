@@ -3,7 +3,7 @@
     <b-row>
       <b-col>
         <b-alert show
-          ><h3>{{ boardType }}글목록</h3></b-alert
+          ><h3>{{ boardTitle }}</h3></b-alert
         >
       </b-col>
     </b-row>
@@ -92,7 +92,7 @@ export default {
     // );
   },
   computed: {
-    ...mapState("boardStore", ["boardType", "articles", "currentPage"]),
+    ...mapState("boardStore", ["boardType","boardTitle", "articles", "currentPage"]),
     ...mapActions("boardStore", ["searchArticle"]),
   },
   methods: {
