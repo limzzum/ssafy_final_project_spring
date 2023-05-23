@@ -4,7 +4,8 @@ const boardStore = {
   namespaced: true,
   state: {
     articles: [],
-    boardType:null,
+    boardType: null,
+    boardTitle:"공지사항",
     currentPage: 1,
     totalPageNum: 1,
   },
@@ -25,16 +26,15 @@ const boardStore = {
     },
     SET_BOARD_TYPE(state, type) {
       state.boardType = type;
-      console.log(state.boardType)
+    },
+    SET_BOARD_TITLE(state, title) {
+      state.boardTitle = title;
     },
     SET_CURRENT_PAGE(state, page) {
-      console.log("store mutation")
       state.currentPage = page;
-      console.log(state.currentPage)
     },
     SET_TOTAL_PAGE_NUM(state, num) {
       state.totalPageNum = num;
-      console.log("board store set totalnum ", state.totalPageNum)
     },
     
   },
