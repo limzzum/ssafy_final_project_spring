@@ -4,11 +4,6 @@ const boardStore = {
   namespaced: true,
   state: {
     articles: [],
-    condition: {
-      contentTypeId: null,
-      sidoCode: null,
-      title:null
-    },
     boardType:null,
     currentPage: 1,
     totalPageNum: 1,
@@ -20,15 +15,7 @@ const boardStore = {
       state.articles = [];
       state.article = null;
     },
-   
-    SET_CONTENT_LIST(state, contents) {
-      contents.forEach((content) => {
-        state.contents.push({
-          value: content.contentTypeId,
-          text: content.contentTypeName,
-        });
-      });
-    },
+  
     SET_ARTICLE_LIST(state, article) {
       state.articles = article;
       console.log("boardlist set mutation ",state.articles);
@@ -53,11 +40,19 @@ const boardStore = {
   },
 
   actions: {
-    async writeArticle({ commit }, id) {
+    async writeArticle({ commit },condition) {
+      console.log("store write")
+      console.log(condition);
       await writeArticle(
-        id,
+        condition,
         ({ data }) => {
-          commit("SET_DETAIL_PLACE", data);
+          let msg = "등록 처리시 문제가 발생했습니다.";
+          if (data.msg === "success") {
+            msg = "등록이 완료되었습니다.";
+            console.log(commit);
+            
+          }
+          alert(msg);
         },
         (error) => {
           console.log(error);
@@ -87,6 +82,7 @@ const boardStore = {
       );
     },
     async searchArticle({ commit, state }) {
+      console.log("search")
       await listArticle(
         state.currentPage,
         { boardType: state.boardType },

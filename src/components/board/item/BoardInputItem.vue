@@ -39,11 +39,12 @@
       </b-form>
     </b-col>
   </b-row>
+ 
 </template>
 
 <script>
-import { writeArticle, modifyArticle, getArticle } from "@/api/board";
-
+import {  modifyArticle, getArticle } from "@/api/board";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "BoardInputItem",
   data() {
@@ -61,6 +62,7 @@ export default {
     type: { type: String },
   },
   created() {
+    
     if (this.type === "modify") {
       let param = this.$route.params.postId;
       getArticle(
@@ -79,7 +81,12 @@ export default {
       this.isUserid = true;
     }
   },
+  computed: {
+    ...mapState("boardStore", ["boardType"]),
+  },
   methods: {
+    ...mapState("userStore", ["userNo"]),
+    ...mapActions("boardStore", ["writeArticle","searchArticle"]),
     onSubmit(event) {
       event.preventDefault();
 
@@ -100,26 +107,17 @@ export default {
       this.moveList();
     },
     registArticle() {
+      
       let param = {
-        userNo: 1,
+        userNo: sessionStorage.getItem("userNo"),
         title: this.article.title,
         content: this.article.content,
-        boardType:"review"
+        boardType:this.boardType
       };
-      writeArticle(
-        param,
-        ({ data }) => {
-          let msg = "등록 처리시 문제가 발생했습니다.";
-          if (data.msg === "success") {
-            msg = "등록이 완료되었습니다.";
-          }
-          alert(msg);
-          this.moveList();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      console.log(param)
+      this.writeArticle(param);
+      this.moveList();
+      
     },
     modifyArticle() {
       let param = {
@@ -144,7 +142,8 @@ export default {
       );
     },
     moveList() {
-      this.$router.push({ name: "boardlist" });
+        this.$router.push({ name: "boardlist" });
+  
     },
   },
 };

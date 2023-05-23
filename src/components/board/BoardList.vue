@@ -28,7 +28,7 @@
 
 <script>
 // import { listArticle } from "@/api/board";
-import { mapState } from "vuex";
+import { mapState,  mapActions } from "vuex";
 import BoardPagenation from "./BoardPagenation.vue";
 export default {
   components: { BoardPagenation },
@@ -45,6 +45,7 @@ export default {
     };
   },
   created() {
+    this.searchArticle();
     // let param = {
     //   pg: 1,
     //   spp: 20,
@@ -71,6 +72,7 @@ export default {
   },
   computed: {
     ...mapState("boardStore", ["boardType", "articles", "currentPage"]),
+    ...mapActions("boardStore", ["searchArticle"]),
   },
   methods: {
     moveWrite() {
