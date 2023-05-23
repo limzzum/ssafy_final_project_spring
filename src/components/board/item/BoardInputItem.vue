@@ -33,6 +33,7 @@
           ></b-form-textarea>
         </b-form-group>
 
+        <b-button variant="success" class="m-1" @click="$router.push({name: 'boardlist'})">글목록</b-button>
         <b-button type="submit" variant="primary" class="m-1" v-if="this.type === 'register'">글작성</b-button>
         <b-button type="submit" variant="primary" class="m-1" v-else>글수정</b-button>
         <b-button type="reset" variant="danger" class="m-1">초기화</b-button>
