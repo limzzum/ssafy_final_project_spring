@@ -12,6 +12,7 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
+const boardStore = "boardStore";
 export default {
   data() {
     return {
@@ -20,7 +21,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("boardStore", ["articles", "totalPageNum"]),
+    ...mapState(boardStore, ["articles", "totalPageNum"]),
 
     rows() {
       return this.totalPageNum;

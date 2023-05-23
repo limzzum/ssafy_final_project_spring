@@ -11,23 +11,24 @@
       img-height="480"
       style="text-shadow: 1px 1px 2px #333"
     >
-      <!-- Slides with custom text -->
       <b-carousel-slide img-src="@/assets/img/carousel1.png">
-        <router-link to="themetrip"><h1>테마 여행</h1></router-link>
+        <router-link to="themetrip">
+          <h1 @click="clearPlace">테마 여행</h1>
+        </router-link>
       </b-carousel-slide>
-      <!-- Slides with custom text -->
       <b-carousel-slide img-src="@/assets/img/carousel2.png">
-        <router-link to="myplan"><h1>나의 여행 계획</h1></router-link>
+        <router-link to="myplan">
+          <h1 @click="clearPlace">나의 여행 계획</h1>
+        </router-link>
       </b-carousel-slide>
-      <!-- Slides with custom text -->
       <b-carousel-slide img-src="@/assets/img/carousel3.png">
+        <router-link to="adjacent">
+          <h1 @click="clearPlace">가까운 관광지</h1>
+        </router-link>
+      </b-carousel-slide>
+      <b-carousel-slide img-src="@/assets/img/carousel4.png">
         <router-link to="worldcup"><h1>관광지 월드컵</h1></router-link>
       </b-carousel-slide>
-      <!-- Slides with custom text -->
-      <b-carousel-slide img-src="@/assets/img/carousel4.png">
-        <router-link to="recommend"><h1>맛집 뽑기</h1></router-link>
-      </b-carousel-slide>
-      <!-- Slides with custom text -->
       <b-carousel-slide img-src="@/assets/img/carousel5.png">
         <router-link to="board"><h1>게시판</h1></router-link>
       </b-carousel-slide>
@@ -36,6 +37,9 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+const placeStore = "placeStore";
+
 export default {
   name: "TheCarousel",
   components: {},
@@ -45,7 +49,9 @@ export default {
       sliding: null,
     };
   },
-  methods: {},
+  methods: {
+    ...mapActions(placeStore, ["clearPlace"]),
+  },
 };
 </script>
 

@@ -4,7 +4,7 @@ import AppMain from "@/views/AppMain.vue";
 import AppThemeTrip from "@/views/AppThemeTrip.vue";
 import AppMyPlan from "@/views/AppMyPlan.vue";
 import AppBoard from "@/views/AppBoard.vue";
-import AppRecommend from "@/views/AppRecommend.vue";
+import AppAdjacent from "@/views/AppAdjacent.vue";
 
 import store from "@/store";
 
@@ -21,7 +21,7 @@ const onlyAuthUser = async (to, from, next) => {
   if (!checkToken || checkUserInfo === null) {
     alert("로그인이 필요한 페이지입니다..");
     // next({ name: "login" });
-    router.push({ name: "login" }).catch(() => { }) ;
+    router.push({ name: "login" }).catch(() => {});
   } else {
     next();
   }
@@ -37,26 +37,6 @@ const routes = [
     path: "/themetrip",
     name: "themetrip",
     component: AppThemeTrip,
-    beforeEnter: onlyAuthUser,
-    // redirect: "/themetrip/list",
-    // children: [
-    //   {
-    //     path: "list",
-    //     name: "placeList",
-    //     component: () =>
-    //       import(
-    //         /* webpackChunkName: "themetrip" */ "@/components/themetrip/ThemeList"
-    //       ),
-    //   },
-    //   {
-    //     path: "view/:contentId",
-    //     name: "placeview",
-    //     component: () =>
-    //       import(
-    //         /* webpackChunkName: "themetrip" */ "@/components/themetrip/ThemeView"
-    //       ),
-    //   },
-    // ],
   },
   {
     path: "/myplan",
@@ -65,9 +45,9 @@ const routes = [
     beforeEnter: onlyAuthUser,
   },
   {
-    path: "/recommend",
-    name: "recommend",
-    component: AppRecommend,
+    path: "/adjacent",
+    name: "adjacent",
+    component: AppAdjacent,
     beforeEnter: onlyAuthUser,
   },
   {
@@ -157,7 +137,7 @@ const routes = [
     beforeEnter: onlyAuthUser,
     component: () =>
       import(/* webpackChunkName: "user" */ "@/views/AppWorldcup.vue"),
-    
+
     redirect: "/worldcup/progress",
     children: [
       {

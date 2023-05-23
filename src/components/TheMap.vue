@@ -7,7 +7,9 @@ import { mapState } from "vuex";
 const placeStore = "placeStore";
 export default {
   name: "TheMap",
-  components: {},
+  props: {
+    markSelected: Boolean,
+  },
   data() {
     return {
       map: null,
@@ -15,7 +17,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(placeStore, ["place", "places"]),
+    ...mapState(placeStore, ["place", "places", "selected"]),
   },
   created() {
     const script = document.createElement("script");
@@ -25,7 +27,10 @@ export default {
   },
   watch: {
     places: function (places) {
-      this.mark(places);
+      if (!this.markSelected) this.mark(places);
+    },
+    selected: function (places) {
+      if (this.markSelected) this.mark(places);
     },
   },
   methods: {
@@ -34,7 +39,8 @@ export default {
         center: new window.kakao.maps.LatLng(37.566352778, 126.977952778),
         level: 3,
       });
-      if (this.places.length) this.mark(this.places);
+      if (this.places.length)
+        this.mark(this.markSelected ? this.selected : this.places);
     },
     mark(places) {
       this.markers.forEach((item) => {

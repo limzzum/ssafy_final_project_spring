@@ -2,8 +2,8 @@
   <b-container>
     <PlaceSearchbar class="m-2" />
     <b-row>
-      <b-col cols="7"><PlaceList /></b-col>
-      <b-col cols="5" class="p-3"><TheMap /></b-col>
+      <b-col cols="7"><PlaceList :viewDetail="true" /></b-col>
+      <b-col cols="5" class="p-3"><TheMap :markSelected="false" /></b-col>
     </b-row>
   </b-container>
 </template>

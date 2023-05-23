@@ -16,7 +16,7 @@ import PlaceList from "@/components/place/PlaceList.vue";
 import TheMap from "@/components/TheMap.vue";
 
 export default {
-  name: "AppMyPlan",
+  name: "AppAdjacent",
   components: { TheMap, PlaceList, PlaceSearchbar },
   data() {
     return {

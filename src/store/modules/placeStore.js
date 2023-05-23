@@ -6,11 +6,14 @@ const placeStore = {
     regions: [{ value: null, text: "선택하세요" }],
     contents: [{ value: null, text: "선택하세요" }],
     places: [],
+    selected: [],
     place: null,
     condition: {
       contentTypeId: null,
       sidoCode: null,
       title: null,
+      latitude: null,
+      longitude: null,
     },
     currentPage: 1,
     totalPageNum: 1,
@@ -26,6 +29,9 @@ const placeStore = {
     CLEAR_PLACE_LIST(state) {
       state.places = [];
       state.place = null;
+    },
+    CLEAR_SELECTED_LIST(state) {
+      state.selected = [];
     },
     SET_REGION_LIST(state, regions) {
       regions.forEach((region) => {
@@ -47,14 +53,12 @@ const placeStore = {
       state.place = place;
     },
     SET_CONDITION(state, condition) {
-      console.log("set condition");
       state.condition = condition;
-      console.log(state.condition);
+      console.log("condition : " + state.condition);
     },
     SET_CURRENT_PAGE(state, page) {
-      console.log("store mutation");
       state.currentPage = page;
-      console.log(state.currentPage);
+      console.log("current page : " + state.currentPage);
     },
     SET_TOTAL_PAGE_NUM(state, num) {
       state.totalPageNum = num;
@@ -98,15 +102,16 @@ const placeStore = {
     },
     clearPlace({ commit }) {
       commit("CLEAR_PLACE_LIST");
+      commit("CLEAR_SELECTED_LIST");
     },
     async searchPlace({ commit, state }) {
-      console.log(this.condition);
+      console.log(state.condition);
       await searchPlace(
         { page: state.currentPage },
         state.condition,
         ({ data }) => {
-          console.log(data);
-          console.log(data.result);
+          // console.log(data);
+          // console.log(data.result);
           commit("SET_PLACE_LIST", data.result);
           commit("SET_TOTAL_PAGE_NUM", data.totalNum);
         },
@@ -114,6 +119,13 @@ const placeStore = {
           console.log(error);
         }
       );
+    },
+    setPage({ commit }, page) {
+      commit("SET_CURRENT_PAGE", page);
+    },
+    setCondition({ commit }, condition) {
+      commit("SET_CONDITION", condition);
+      commit("SET_CURRENT_PAGE", 1);
     },
   },
 };
