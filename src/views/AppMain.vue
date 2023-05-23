@@ -1,17 +1,17 @@
 <template>
   <b-container>
-    <TheSearchbar class="m-2" route="themetrip" />
+    <PlaceSearchbar class="m-2" route="themetrip" />
     <TheCarousel />
   </b-container>
 </template>
 
 <script>
-import TheSearchbar from "@/components/TheSearchbar.vue";
+import PlaceSearchbar from "@/components/place/PlaceSearchbar.vue";
 import TheCarousel from "@/components/TheCarousel.vue";
 export default {
   name: "AppMain",
   components: {
-    TheSearchbar,
+    PlaceSearchbar,
     TheCarousel,
   },
   data() {

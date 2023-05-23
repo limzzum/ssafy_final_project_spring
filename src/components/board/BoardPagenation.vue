@@ -4,10 +4,9 @@
       v-model="curPage"
       :total-rows="rows"
       :per-page="perPage"
-      aria-controls="my-table"
+      align="center"
+      limit="9"
     ></b-pagination>
-
-    <p class="mt-3">Current Page: {{ curPage }}</p>
   </div>
 </template>
 
@@ -17,34 +16,31 @@ export default {
   data() {
     return {
       perPage: 10,
-      curPage:1
+      curPage: 1,
     };
   },
   computed: {
     ...mapState("boardStore", ["articles", "totalPageNum"]),
-    
+
     rows() {
-      console.log("total "+this.totalPageNum)
+      console.log("total " + this.totalPageNum);
       return this.totalPageNum;
     },
   },
   watch: {
-
     curPage() {
-      console.log("change page")
+      console.log("change page");
       this.setPage();
-      
-    }
+    },
   },
   methods: {
     ...mapMutations("boardStore", ["SET_CURRENT_PAGE"]),
     ...mapActions("boardStore", ["searchArticle"]),
     setPage() {
-      console.log("change method")
+      console.log("change method");
       this.SET_CURRENT_PAGE(this.curPage);
       this.searchArticle();
-
-    }
-  }
+    },
+  },
 };
 </script>

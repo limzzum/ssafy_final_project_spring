@@ -1,5 +1,6 @@
 <template>
-  <b-container>
+  <b-container class="text-center">
+    <div v-if="!places.length"><b-alert show>관광지를 검색하세요</b-alert></div>
     <b-table
       hover
       :items="places"
@@ -9,9 +10,10 @@
       style="vertical-align: middle"
       v-show="!detailShow"
       outlined
+      v-if="places.length"
     >
     </b-table>
-    <ThePagenation v-show="!detailShow" />
+    <PlacePagenation v-show="!detailShow" v-if="places.length" />
     <PlaceDetail
       v-show="detailShow"
       :place="detailPlace"
@@ -22,12 +24,13 @@
 
 <script>
 import { mapState } from "vuex";
-import ThePagenation from "../ThePagenation.vue";
+import PlacePagenation from "@/components/place/PlacePagenation.vue";
 import PlaceDetail from "@/components/place/PlaceDetail.vue";
+const placeStore = "placeStore";
 
 export default {
   components: {
-    ThePagenation,
+    PlacePagenation,
     PlaceDetail,
   },
   name: "PlaceList",
@@ -48,7 +51,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("placeStore", ["places"]),
+    ...mapState(placeStore, ["places"]),
   },
   created() {
     this.detailShow = false;

@@ -16,12 +16,16 @@
           <b-navbar-nav>
             <b-nav-item href="#"
               ><router-link to="/themetrip"
-                ><b-row class="p-3">테마 여행</b-row></router-link
+                ><b-row class="p-3" @click="resetPlace"
+                  >테마 여행</b-row
+                ></router-link
               ></b-nav-item
             >
             <b-nav-item href="#"
               ><router-link to="/myplan"
-                ><b-row class="p-3">나의 여행 계획</b-row></router-link
+                ><b-row class="p-3" @click="resetPlace"
+                  >나의 여행 계획</b-row
+                ></router-link
               ></b-nav-item
             >
             <b-nav-item href="#"
@@ -90,6 +94,7 @@
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
 const userStore = "userStore";
+const placeStore = "placeStore";
 export default {
   name: "TheNavbar",
   computed: {
@@ -98,6 +103,7 @@ export default {
   },
   methods: {
     ...mapActions(userStore, ["userLogout"]),
+    ...mapActions(placeStore, ["clearPlace"]),
     // ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
     onClickLogout() {
       // this.SET_IS_LOGIN(false);
@@ -112,6 +118,9 @@ export default {
       sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
       sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
       if (this.$route.path != "/") this.$router.push({ name: "main" });
+    },
+    resetPlace() {
+      this.clearPlace();
     },
   },
 };
