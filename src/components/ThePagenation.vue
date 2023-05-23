@@ -1,12 +1,11 @@
 <template>
-  <b-row>
-    <b-pagination
-      v-model="curPage"
-      :total-rows="rows"
-      :per-page="perPage"
-      aria-controls="my-table"
-    ></b-pagination>
-  </b-row>
+  <b-pagination
+    v-model="curPage"
+    :total-rows="rows"
+    :per-page="perPage"
+    align="fill"
+    limit="9"
+  ></b-pagination>
 </template>
 
 <script>
@@ -20,15 +19,12 @@ export default {
   },
   computed: {
     ...mapState("placeStore", ["places", "totalPageNum"]),
-
     rows() {
-      // console.log("total " + this.totalPageNum);
       return this.totalPageNum;
     },
   },
   watch: {
     curPage() {
-      // console.log("change page");
       this.setPage();
     },
   },
@@ -36,7 +32,6 @@ export default {
     ...mapMutations("placeStore", ["SET_CURRENT_PAGE"]),
     ...mapActions("placeStore", ["searchPlace"]),
     setPage() {
-      // console.log("change method");
       this.SET_CURRENT_PAGE(this.curPage);
       this.searchPlace();
     },

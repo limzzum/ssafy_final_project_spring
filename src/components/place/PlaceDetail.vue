@@ -1,10 +1,11 @@
 <template>
   <b-container>
-    <b-card border-variant="primary" class="mb-2" no-body>
-      <b-card-img
+    <b-card border-variant="black" class="mb-2" no-body>
+      <b-card-img-lazy
         :src="img"
-        style="max-height: 400px; object-fit: cover"
-      ></b-card-img>
+        blank-color="grey"
+        style="max-height: 400px; min-height: 400px; object-fit: cover"
+      ></b-card-img-lazy>
       <template #header>
         <b-row class="text-center">
           <b-col cols="10"
@@ -41,7 +42,7 @@ export default {
     message() {
       if (!this.place) return "";
       return this.place.overview
-        ? "<div>" + this.place.overview.split(".").join(".<br>") + "</div>"
+        ? "<div>" + this.place.overview.split("다. ").join("다.<br>") + "</div>"
         : "";
     },
     img() {

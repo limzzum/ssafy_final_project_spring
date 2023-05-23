@@ -8,18 +8,8 @@
       class="text-center"
       style="vertical-align: middle"
       v-show="!detailShow"
+      outlined
     >
-      <template v-slot:cell(firstImage)="data">
-        <b-img
-          class="img-fluid img-thumbnail"
-          :src="`${
-            data.item.firstImage
-              ? data.item.firstImage
-              : require('@/assets/img/on_error.png')
-          }`"
-          style="min-height: 70px; max-height: 70px"
-        />
-      </template>
     </b-table>
     <ThePagenation v-show="!detailShow" />
     <PlaceDetail
@@ -49,7 +39,6 @@ export default {
         title: "",
       },
       fields: [
-        { key: "firstImage", label: "이미지", tdClass: "col-1" },
         { key: "title", label: "이름", tdClass: "col-3" },
         { key: "contentTypeName", label: "유형", tdClass: "col-1" },
         { key: "sidoName", label: "지역", tdClass: "col-1" },

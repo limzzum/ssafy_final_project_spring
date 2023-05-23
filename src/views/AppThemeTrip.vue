@@ -2,8 +2,8 @@
   <b-container>
     <TheSearchbar class="m-2" />
     <b-row>
-      <b-col cols="4"><TheMap /></b-col>
       <b-col cols="8"><PlaceList /></b-col>
+      <b-col cols="4" class="p-3"><TheMap /></b-col>
     </b-row>
   </b-container>
 </template>
