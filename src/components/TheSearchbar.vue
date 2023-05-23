@@ -69,7 +69,8 @@ export default {
       console.log("search");
       this.setCondition();
       this.searchPlace();
-      this.$router.push({ name: this.route });
+      if (this.route.length)
+        this.$router.push({ name: this.route }).catch(() => {});
     },
   },
 };
