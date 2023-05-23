@@ -8,15 +8,15 @@ import org.springframework.web.servlet.config.annotation.*;
 @Configuration
 public class MVCConfig implements WebMvcConfigurer {
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginCheckInterCeptor())
-                .order(1)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/", "/api/user/regist", "/api/user/login", "/api/user/logout/**","/api/user/refresh/**","/api/place/**",
-                        "/**/*.css","/**/*.jpg","/**/*.jpeg","/**/*.png","/**/*.peg", "/**/*.js", "/error/**",
-                        "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(loginCheckInterCeptor())
+//                .order(1)
+//                .addPathPatterns("/**")
+//                .excludePathPatterns("/", "/api/user/regist", "/api/user/login", "/api/user/logout/**","/api/user/refresh/**","/api/place/**",
+//                        "/**/*.css","/**/*.jpg","/**/*.jpeg","/**/*.png","/**/*.peg", "/**/*.js", "/error/**",
+//                        "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**");
+//    }
 
     @Bean
     public LoginCheckInterCeptor loginCheckInterCeptor(){
@@ -24,10 +24,10 @@ public class MVCConfig implements WebMvcConfigurer {
     }
 
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("redirect:/swagger-ui/index.html");
-    }
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/").setViewName("redirect:/swagger-ui/index.html");
+//    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
