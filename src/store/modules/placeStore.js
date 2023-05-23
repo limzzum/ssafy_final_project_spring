@@ -63,6 +63,13 @@ const placeStore = {
     SET_TOTAL_PAGE_NUM(state, num) {
       state.totalPageNum = num;
     },
+    ADD_SELECTED(state, place) {
+      for (let sel of state.selected) {
+        if (sel.contentId == place.contentId) return;
+      }
+      state.selected.push(place);
+      console.log(state.selected);
+    },
   },
 
   actions: {
@@ -126,6 +133,9 @@ const placeStore = {
     setCondition({ commit }, condition) {
       commit("SET_CONDITION", condition);
       commit("SET_CURRENT_PAGE", 1);
+    },
+    selectPlace({ commit }, place) {
+      commit("ADD_SELECTED", place);
     },
   },
 };
