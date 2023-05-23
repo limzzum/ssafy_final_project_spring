@@ -18,7 +18,7 @@
       <b-col>
         <b-card
           :header-html="`<h3>${article.postId}.
-          ${article.title} [${article.hits}]</h3><div><h6>${article.userName}</div><div>${article.createTime}</h6></div>`"
+          ${article.title} [조회수: ${article.hits}]</h3><div><h6>${article.userName}</div><div>${article.createTime}</h6></div>`"
           class="mb-2"
           border-variant="dark"
           no-body
