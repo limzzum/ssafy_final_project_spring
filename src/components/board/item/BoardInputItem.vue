@@ -5,7 +5,7 @@
         <b-form-group id="userid-group" label="작성자:" label-for="userName" description="작성자를 입력하세요.">
           <b-form-input
             id="userName"
-            :disabled="isUserid"
+            :disabled="true"
             v-model="article.userName"
             type="text"
             required
@@ -46,6 +46,8 @@
 <script>
 import {  modifyArticle, getArticle } from "@/api/board";
 import { mapActions, mapState } from "vuex";
+const boardStore = "boardStore";
+const userStore = "userStore";
 export default {
   name: "BoardInputItem",
   data() {
@@ -63,7 +65,11 @@ export default {
     type: { type: String },
   },
   created() {
-    
+    if (this.type === "register") {
+      console.log( this.userName)
+      this.article.userName = this.userName;
+     
+    }
     if (this.type === "modify") {
       let param = this.$route.params.postId;
       getArticle(
@@ -83,11 +89,13 @@ export default {
     }
   },
   computed: {
-    ...mapState("boardStore", ["boardType"]),
+    ...mapState(boardStore, ["boardType"]),
+    ...mapState(userStore, ["userNo","userName"]),
   },
   methods: {
-    ...mapState("userStore", ["userNo"]),
-    ...mapActions("boardStore", ["writeArticle","searchArticle"]),
+ 
+    ...mapActions(boardStore, ["writeArticle", "searchArticle"]),
+    ...mapActions(userStore, ["getUserInfo"]),
     onSubmit(event) {
       event.preventDefault();
 
