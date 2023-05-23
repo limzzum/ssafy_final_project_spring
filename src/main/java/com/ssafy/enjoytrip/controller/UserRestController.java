@@ -54,8 +54,9 @@ public class UserRestController {
     }
 
     @ApiOperation(value = "access토큰 재발급 요청", notes = "유효한 refreshToken이라면 accessToken을 재발급한다.",response = Map.class)
-    @PostMapping("/refreshToken")
-    public ResponseEntity<Map<String, Object>> refreshToken(@RequestHeader @ApiParam(value = "refresh", required = true) String refreshToken){
+    @GetMapping("/refresh")
+    public ResponseEntity<Map<String, Object>> refreshToken(@RequestHeader(name = "refresh-token") @ApiParam(value = "refresh-token", required = true) String refreshToken){
+        log.info("refresh 요청 들어옴");
         Map<String, Object> map = new HashMap<>();
        try{
            String accessToken = securityService.reCreateJwtToken(refreshToken);
