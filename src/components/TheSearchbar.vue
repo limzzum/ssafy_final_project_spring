@@ -1,5 +1,5 @@
 <template>
-  <b-form>
+  <b-form @submit.prevent="search">
     <b-form-row class="align-items-center">
       <b-col cols="3">
         <b-form-select v-model="condition.sidoCode" :options="regions">
@@ -18,9 +18,7 @@
         ></b-form-input>
       </b-col>
       <b-col cols="1" class="text-center">
-        <b-button class="m-1" type="button" variant="primary" @click="search"
-          >검색</b-button
-        >
+        <b-button class="m-1" type="submit" variant="primary">검색</b-button>
       </b-col>
     </b-form-row>
   </b-form>
@@ -66,7 +64,7 @@ export default {
       this.SET_CONDITION(this.condition);
     },
     async search() {
-      console.log("search");
+      // console.log("search");
       this.setCondition();
       this.searchPlace();
       if (this.route.length)

@@ -4,7 +4,7 @@
     :total-rows="rows"
     :per-page="perPage"
     align="fill"
-    limit="9"
+    limit="7"
   ></b-pagination>
 </template>
 
