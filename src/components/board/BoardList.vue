@@ -2,33 +2,44 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-alert show><h3>{{ boardType }}글목록</h3></b-alert>
+        <b-alert show
+          ><h3>{{ boardType }}글목록</h3></b-alert
+        >
       </b-col>
     </b-row>
     <b-row class="mb-1">
       <b-col class="text-right">
-        <b-button variant="outline-primary" @click="moveWrite()">글쓰기</b-button>
+        <b-button variant="outline-primary" @click="moveWrite()"
+          >글쓰기</b-button
+        >
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <b-table striped hover :items="articles" :fields="fields" @row-clicked="viewArticle">
+        <b-table
+          hover
+          :items="articles"
+          :fields="fields"
+          @row-clicked="viewArticle"
+        >
           <template #cell(title)="data">
             <!-- <board-list-item :postId=data.postId :title="data.title" :user-name="data.userName" :hits="data.hits" :create-time="data.createTime" ></board-list-item> -->
-            <router-link :to="{ name: 'boardview', params: { postId: data.item.postId } }">
-              {{data.item.title}}
+            <router-link
+              :to="{ name: 'boardview', params: { postId: data.item.postId } }"
+            >
+              {{ data.item.title }}
             </router-link>
           </template>
         </b-table>
       </b-col>
     </b-row>
-    <board-pagenation/>
+    <board-pagenation />
   </b-container>
 </template>
 
 <script>
 // import { listArticle } from "@/api/board";
-import { mapState,  mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 import BoardPagenation from "./BoardPagenation.vue";
 export default {
   components: { BoardPagenation },
@@ -78,17 +89,25 @@ export default {
     moveWrite() {
       this.$router.push({ name: "boardwrite" });
     },
-    viewArticle(article) {
+    viewArticle(item) {
       this.$router.push({
         name: "boardview",
-        params: { articleno: article.articleno },
+        params: { postId: item.postId },
       });
     },
   },
 };
 </script>
 
-<style scope>
+<style>
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  text-decoration: none;
+  color: darkblue;
+}
 .tdClass {
   width: 50px;
   text-align: center;
