@@ -14,6 +14,7 @@ const userStore = {
     isLogin: false,
     isLoginError: false,
     userInfo: null,
+    userName : null,
     isValidToken: false,
   },
   getters: {
@@ -37,6 +38,10 @@ const userStore = {
     SET_USER_INFO: (state, userInfo) => {
       state.isLogin = true;
       state.userInfo = userInfo;
+    },
+    SET_USER_NAME: (state, userName) => {
+      state.isLogin = true;
+      state.userName = userName;
     },
   },
   actions: {
@@ -96,6 +101,7 @@ const userStore = {
         ({ data }) => {
           if (data.msg === "success") {
             commit("SET_USER_INFO", data.user);
+            commit("SET_USER_NAME", data.user.userName);
             console.log("3. getUserInfo data >> ", data);
           } else {
             console.log("유저 정보 없음!!!!");
