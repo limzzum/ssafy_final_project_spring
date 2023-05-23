@@ -19,7 +19,6 @@ const boardStore = {
   
     SET_ARTICLE_LIST(state, article) {
       state.articles = article;
-      console.log("boardlist set mutation ",state.articles);
     },
     SET_DETAIL_ARTICLE(state, article) {
       state.place = article;
