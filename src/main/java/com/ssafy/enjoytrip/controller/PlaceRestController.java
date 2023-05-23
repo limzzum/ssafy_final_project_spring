@@ -34,7 +34,7 @@ public class PlaceRestController {
                                                     @PathVariable int page){
         PageHelper.startPage(page,10);
         log.info("list condition : "+place);
-        Page<Place> list = service.search(place);
+        Page<Place> list = (Page<Place>) service.search(place);
         log.info("list result : "+list);
         Map<String, Object> map = new HashMap<>();
         map.put("result", list);

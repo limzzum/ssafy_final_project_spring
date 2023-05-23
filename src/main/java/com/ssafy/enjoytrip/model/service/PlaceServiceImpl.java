@@ -1,6 +1,5 @@
 package com.ssafy.enjoytrip.model.service;
 
-import com.github.pagehelper.Page;
 import com.ssafy.enjoytrip.model.dto.ContentType;
 import com.ssafy.enjoytrip.model.dto.Place;
 import com.ssafy.enjoytrip.model.dto.Sido;
@@ -21,7 +20,7 @@ public class PlaceServiceImpl implements PlaceService{
     }
 
     @Override
-    public Page<Place> search(Place place) {
+    public List<Place> search(Place place) {
         return mapper.search(place);
     }
 
@@ -39,4 +38,5 @@ public class PlaceServiceImpl implements PlaceService{
     public List<Sido> getRegions() {
         return mapper.getRegions();
     }
+
 }
