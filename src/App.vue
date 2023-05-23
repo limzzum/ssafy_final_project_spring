@@ -18,4 +18,9 @@ export default {
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 </script>
-<style></style>
+<style>
+.table th,
+.table td {
+  vertical-align: middle;
+}
+</style>

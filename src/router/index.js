@@ -41,25 +41,25 @@ const routes = [
     name: "themetrip",
     component: AppThemeTrip,
     beforeEnter: onlyAuthUser,
-    redirect: "/themetrip/list",
-    children: [
-      {
-        path: "list",
-        name: "placeList",
-        component: () =>
-          import(
-            /* webpackChunkName: "themetrip" */ "@/components/themetrip/ThemeList"
-          ),
-      },
-      {
-        path: "view/:contentId",
-        name: "placeview",
-        component: () =>
-          import(
-            /* webpackChunkName: "themetrip" */ "@/components/themetrip/ThemeView"
-          ),
-      },
-    ],
+    // redirect: "/themetrip/list",
+    // children: [
+    //   {
+    //     path: "list",
+    //     name: "placeList",
+    //     component: () =>
+    //       import(
+    //         /* webpackChunkName: "themetrip" */ "@/components/themetrip/ThemeList"
+    //       ),
+    //   },
+    //   {
+    //     path: "view/:contentId",
+    //     name: "placeview",
+    //     component: () =>
+    //       import(
+    //         /* webpackChunkName: "themetrip" */ "@/components/themetrip/ThemeView"
+    //       ),
+    //   },
+    // ],
   },
   {
     path: "/myplan",
@@ -92,25 +92,37 @@ const routes = [
         path: "write",
         name: "boardwrite",
         // beforeEnter: onlyAuthUser,
-        component: () => import(/* webpackChunkName: "board" */ "@/components/board/BoardWrite"),
+        component: () =>
+          import(
+            /* webpackChunkName: "board" */ "@/components/board/BoardWrite"
+          ),
       },
       {
         path: "view/:postId",
         name: "boardview",
         // beforeEnter: onlyAuthUser,
-        component: () => import(/* webpackChunkName: "board" */ "@/components/board/BoardView"),
+        component: () =>
+          import(
+            /* webpackChunkName: "board" */ "@/components/board/BoardView"
+          ),
       },
       {
         path: "modify",
         name: "boardmodify",
         // beforeEnter: onlyAuthUser,
-        component: () => import(/* webpackChunkName: "board" */ "@/components/board/BoardModify"),
+        component: () =>
+          import(
+            /* webpackChunkName: "board" */ "@/components/board/BoardModify"
+          ),
       },
       {
         path: "delete/:postId",
         name: "boarddelete",
         // beforeEnter: onlyAuthUser,
-        component: () => import(/* webpackChunkName: "board" */ "@/components/board/BoardDelete"),
+        component: () =>
+          import(
+            /* webpackChunkName: "board" */ "@/components/board/BoardDelete"
+          ),
       },
     ],
   },

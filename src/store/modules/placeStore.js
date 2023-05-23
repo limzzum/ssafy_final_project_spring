@@ -96,6 +96,9 @@ const placeStore = {
         }
       );
     },
+    clearPlace({ commit }) {
+      commit("CLEAR_PLACE_LIST");
+    },
     async searchPlace({ commit, state }) {
       console.log(this.condition);
       await searchPlace(
