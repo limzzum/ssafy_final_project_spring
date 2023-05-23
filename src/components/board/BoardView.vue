@@ -18,7 +18,8 @@
       <b-col>
         <b-card
           :header-html="`<h3>${article.postId}.
-          ${article.title} [조회수: ${article.hits}]</h3><div><h6>${article.userName}</div><div>${article.createTime}</h6></div>`"
+          ${article.title} [조회수: ${article.hits}]</h3><div><h6>${article.userName}</div><div>${article.createTime.split('-')[0]}년 ${article.createTime.split('-')[1]}월 
+          ${article.createTime.split('-')[2].split('T')[0]}일 시간 : ${article.createTime.split('-')[2].split('T')[1].split('.0')[0]}</h6></div>`"
           class="mb-2"
           border-variant="dark"
           no-body
