@@ -1,8 +1,8 @@
 <template>
   <b-pagination
     v-model="curPage"
-    :total-rows="rows"
-    :per-page="perPage"
+    :total-rows="totalPageNum"
+    :per-page="10"
     align="center"
     limit="9"
   ></b-pagination>
@@ -14,28 +14,21 @@ const placeStore = "placeStore";
 export default {
   data() {
     return {
-      perPage: 10,
       curPage: 1,
     };
   },
   computed: {
-    ...mapState(placeStore, ["places", "totalPageNum"]),
-    rows() {
-      return this.totalPageNum;
-    },
+    ...mapState(placeStore, ["currentPage", "totalPageNum"]),
   },
   watch: {
-    curPage() {
-      this.setPage();
+    curPage(page) {
+      this.setPage(page);
+      this.searchPlace();
     },
   },
   methods: {
     ...mapMutations(placeStore, ["SET_CURRENT_PAGE"]),
-    ...mapActions(placeStore, ["searchPlace"]),
-    setPage() {
-      this.SET_CURRENT_PAGE(this.curPage);
-      this.searchPlace();
-    },
+    ...mapActions(placeStore, ["setPage", "searchPlace"]),
   },
 };
 </script>

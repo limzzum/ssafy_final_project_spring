@@ -1,19 +1,24 @@
 <template>
   <b-container class="text-center">
-    <div v-if="!places.length"><b-alert show>관광지를 검색하세요</b-alert></div>
+    <div v-if="!places.length">
+      <b-alert show>관광지를 검색하고 선택하세요</b-alert>
+    </div>
     <b-table
       hover
       :items="places"
       :fields="fields"
-      @row-clicked="viewPlace"
+      @row-clicked="clicked"
       class="text-center"
       style="vertical-align: middle"
       v-show="!detailShow"
       outlined
       v-if="places.length"
     >
+      <template #cell(contentId)="data">
+        <b-button variant="primary" @click="search(data.item)">검색</b-button>
+      </template>
     </b-table>
-    <PlacePagenation v-show="!detailShow" v-if="places.length" />
+    <PlacePagination v-show="!detailShow" v-if="places.length" />
     <PlaceDetail
       v-show="detailShow"
       :place="detailPlace"
@@ -23,28 +28,34 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import PlacePagenation from "@/components/place/PlacePagenation.vue";
+import { mapState, mapActions } from "vuex";
+import PlacePagination from "@/components/place/PlacePagination.vue";
 import PlaceDetail from "@/components/place/PlaceDetail.vue";
 const placeStore = "placeStore";
 
 export default {
   components: {
-    PlacePagenation,
+    PlacePagination,
     PlaceDetail,
+  },
+  props: {
+    viewDetail: Boolean,
   },
   name: "PlaceList",
   data() {
     return {
       condition: {
-        contentTypeId: 0,
-        sidoCode: "",
-        title: "",
+        contentTypeId: null,
+        sidoCode: null,
+        title: null,
+        latitude: null,
+        longitude: null,
       },
       fields: [
         { key: "title", label: "이름", tdClass: "col-3" },
         { key: "contentTypeName", label: "유형", tdClass: "col-1" },
         { key: "sidoName", label: "지역", tdClass: "col-1" },
+        { key: "contentId", label: "근처 관광지", tdClass: "col-1" },
       ],
       detailShow: false,
       detailPlace: null,
@@ -57,13 +68,21 @@ export default {
     this.detailShow = false;
   },
   methods: {
-    viewPlace(item) {
-      this.detailShow = true;
-      this.detailPlace = item;
-      console.log(this.detailPlace);
+    ...mapActions(placeStore, ["setCondition", "searchPlace"]),
+    clicked(item) {
+      if (this.viewDetail) {
+        this.detailShow = true;
+        this.detailPlace = item;
+      }
     },
     closeDetail() {
       this.detailShow = false;
+    },
+    search(item) {
+      this.condition.latitude = item.latitude;
+      this.condition.longitude = item.longitude;
+      this.setCondition(this.condition);
+      this.searchPlace();
     },
   },
 };

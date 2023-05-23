@@ -16,26 +16,28 @@
           <b-navbar-nav>
             <b-nav-item href="#"
               ><router-link to="/themetrip"
-                ><b-row class="p-3" @click="resetPlace"
+                ><b-row class="p-3" @click="clearPlace"
                   >테마 여행</b-row
                 ></router-link
               ></b-nav-item
             >
             <b-nav-item href="#"
               ><router-link to="/myplan"
-                ><b-row class="p-3" @click="resetPlace"
+                ><b-row class="p-3" @click="clearPlace"
                   >나의 여행 계획</b-row
+                ></router-link
+              ></b-nav-item
+            >
+            <b-nav-item href="#"
+              ><router-link to="/adjacent"
+                ><b-row class="p-3" @click="clearPlace"
+                  >가까운 관광지</b-row
                 ></router-link
               ></b-nav-item
             >
             <b-nav-item href="#"
               ><router-link to="/worldcup"
                 ><b-row class="p-3">관광지 월드컵</b-row></router-link
-              ></b-nav-item
-            >
-            <b-nav-item href="#"
-              ><router-link to="/recommend"
-                ><b-row class="p-3">맛집 뽑기</b-row></router-link
               ></b-nav-item
             >
             <b-nav-item href="#"
@@ -118,9 +120,6 @@ export default {
       sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
       sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
       if (this.$route.path != "/") this.$router.push({ name: "main" });
-    },
-    resetPlace() {
-      this.clearPlace();
     },
   },
 };

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 const placeStore = "placeStore";
 
 export default {
@@ -40,34 +40,30 @@ export default {
         contentTypeId: null,
         sidoCode: null,
         title: null,
+        latitude: null,
+        longitude: null,
       },
     };
   },
   async created() {
-    // console.log("created");
     await this.getRegionInfo();
-    // console.log(this.contents);
     await this.getContentInfo();
-    // console.log(this.regions);
   },
   computed: {
     ...mapState(placeStore, ["regions", "contents"]),
   },
   methods: {
-    ...mapMutations(placeStore, ["SET_CONDITION"]),
     ...mapActions(placeStore, [
       "getRegionInfo",
       "getContentInfo",
       "searchPlace",
+      "setCondition",
     ]),
-    setCondition() {
-      this.SET_CONDITION(this.condition);
-    },
     async search() {
-      // console.log("search");
-      this.setCondition();
+      console.log("search");
+      this.setCondition(this.condition);
       this.searchPlace();
-      if (this.route.length)
+      if (this.route && this.route.length)
         this.$router.push({ name: this.route }).catch(() => {});
     },
   },
