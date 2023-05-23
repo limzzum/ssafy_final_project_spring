@@ -29,8 +29,12 @@ const boardStore = "boardStore";
   
     async search(type) {
       console.log("search")
-          this.SET_BOARD_TYPE(type);
+      
+      this.SET_BOARD_TYPE(type);
       this.searchArticle();
+      
+      this.$router.push({ name: "boardlist" }).catch(() => { });
+      
       // },
       // TODO : search 후 /themetrip 이동 구현
     },
