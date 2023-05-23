@@ -5,6 +5,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -24,7 +25,11 @@ public class LoginCheckInterCeptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle( HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if (HttpMethod.OPTIONS.matches(request.getMethod())) {
+            return true;
+        }
         String accessToken = request.getHeader("access-token");
+
         if(accessToken == null){
             log.info("미인증 사용자 요청");
             response.sendRedirect("/error/login");
