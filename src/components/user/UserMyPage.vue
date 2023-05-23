@@ -55,13 +55,13 @@
 <script>
 import { mapState } from "vuex";
 
-const memberStore = "memberStore";
+const userStore = "userStore";
 
 export default {
   name: "UserMyPage",
   components: {},
   computed: {
-    ...mapState(memberStore, ["userInfo"]),
+    ...mapState(userStore, ["userInfo"]),
   },
 };
 </script>
