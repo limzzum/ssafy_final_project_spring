@@ -15,6 +15,7 @@ async function getContents(success, fail) {
 }
 
 async function searchPlace(param, condition, success, fail) {
+  api.defaults.headers["access-token"] = sessionStorage.getItem("access-token");
   await api
     .post(`/place/search/${param.page}`, JSON.stringify(condition))
     .then(success)

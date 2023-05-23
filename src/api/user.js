@@ -7,6 +7,7 @@ async function login(user, success, fail) {
 }
 
 async function findByUserNo(userNo, success, fail) {
+  // console.log("find user info ",sessionStorage.getItem("access-token"))
   api.defaults.headers["access-token"] = sessionStorage.getItem("access-token");
   await api.get(`/user/select/${userNo}`).then(success).catch(fail);
 }
