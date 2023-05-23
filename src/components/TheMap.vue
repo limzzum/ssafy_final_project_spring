@@ -34,7 +34,7 @@ export default {
         center: new window.kakao.maps.LatLng(37.566352778, 126.977952778),
         level: 3,
       });
-      this.mark(this.places);
+      if (this.places.length) this.mark(this.places);
     },
     mark(places) {
       this.markers.forEach((item) => {

@@ -2,13 +2,8 @@
   <b-form>
     <b-form-row class="align-items-center">
       <b-col cols="3">
-        <b-form-select
-          v-model="condition.sidoCode"
-          :options="regions"
-
-        >
-
-      </b-form-select>
+        <b-form-select v-model="condition.sidoCode" :options="regions">
+        </b-form-select>
       </b-col>
       <b-col cols="3">
         <b-form-select
@@ -38,6 +33,9 @@ const placeStore = "placeStore";
 export default {
   name: "TheSearchbar",
   components: {},
+  props: {
+    route: String,
+  },
   data() {
     return {
       condition: {
@@ -68,11 +66,10 @@ export default {
       this.SET_CONDITION(this.condition);
     },
     async search() {
-      console.log("search")
+      console.log("search");
       this.setCondition();
       this.searchPlace();
-      // },
-      // TODO : search 후 /themetrip 이동 구현
+      this.$router.push({ name: this.route });
     },
   },
 };
