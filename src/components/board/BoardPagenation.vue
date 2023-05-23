@@ -23,13 +23,11 @@ export default {
     ...mapState("boardStore", ["articles", "totalPageNum"]),
 
     rows() {
-      console.log("total " + this.totalPageNum);
       return this.totalPageNum;
     },
   },
   watch: {
     curPage() {
-      console.log("change page");
       this.setPage();
     },
   },
@@ -37,7 +35,6 @@ export default {
     ...mapMutations("boardStore", ["SET_CURRENT_PAGE"]),
     ...mapActions("boardStore", ["searchArticle"]),
     setPage() {
-      console.log("change method");
       this.SET_CURRENT_PAGE(this.curPage);
       this.searchArticle();
     },
