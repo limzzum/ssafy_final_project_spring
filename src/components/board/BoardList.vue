@@ -22,6 +22,13 @@
           :fields="fields"
           @row-clicked="viewArticle"
         >
+        <template #cell(createTime)="data">
+            <!-- <board-list-item :postId=data.postId :title="data.title" :user-name="data.userName" :hits="data.hits" :create-time="data.createTime" ></board-list-item> -->
+          <!-- {{ this.$moment(data.item.createTime).format("yyyy-mm-dd") }} -->
+            {{data.item.createTime.split("-")[0]+" / "+data.item.createTime.split("-")[1]}}
+              <!-- <a>{{ Date(data.item.createTime).format("YY.MM.DD") }}</a> -->
+  
+          </template>
           <template #cell(title)="data">
             <!-- <board-list-item :postId=data.postId :title="data.title" :user-name="data.userName" :hits="data.hits" :create-time="data.createTime" ></board-list-item> -->
             <router-link
@@ -38,6 +45,7 @@
 </template>
 
 <script>
+import moment from "moment";
 // import { listArticle } from "@/api/board";
 import { mapState, mapActions } from "vuex";
 import BoardPagenation from "./BoardPagenation.vue";
@@ -47,16 +55,18 @@ export default {
   data() {
     return {
       fields: [
-        { key: "postId", label: "글번호", tdClass: "tdClass" },
-        { key: "title", label: "제목", tdClass: "tdSubject" },
-        { key: "userName", label: "작성자", tdClass: "tdClass" },
-        { key: "createTime", label: "작성일", tdClass: "tdClass" },
-        { key: "hits", label: "조회수", tdClass: "tdClass" },
+        { key: "postId", label: "글번호", tdClass: "tdClass; algin:center" },
+        { key: "title", label: "제목", tdClass: "tdSubject; algin:center" },
+        { key: "userName", label: "작성자", tdClass: "tdClass; algin:center" },
+        { key: "createTime", label: "작성일", tdClass: "tdClass; algin:center" },
+        { key: "hits", label: "조회수", tdClass: "tdClass; algin:center" },
       ],
     };
   },
   created() {
     this.searchArticle();
+
+    console.log(this.articles[0].createTime.year," aaaaaa  ")
     // let param = {
     //   pg: 1,
     //   spp: 20,
@@ -94,6 +104,11 @@ export default {
         name: "boardview",
         params: { postId: item.postId },
       });
+    },
+  },
+   filters: {
+    dateFormat(createTime) {
+      return moment(new Date(createTime)).format("YY.MM.DD hh:mm:ss");
     },
   },
 };
