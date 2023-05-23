@@ -117,20 +117,23 @@ const userStore = {
     async tokenRegeneration({ commit, state }) {
       console.log(
         "토큰 재발급 >> 기존 토큰 정보 : {}",
-        sessionStorage.getItem("access-token")
+        sessionStorage.getItem("refresh-token")
       );
       await tokenRegeneration(
-        JSON.stringify(state.userInfo),
         ({ data }) => {
-          if (data.message === "success") {
+          if (data.msg === "success") {
             let accessToken = data["access-token"];
             console.log("재발급 완료 >> 새로운 토큰 : {}", accessToken);
             sessionStorage.setItem("access-token", accessToken);
             commit("SET_IS_VALID_TOKEN", true);
+          } else {
+            console.log("리프레시 토큰 만료")
           }
         },
         async (error) => {
           // HttpStatus.UNAUTHORIZE(401) : RefreshToken 기간 만료 >> 다시 로그인!!!!
+          console.log("refresh error")
+          console.log(error)
           if (error.response.status === 401) {
             console.log("갱신 실패");
             // 다시 로그인 전 DB에 저장된 RefreshToken 제거.
