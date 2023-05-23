@@ -95,14 +95,12 @@ const userStore = {
     },
     async getUserInfo({ commit, dispatch }, token) {
       let decodeToken = jwtDecode(token);
-      console.log("2. getUserInfo() decodeToken :: ", decodeToken);
       await findByUserNo(
         decodeToken.sub,
         ({ data }) => {
           if (data.msg === "success") {
             commit("SET_USER_INFO", data.user);
             commit("SET_USER_NAME", data.user.userName);
-            console.log("3. getUserInfo data >> ", data);
           } else {
             console.log("유저 정보 없음!!!!");
           }
@@ -130,7 +128,6 @@ const userStore = {
         },
         async (error) => {
           // HttpStatus.UNAUTHORIZE(401) : RefreshToken 기간 만료 >> 다시 로그인!!!!
-          console.log("refresh error")
           console.log(error)
           if (error.response.status === 401) {
             console.log("갱신 실패");
