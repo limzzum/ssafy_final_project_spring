@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import moment from "moment";
 // import { listArticle } from "@/api/board";
 import { mapState, mapActions } from "vuex";
 import BoardPagenation from "./BoardPagenation.vue";
@@ -106,11 +105,7 @@ export default {
       });
     },
   },
-   filters: {
-    dateFormat(createTime) {
-      return moment(new Date(createTime)).format("YY.MM.DD hh:mm:ss");
-    },
-  },
+   
 };
 </script>
 
