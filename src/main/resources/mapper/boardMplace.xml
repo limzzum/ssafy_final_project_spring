@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.enjoytrip.model.mapper.BoardMapPlace">
+
+    <resultMap type="board" id="BoardMap">
+        <id column="post_id" property="postId"/>
+        <result column="title" property="title"/>
+        <result column="create_time" property="createTime"/>
+        <result column="content" property="content"/>
+        <result column="user_no" property="userNo"/>
+        <result column="board_type" property="boardType"/>
+        <result column="hits" property="hits"/>
+        <result column="user_name" property="userName"/>
+        <result column="board_title" property="boardTitle"/>
+    </resultMap>
+
+
+    <select id="search" parameterType="map" resultMap="BoardMap">
+        select *
+        from board left join user u on u.user_no = board.user_no left join board_info bi on board.board_type = bi.board_type
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="title!=null">
+                and title like concat("%",#{title},"%")
+            </if>
+            <if test="userNo!=null">
+                and board.user_no = #{userNo}
+            </if>
+            <if test="boardType!=null">
+                and board.board_type = #{boardType}
+            </if>
+            <if test="content!=null">
+                and content like concat("%",#{content},"%")
+            </if>
+        </trim>
+        order by post_id desc
+    </select>
+
+    <insert id="insert" parameterType="java.util.HashMap">
+        <if test="places.size != 0">
+            insert into board_attraction_map
+            (post_id, content_id)
+            values
+            <foreach collection="places" item="item" separator=",">
+            (#{postId},#{item})
+            </foreach>
+        </if>
+
+    </insert>
+
+
+    <delete id="delete" parameterType="int" >
+        delete
+        from board
+        where post_id = #{postId}
+    </delete>
+
+</mapper>
