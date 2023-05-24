@@ -39,10 +39,18 @@ export default {
         center: new window.kakao.maps.LatLng(37.566352778, 126.977952778),
         level: 3,
       });
-      if (this.places.length)
-        this.mark(this.markSelected ? this.selected : this.places);
+      this.map.addControl(
+        new window.kakao.maps.MapTypeControl(),
+        window.kakao.maps.ControlPosition.TOPRIGHT
+      );
+      this.map.addControl(
+        new window.kakao.maps.ZoomControl(),
+        window.kakao.maps.ControlPosition.RIGHT
+      );
+      this.mark(this.markSelected ? this.selected : this.places);
     },
     mark(places) {
+      if (!places.length) return;
       this.markers.forEach((item) => {
         item.setMap(null);
       });

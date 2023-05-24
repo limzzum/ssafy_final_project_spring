@@ -68,11 +68,14 @@ export default {
     this.detailShow = false;
   },
   methods: {
-    ...mapActions(placeStore, ["setCondition", "searchPlace"]),
+    ...mapActions(placeStore, ["setCondition", "searchPlace", "selectPlace"]),
     clicked(item) {
       if (this.viewDetail) {
         this.detailShow = true;
         this.detailPlace = item;
+      } else {
+        console.log(item);
+        this.selectPlace(item);
       }
     },
     closeDetail() {
