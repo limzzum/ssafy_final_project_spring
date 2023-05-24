@@ -36,7 +36,6 @@ public class SecurityService {
 
     public String reCreateJwtToken(String refreshToken){
         String key = getSubject(refreshToken);
-        System.out.println(key);
         if(redisUtil.hasKey(key)){
             System.out.println("유효한 refreshtoken1");
             if(redisUtil.get(key).equals(refreshToken)){
@@ -69,7 +68,6 @@ public class SecurityService {
     }
 
     public String getSubject(String token){
-        System.out.println("getSubject");
         if(redisUtil.hasKeyExcludeList(token)){
             System.out.println("로그아웃함");
             throw new RuntimeException("이미 로그아웃하였습니다");
