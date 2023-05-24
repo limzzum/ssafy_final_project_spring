@@ -7,10 +7,10 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class UserUpdateForm {
     @NotEmpty
-    private String userId;
+    private int userNo;
     @NotEmpty
-    private String userPwd;
+    private String curPwd;
     @NotEmpty
-    private String userNewPwd;
+    private String newPwd;
 
 }
