@@ -105,12 +105,12 @@ export default {
         if (tdiff >= 365) return parseInt(tdiff / 365) + "년 전";
         if (tdiff >= 30) return parseInt(tdiff / 30) + "달 전";
         if (tdiff >= 7) return parseInt(tdiff / 7) + "주 전";
-        if (tdiff >= 1) return tdiff + "일 전";
+        if (tdiff >= 1) return parseInt(tdiff) + "일 전";
       }
       tdiff = tdiff.asMinutes();
       if (tdiff >= 60) return parseInt(tdiff / 60) + "시간 전";
-      if (tdiff <= 0) return "방금 전";
-      return tdiff + "분 전";
+      // if (tdiff <= 0) return "방금 전";
+      return parseInt(tdiff) + "분 전";
     },
     search(type) {
       // console.log(type);
