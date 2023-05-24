@@ -4,10 +4,14 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.ssafy.enjoytrip.model.dto.Board;
 import com.ssafy.enjoytrip.model.dto.User;
+import com.ssafy.enjoytrip.model.dto.form.PostBoard;
+import com.ssafy.enjoytrip.model.mapper.BoardMapPlace;
+import com.ssafy.enjoytrip.model.service.BoardMapPlaceService;
 import com.ssafy.enjoytrip.model.service.BoardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -25,12 +30,22 @@ import java.util.Map;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class BoardRestController {
     private final BoardService service;
+    private final BoardMapPlaceService boardMapPlaceService;
 
     @Autowired
-    public BoardRestController(BoardService service){
+    public BoardRestController(BoardService service, BoardMapPlaceService boardMapPlaceService){
         this.service = service;
+        this.boardMapPlaceService = boardMapPlaceService;
     }
 
+    @PostMapping("/test")
+    public ResponseEntity<Map<String, Object>> test(@RequestBody Map<String,Object> body){
+        List<Integer> list;
+        list = (List)body.get("list");
+
+        log.info(list.toString());
+        return new ResponseEntity<>(body, HttpStatus.ACCEPTED);
+    }
     @ApiOperation(value = "board 상세 정보 요청", notes = "postId에 해당하는 board info 반환",response = ResponseEntity.class)
     @GetMapping("/{postId}")
     public ResponseEntity<Map<String, Object>> detail(@PathVariable @ApiParam(value = "board primarykey", required = true) int postId){
@@ -95,16 +110,20 @@ public class BoardRestController {
 
     @ApiOperation(value = "board 등록", notes = "등록할 board를 requestBody로 요청", response = ResponseEntity.class)
     @PostMapping
-    public ResponseEntity<Map<String, Object>> regist(@RequestBody @ApiParam(value = "등록할 board", required = true) Board board){
-        int result = service.insert(board);
-        Map<String, Object> map = new HashMap<>();
+    public ResponseEntity<Map<String, Object>> regist(@RequestBody @ApiParam(value = "등록할 board", required = true) PostBoard board){
         String  msg = "success";
-
-        if(result == 1){
-            map.put("msg", msg);
-            return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
+        try{
+            int result = service.insert(board);
+            Map<String , Object> map = new HashMap<>();
+            map.put("postId", board.getPostId());
+            map.put("places", board.getPlaces());
+            System.out.println("aaaa");
+            boardMapPlaceService.insert(map);
+        }catch (Exception e){
+            msg = "fail";
         }
-        msg="fail";
+
+        Map<String, Object> map = new HashMap<>();
         map.put("msg", msg);
         return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
     }
