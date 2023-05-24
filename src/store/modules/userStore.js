@@ -6,6 +6,7 @@ import {
   tokenRegeneration,
   logout,
   regist,
+  update,
 } from "@/api/user";
 
 const userStore = {
@@ -77,6 +78,26 @@ const userStore = {
       console.log(commit);
       let msg = null;
       await regist(
+        user,
+        ({ data }) => {
+          console.log(data);
+          if (data.msg === "success") {
+            msg = "success";
+          } else {
+            msg = data.result;
+          }
+        },
+        async (error) => {
+          console.log(error);
+          msg = "통신 오류 : 잠시 후 다시 시도해보세요";
+        }
+      );
+      return msg;
+    },
+    async userUpdate({ commit }, user) {
+      console.log("update ",commit);
+      let msg = null;
+      await update(
         user,
         ({ data }) => {
           console.log(data);
