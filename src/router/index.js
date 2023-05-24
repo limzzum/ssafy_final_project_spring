@@ -60,7 +60,6 @@ const routes = [
       {
         path: "list",
         name: "boardlist",
-        props:{isMy:false},
         component: () => import("@/components/board/BoardList"),
       },
       {
