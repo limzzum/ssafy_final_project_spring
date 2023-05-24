@@ -44,7 +44,6 @@ public class BoardRestController {
     @ApiOperation(value = "board 수정 요청", notes = "title or content 수정 요청",response = ResponseEntity.class)
     @PutMapping
     public ResponseEntity<Map<String, Object>> modify(@RequestBody @ApiParam(value = "수정할 board", required = true) Board board){
-        log.info("modify");
         Map<String,Object> map = new HashMap<>();
         int update = service.update(board);
         String msg = "success";
@@ -60,7 +59,6 @@ public class BoardRestController {
     @ApiOperation(value = "board 삭제 요청", notes = "postId에 해당하는 board 삭제",response = ResponseEntity.class)
     @DeleteMapping("/{postId}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable @ApiParam(value = "삭제할 board id", required = true) int postId){
-        log.info("delete");
         Map<String,Object> map = new HashMap<>();
         int delete = service.delete(postId);
         String msg = "success";
@@ -98,8 +96,6 @@ public class BoardRestController {
     @ApiOperation(value = "board 등록", notes = "등록할 board를 requestBody로 요청", response = ResponseEntity.class)
     @PostMapping
     public ResponseEntity<Map<String, Object>> regist(@RequestBody @ApiParam(value = "등록할 board", required = true) Board board){
-        log.info(String.valueOf(board.getUserNo()));
-        log.info(board.getBoardType());
         int result = service.insert(board);
         Map<String, Object> map = new HashMap<>();
         String  msg = "success";
