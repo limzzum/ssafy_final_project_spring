@@ -3,22 +3,18 @@ package com.ssafy.enjoytrip.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.ssafy.enjoytrip.model.dto.Board;
-import com.ssafy.enjoytrip.model.dto.User;
 import com.ssafy.enjoytrip.model.dto.form.PostBoard;
-import com.ssafy.enjoytrip.model.mapper.BoardMapPlace;
 import com.ssafy.enjoytrip.model.service.BoardMapPlaceService;
 import com.ssafy.enjoytrip.model.service.BoardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,8 +36,7 @@ public class BoardRestController {
 
     @PostMapping("/test")
     public ResponseEntity<Map<String, Object>> test(@RequestBody Map<String,Object> body){
-        List<Integer> list;
-        list = (List)body.get("list");
+        List list= (List) body.get("list");
 
         log.info(list.toString());
         return new ResponseEntity<>(body, HttpStatus.ACCEPTED);
@@ -113,19 +108,21 @@ public class BoardRestController {
     public ResponseEntity<Map<String, Object>> regist(@RequestBody @ApiParam(value = "등록할 board", required = true) PostBoard board){
         String  msg = "success";
         try{
-            int result = service.insert(board);
+            service.insert(board);
             Map<String , Object> map = new HashMap<>();
-            map.put("postId", board.getPostId());
-            map.put("places", board.getPlaces());
-            System.out.println("aaaa");
-            boardMapPlaceService.insert(map);
+            if(board.getPlaces()!=null && board.getPlaces().size()!=0){
+                map.put("postId", board.getPostId());
+                map.put("places", board.getPlaces());
+                boardMapPlaceService.insert(map);
+            }
         }catch (Exception e){
+            e.printStackTrace();
             msg = "fail";
         }
 
         Map<String, Object> map = new HashMap<>();
         map.put("msg", msg);
-        return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
 
