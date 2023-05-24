@@ -1,102 +1,93 @@
 <template>
-  <b-container class="bv-example-row mt-3">
+  <b-container class="m-3 p-2">
     <b-row>
       <b-col>
-        <b-alert show><h3>글보기</h3></b-alert>
-      </b-col>
-    </b-row>
-    <b-row class="mb-1">
-      <b-col class="text-left">
-        <b-button variant="outline-primary" @click="moveList">목록</b-button>
-      </b-col>
-      <b-col class="text-right" >
-        <b-button variant="outline-info" size="sm" @click="moveModifyArticle" class="mr-2">글수정</b-button>
-        <b-button variant="outline-danger" size="sm" @click="deleteArticle">글삭제</b-button>
-      </b-col>
-    </b-row>
-    <b-row class="mb-1">
-      <b-col>
-        <b-card
-          :header-html="`<h3>${article.postId}.
-          ${article.title} [조회수: ${article.hits}]</h3><div><h6>${article.userName}</div><div>${article.createTime.split('-')[0]}년 ${article.createTime.split('-')[1]}월 
-          ${article.createTime.split('-')[2].split('T')[0]}일 시간 : ${article.createTime.split('-')[2].split('T')[1].split('.0')[0]}</h6></div>`"
-          class="mb-2"
-          border-variant="dark"
-          no-body
-        >
-          <b-card-body class="text-left">
-            <div v-html="message"></div>
+        <b-card border-variant="black" class="mb-2" no-body>
+          <b-card-header>
+            <b-row>
+              <b-col class="board-title" cols="2">{{
+                article.boardTitle
+              }}</b-col>
+              <b-col class="board-title"> | </b-col>
+              <b-col class="article-title" cols="8">{{ article.title }}</b-col>
+            </b-row>
+            <b-row>
+              <b-col class="article-info" cols="3">
+                {{ article.userName }}
+                | {{ regTime }}
+              </b-col>
+              <b-col class="article-icon" cols="8">
+                <BIconEye variant="secondary"></BIconEye> {{ article.hits }}
+                <BIconChatDots variant="secondary"></BIconChatDots> 0
+              </b-col>
+            </b-row>
+          </b-card-header>
+          <b-card-body class="article-body">
+            <b-row>
+              <b-col>
+                {{ article.content }}
+              </b-col>
+            </b-row>
           </b-card-body>
+          <b-card-footer>
+            <b-row>
+              <b-col> 등록된 댓글이 없습니다. </b-col>
+            </b-row>
+          </b-card-footer>
         </b-card>
+      </b-col>
+    </b-row>
+    <b-row class="text-center">
+      <b-col>
+        <router-link to="/board/list">
+          <b-button variant="primary"> 목록 </b-button>
+        </router-link>
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-// import moment from "moment";
-import { getArticle } from "@/api/board";
-// import { mapState } from "vuex";
-
-// const memberStore = "memberStore";
-
+import { mapState, mapActions } from "vuex";
+import moment from "moment";
+const boardStore = "boardStore";
 export default {
-  name: "BoardDetail",
+  name: "BoardView",
+  components: {},
   data() {
-    return {
-      article: {},
-    };
+    return {};
   },
   computed: {
-    // ...mapState(memberStore, ["userInfo"]),
-    message() {
-      if (this.article.content) return this.article.content.split("\n").join("<br>");
-      return "";
+    ...mapState(boardStore, ["article"]),
+    regTime() {
+      return moment(this.article.regTime).format("YY.MM.DD hh:mm");
     },
-  },
-  created() {
-    let postId = this.$route.params.postId;
-    getArticle(
-      postId,
-      ({ data }) => {
-        this.article = data.result;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
   },
   methods: {
-    moveModifyArticle() {
-      this.$router.replace({
-        name: "boardmodify",
-        params: { postId: this.article.postId },
-      });
-      //   this.$router.push({ path: `/board/modify/${this.article.postId}` });
-    },
-    deleteArticle() {
-      if (confirm("정말로 삭제?")) {
-        this.$router.replace({
-          name: "boarddelete",
-          params: { postId: this.article.postId },
-        });
-      }
-    },
-    moveList() {
-      if (this.$router.currentRoute.name == "boardview") {
-        this.$router.push({ name: "boardlist" });
-      } else if (this.$router.currentRoute.name == "myboardview") {
-        this.$router.push({ name: "myboardlist" });
-      }
-      
-    },
+    ...mapActions(boardStore, []),
   },
-  // filters: {
-  //   dateFormat(createTime) {
-  //     return moment(new Date(createTime)).format("YY.MM.DD hh:mm:ss");
-  //   },
-  // },
 };
 </script>
 
-<style></style>
+<style scoped>
+.board-title {
+  font-size: x-large;
+  text-align: center;
+  color: cornflowerblue;
+}
+.article-title {
+  font-size: x-large;
+  text-align: left;
+}
+.article-info {
+  text-align: center;
+  color: grey;
+}
+.article-icon {
+  text-align: right;
+  color: grey;
+}
+.article-body {
+  min-height: 300px;
+}
+</style>
