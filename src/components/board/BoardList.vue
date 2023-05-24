@@ -30,6 +30,7 @@
           hover
           :items="articles"
           :fields="fields"
+          style="white-space: nowrap"
           @row-clicked="viewArticle"
         >
           <template #cell(createTime)="data">
@@ -98,15 +99,18 @@ export default {
       });
     },
     getTime(data) {
-      let daydiff = moment().diff(data.item.createTime, "days");
-      if (daydiff >= 365) return parseInt(daydiff / 365) + "년 전";
-      if (daydiff >= 30) return parseInt(daydiff / 30) + "달 전";
-      if (daydiff >= 7) return parseInt(daydiff / 7) + "주 전";
-      if (daydiff >= 1) return daydiff + "일 전";
-      let mindiff = moment().diff(data.item.createTime, "minutes");
-      if (mindiff >= 60) return parseInt(mindiff / 60) + "시간 전";
-      if (mindiff == 0) return "방금 전";
-      return mindiff + "분 전";
+      let tdiff = moment.duration(moment().diff(data.item.createTime));
+      if (tdiff.asDays() >= 1) {
+        tdiff = tdiff.asDays();
+        if (tdiff >= 365) return parseInt(tdiff / 365) + "년 전";
+        if (tdiff >= 30) return parseInt(tdiff / 30) + "달 전";
+        if (tdiff >= 7) return parseInt(tdiff / 7) + "주 전";
+        if (tdiff >= 1) return tdiff + "일 전";
+      }
+      tdiff = tdiff.asMinutes();
+      if (tdiff >= 60) return parseInt(tdiff / 60) + "시간 전";
+      if (tdiff <= 0) return "방금 전";
+      return tdiff + "분 전";
     },
     search(type) {
       // console.log(type);

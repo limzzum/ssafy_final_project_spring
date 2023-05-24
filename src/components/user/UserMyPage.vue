@@ -28,14 +28,14 @@
       <router-view/>
     </div>
     </b-tab>
- 
+
     <b-tab title="프로필 정보 수정" >
-   
+
 
 
 
                 <div class="col-12">
-                 
+
                         <table class="table table-borderless display-flex p-3"
                                style="text-align: center; vertical-align: middle; width:170%">
                             <thead>
@@ -52,7 +52,7 @@
                                             id="changePW" v-on:click="updateUser()">비밀번호 변경
                                     </button>
                                 </td>
-                                
+
                             </tr>
                             <tr>
                                 <td>
@@ -90,7 +90,7 @@
     </b-row>
     <b-row>
       <b-col></b-col>
-      
+
       <b-col></b-col>
     </b-row>
   </b-container>
@@ -118,26 +118,23 @@ export default {
   },
   computed: {
     ...mapState(userStore, ["userInfo"]),
-    
- 
   },
   methods:{
     ...mapActions(userStore, ["userUpdate","userDelete"]),
     updateUser() {
-      console.log(this.user.curPwd , this.user.newPwd , this.user.checkPwd)
+      console.log(this.user.curPwd, this.user.newPwd, this.user.checkPwd);
       if (this.user.curPwd & this.user.newPwd & this.user.checkPwd) {
         if (this.user.newPwd === this.user.checkPwd) {
           let newUser = {
-            "userNo": sessionStorage.getItem("userNo"),
-            "curPwd": this.user.curPwd,
-            "newPwd": this.user.newPwd
+            userNo: sessionStorage.getItem("userNo"),
+            curPwd: this.user.curPwd,
+            newPwd: this.user.newPwd,
           };
           this.userUpdate(newUser);
           this.user.curPwd = null;
           this.user.newPwd = null;
           this.user.checkPwd = null;
         }
-     
       }
     },
     deleteUser() {
@@ -145,15 +142,15 @@ export default {
         if (confirm('Are you ready?')) {
           this.userDelete();
         }
-      
+
       }
-      
+
     },
 
     routeMyBoard() {
-      this.$router.push({ name: "myboardlist" ,props:{isMy:true}});
-    }
-  }
+      this.$router.push({ name: "myboardlist", props: { isMy: true } });
+    },
+  },
 };
 </script>
 
