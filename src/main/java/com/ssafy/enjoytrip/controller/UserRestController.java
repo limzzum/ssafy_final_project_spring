@@ -133,14 +133,11 @@ public class UserRestController {
                                                       @PathVariable @ApiParam(value = "user no", required = true) int userNo){
         String msg = "fail";
         try {
-            System.out.println(accessToken);
             String subject = securityService.getSubject(accessToken);
-            System.out.println("subject "+subject);
             if(Integer.parseInt(subject) == userNo){
                 service.delete(userNo);
                 securityService.deleteUserToken(userNo);
                 msg = "success";
-                System.out.println("good");
             }
         }catch (Exception e){
             e.printStackTrace();
