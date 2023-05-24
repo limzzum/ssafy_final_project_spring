@@ -6,18 +6,22 @@
         blank-color="grey"
         style="max-height: 400px; min-height: 400px; object-fit: cover"
       ></b-card-img-lazy>
-      <template #header>
+      <b-card-header>
         <b-row class="text-center">
           <b-col cols="10"
             ><h3>{{ title }}</h3></b-col
           >
           <b-col cols="2"
-            ><b-button variant="primary" @click="back" class="align-self-end"
+            ><b-button
+              variant="primary"
+              @click="back"
+              class="align-self-end"
+              style="white-space: nowrap"
               >목록</b-button
             ></b-col
           >
         </b-row>
-      </template>
+      </b-card-header>
       <b-card-body class="text-left">
         <div v-html="message"></div>
       </b-card-body>

@@ -9,17 +9,31 @@
       <b-col class="text-left">
         <b-button variant="outline-primary" @click="moveList">목록</b-button>
       </b-col>
-      <b-col class="text-right" >
-        <b-button variant="outline-info" size="sm" @click="moveModifyArticle" class="mr-2">글수정</b-button>
-        <b-button variant="outline-danger" size="sm" @click="deleteArticle">글삭제</b-button>
+      <b-col class="text-right">
+        <b-button
+          variant="outline-info"
+          size="sm"
+          @click="moveModifyArticle"
+          class="mr-2"
+          >글수정</b-button
+        >
+        <b-button variant="outline-danger" size="sm" @click="deleteArticle"
+          >글삭제</b-button
+        >
       </b-col>
     </b-row>
     <b-row class="mb-1">
       <b-col>
         <b-card
           :header-html="`<h3>${article.postId}.
-          ${article.title} [조회수: ${article.hits}]</h3><div><h6>${article.userName}</div><div>${article.createTime.split('-')[0]}년 ${article.createTime.split('-')[1]}월 
-          ${article.createTime.split('-')[2].split('T')[0]}일 시간 : ${article.createTime.split('-')[2].split('T')[1].split('.0')[0]}</h6></div>`"
+          ${article.title} [조회수: ${article.hits}]</h3><div><h6>${
+            article.userName
+          }</div><div>${article.createTime.split('-')[0]}년 ${
+            article.createTime.split('-')[1]
+          }월 
+          ${article.createTime.split('-')[2].split('T')[0]}일 시간 : ${
+            article.createTime.split('-')[2].split('T')[1].split('.0')[0]
+          }</h6></div>`"
           class="mb-2"
           border-variant="dark"
           no-body
@@ -34,11 +48,7 @@
 </template>
 
 <script>
-// import moment from "moment";
 import { getArticle } from "@/api/board";
-// import { mapState } from "vuex";
-
-// const memberStore = "memberStore";
 
 export default {
   name: "BoardDetail",
@@ -50,7 +60,8 @@ export default {
   computed: {
     // ...mapState(memberStore, ["userInfo"]),
     message() {
-      if (this.article.content) return this.article.content.split("\n").join("<br>");
+      if (this.article.content)
+        return this.article.content.split("\n").join("<br>");
       return "";
     },
   },

@@ -1,25 +1,15 @@
 <template>
-  <b-container>  
-    <div style="display: flex;">
-      <BoardTypeNav :isMy="false"/>
-      <router-view/>
-    </div>
- 
-    
+  <b-container>
+    <router-view></router-view>
   </b-container>
 </template>
 
 <script>
-import BoardTypeNav from "@/components/board/item/BoardTypeNav.vue";
 export default {
   name: "AppMain",
-  components: {
-    BoardTypeNav
-  },
+  components: {},
   data() {
-    return {
-      message: "",
-    };
+    return {};
   },
 };
 </script>

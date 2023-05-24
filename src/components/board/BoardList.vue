@@ -1,120 +1,124 @@
 <template>
-  <b-container class="bv-example-row mt-3">
-    <b-row>
-      <b-col>
-        <b-alert show
-          ><h3>{{ boardTitle }}</h3></b-alert
-        >
+  <b-container
+    ><b-row class="text-center p-2 m-2">
+      <b-col class="text-center" cols="2">
+        <b-button-group vertical size="md">
+          <b-button
+            v-for="(value, name) in boardTypeData"
+            :key="value"
+            @click="search(name)"
+            variant="outline-primary"
+            :pressed="isActive(name)"
+            style="white-space: nowrap"
+            >{{ value }}</b-button
+          >
+        </b-button-group>
       </b-col>
-    </b-row>
-    <b-row class="mb-1">
-      <b-col class="text-right">
-        <b-button variant="outline-primary" @click="moveWrite()"
-          >글쓰기</b-button
-        >
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
+      <b-col cols="10">
+        <b-row class="m-2 align-items-center">
+          <b-col cols="11">
+            <BoardSearchbar />
+          </b-col>
+          <b-col cols="1">
+            <router-link to="/board/write" style="white-space: nowrap">
+              <b-button variant="outline-primary">글쓰기</b-button>
+            </router-link>
+          </b-col>
+        </b-row>
         <b-table
+          v-if="articles.length"
           hover
           :items="articles"
           :fields="fields"
           @row-clicked="viewArticle"
         >
           <template #cell(createTime)="data">
-            <!-- <board-list-item :postId=data.postId :title="data.title" :user-name="data.userName" :hits="data.hits" :create-time="data.createTime" ></board-list-item> -->
-            <!-- {{ this.$moment(data.item.createTime).format("yyyy-mm-dd") }} -->
-            {{
-              data.item.createTime.split("-")[0] +
-              " / " +
-              data.item.createTime.split("-")[1]
-            }}
-            <!-- <a>{{ Date(data.item.createTime).format("YY.MM.DD") }}</a> -->
-          </template>
-          <template #cell(title)="data">
-            <!-- <board-list-item :postId=data.postId :title="data.title" :user-name="data.userName" :hits="data.hits" :create-time="data.createTime" ></board-list-item> -->
-            <router-link
-              :to="{ name: 'boardview', params: { postId: data.item.postId } }"
-            >
-              {{ data.item.title }}
-            </router-link>
+            {{ getTime(data) }}
           </template>
         </b-table>
+        <b-alert show v-if="!articles.length">검색된 글이 없습니다.</b-alert>
+        <BoardPagination v-if="articles.length" />
       </b-col>
     </b-row>
-    <BoardPagination />
   </b-container>
 </template>
 
 <script>
-// import { listArticle } from "@/api/board";
 import { mapState, mapActions } from "vuex";
+const boardStore = "boardStore";
 import BoardPagination from "./BoardPagination.vue";
+import BoardSearchbar from "@/components/board/BoardSearchbar.vue";
+import moment from "moment";
 export default {
-  components: { BoardPagination },
+  components: { BoardPagination, BoardSearchbar },
   name: "BoardList",
   data() {
     return {
       fields: [
-        { key: "postId", label: "글번호", tdClass: "tdClass" },
-        { key: "title", label: "제목", tdClass: "tdSubject" },
-        { key: "userName", label: "작성자", tdClass: "tdClass" },
-        { key: "createTime", label: "작성일", tdClass: "tdClass" },
-        { key: "hits", label: "조회수", tdClass: "tdClass" },
+        { key: "postId", label: "글번호", tdClass: "col-1" },
+        { key: "title", label: "제목", tdClass: "col-5" },
+        { key: "userName", label: "작성자", tdClass: "col-1" },
+        { key: "createTime", label: "작성일", tdClass: "col-1" },
+        { key: "hits", label: "조회수", tdClass: "col-1" },
       ],
+      condition: {
+        title: null,
+        content: null,
+        userName: null,
+        userNo: null,
+        boardType: null,
+      },
     };
   },
-  props: {
-    isMy:Boolean
-  },
   created() {
+    this.setBoardType("notice");
+    this.condition.boardType = this.boardType;
+    this.setCondition(this.condition);
     this.searchArticle();
-    // let param = {
-    //   pg: 1,
-    //   spp: 20,
-    //   key: null,
-    //   word: null,
-    // };
-    // let option = {
-    //   title: null,
-    //   content: null,
-    //   boardType: 'notice',
-    //   user_no: null
-    // };
-    // listArticle(
-    //   param.pg,
-    //   option,
-    //   ({ data }) => {
-    //     this.articles = data.result;
-    //     console.log(data.result);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
   },
   computed: {
-    ...mapState("boardStore", ["boardType","boardTitle", "articles", "currentPage"]),
-    ...mapActions("boardStore", ["searchArticle"]),
+    ...mapState(boardStore, [
+      "boardTypeData",
+      "boardType",
+      "articles",
+      "currentPage",
+    ]),
   },
   methods: {
-    moveWrite() {
-      this.$router.push({ name: "boardwrite" });
-    },
+    ...mapActions(boardStore, [
+      "setCondition",
+      "setBoardType",
+      "searchArticle",
+      "setArticle",
+    ]),
     viewArticle(item) {
-      if (this.isMy) {
-        this.$router.push({
-        name: "myboardview",
-        params: { postId: item.postId },
-      });
-      } else {
-        this.$router.push({
+      this.setArticle(item);
+      this.$router.push({
         name: "boardview",
-        params: { postId: item.postId },
       });
-      }
-    
+    },
+    getTime(data) {
+      let daydiff = moment().diff(data.item.createTime, "days");
+      if (daydiff >= 365) return parseInt(daydiff / 365) + "년 전";
+      if (daydiff >= 30) return parseInt(daydiff / 30) + "달 전";
+      if (daydiff >= 7) return parseInt(daydiff / 7) + "주 전";
+      if (daydiff >= 1) return daydiff + "일 전";
+      let mindiff = moment().diff(data.item.createTime, "minutes");
+      if (mindiff >= 60) return parseInt(mindiff / 60) + "시간 전";
+      if (mindiff == 0) return "방금 전";
+      return mindiff + "분 전";
+    },
+    search(type) {
+      // console.log(type);
+      this.setBoardType(type);
+      this.condition.boardType = this.boardType;
+      this.setCondition(this.condition);
+      // console.log(this.boardType);
+      this.searchArticle();
+      this.$router.push({ name: "boardlist" }).catch(() => {});
+    },
+    isActive(type) {
+      return type == this.boardType;
     },
   },
 };
@@ -129,12 +133,8 @@ a:hover {
   text-decoration: none;
   color: darkblue;
 }
-.tdClass {
-  width: 50px;
-  text-align: center;
-}
-.tdSubject {
-  width: 300px;
-  text-align: left;
+.table th,
+.table td {
+  vertical-align: middle;
 }
 </style>

@@ -61,74 +61,58 @@ const routes = [
         path: "list",
         name: "boardlist",
         props:{isMy:false},
-        component: () =>
-          import(
-            /* webpackChunkName: "board" */ "@/components/board/BoardList"
-          ),
+        component: () => import("@/components/board/BoardList"),
       },
       {
         path: "write",
         name: "boardwrite",
-        // beforeEnter: onlyAuthUser,
-        component: () =>
-          import(
-            /* webpackChunkName: "board" */ "@/components/board/BoardWrite"
-          ),
+        component: () => import("@/components/board/BoardWrite"),
       },
       {
-        path: "view/:postId",
+        path: "view",
         name: "boardview",
-        // beforeEnter: onlyAuthUser,
-        component: () =>
-          import(
-            /* webpackChunkName: "board" */ "@/components/board/BoardView"
-          ),
+        component: () => import("@/components/board/BoardView"),
       },
-      {
-        path: "modify",
-        name: "boardmodify",
-        // beforeEnter: onlyAuthUser,
-        component: () =>
-          import(
-            /* webpackChunkName: "board" */ "@/components/board/BoardModify"
-          ),
-      },
-      {
-        path: "delete/:postId",
-        name: "boarddelete",
-        // beforeEnter: onlyAuthUser,
-        component: () =>
-          import(
-            /* webpackChunkName: "board" */ "@/components/board/BoardDelete"
-          ),
-      },
+      // {
+      //   path: "modify",
+      //   name: "boardmodify",
+      //   // beforeEnter: onlyAuthUser,
+      //   component: () =>
+      //     import(
+      //       /* webpackChunkName: "board" */ "@/components/board/BoardModify"
+      //     ),
+      // },
+      // {
+      //   path: "delete/:postId",
+      //   name: "boarddelete",
+      //   // beforeEnter: onlyAuthUser,
+      //   component: () =>
+      //     import(
+      //       /* webpackChunkName: "board" */ "@/components/board/BoardDelete"
+      //     ),
+      // },
     ],
   },
   {
     path: "/user",
     name: "user",
-    component: () => import(/* webpackChunkName: "user" */ "@/views/AppUser"),
+    component: () => import("@/views/AppUser"),
     children: [
       {
         path: "join",
         name: "join",
-        component: () =>
-          import(
-            /* webpackChunkName: "user" */ "@/components/user/UserRegister"
-          ),
+        component: () => import("@/components/user/UserRegister"),
       },
       {
         path: "login",
         name: "login",
-        component: () =>
-          import(/* webpackChunkName: "user" */ "@/components/user/UserLogin"),
+        component: () => import("@/components/user/UserLogin"),
       },
       {
         path: "mypage",
         name: "mypage",
         beforeEnter: onlyAuthUser,
-        component: () =>
-          import(/* webpackChunkName: "user" */ "@/components/user/UserMyPage"),
+        component: () => import("@/components/user/UserMyPage"),
         children: [
           {
             path: "myboardlist",
@@ -155,26 +139,19 @@ const routes = [
     path: "/worldcup",
     name: "worldcup",
     beforeEnter: onlyAuthUser,
-    component: () =>
-      import(/* webpackChunkName: "user" */ "@/views/AppWorldcup.vue"),
+    component: () => import("@/views/AppWorldcup.vue"),
 
     redirect: "/worldcup/progress",
     children: [
       {
         path: "progress",
         name: "progress",
-        component: () =>
-          import(
-            /* webpackChunkName: "user" */ "@/components/worldcup/WorldcupProgress.vue"
-          ),
+        component: () => import("@/components/worldcup/WorldcupProgress.vue"),
       },
       {
         path: "result",
         name: "result",
-        component: () =>
-          import(
-            /* webpackChunkName: "user" */ "@/components/worldcup/WorldcupResult.vue"
-          ),
+        component: () => import("@/components/worldcup/WorldcupResult.vue"),
       },
     ],
   },
