@@ -31,5 +31,8 @@ async function logout(userNo, success, fail) {
   api.defaults.headers["access-token"] = sessionStorage.getItem("access-token"); //axios header에 refresh-token 셋팅
   await api.get(`/user/logout/${userNo}`).then(success).catch(fail);
 }
-
-export { login, findByUserNo, tokenRegeneration, logout, regist, update };
+async function deleteUser(userNo, success, fail) {
+  api.defaults.headers["access-token"] = sessionStorage.getItem("access-token"); //axios header에 refresh-token 셋팅
+  await api.delete(`/user/${userNo}`).then(success).catch(fail);
+}
+export { login, findByUserNo, tokenRegeneration, logout, regist, update, deleteUser };

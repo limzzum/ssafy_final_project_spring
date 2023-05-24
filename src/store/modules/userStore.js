@@ -7,6 +7,7 @@ import {
   logout,
   regist,
   update,
+  deleteUser,
 } from "@/api/user";
 
 const userStore = {
@@ -185,6 +186,25 @@ const userStore = {
           console.log("userLogout 성공 : ");
           console.log(data);
           if (data.msg === "success") {
+            commit("SET_IS_LOGIN", false);
+            commit("SET_USER_INFO", null);
+            commit("SET_IS_VALID_TOKEN", false);
+          } else {
+            console.log("유저 정보 없음!!!!");
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    async userDelete({ commit }) {
+      await deleteUser(
+        sessionStorage.getItem("userNo"),
+        ({ data }) => {
+          console.log(data);
+          if (data.msg === "success") {
+            console.log("탈퇴완료!!!!");
             commit("SET_IS_LOGIN", false);
             commit("SET_USER_INFO", null);
             commit("SET_IS_VALID_TOKEN", false);
