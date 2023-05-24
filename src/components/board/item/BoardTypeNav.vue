@@ -22,10 +22,13 @@ const boardStore = "boardStore";
             };
     },
 
+    props: {
+      isMy:Boolean
+  },
     methods: {
     ...mapMutations(boardStore, ["SET_BOARD_TYPE","SET_BOARD_TITLE"]),
     ...mapActions(boardStore, [
-      "searchArticle",
+      "searchArticle","searchMyArticle"
     ]),
   
     async search(type,title) {
@@ -33,9 +36,14 @@ const boardStore = "boardStore";
       
       this.SET_BOARD_TYPE(type);
       this.SET_BOARD_TITLE(title);
-      this.searchArticle();
+        if (this.isMy) {
+            this.searchMyArticle();
+          } else {
+            this.searchArticle();
+      }
+    
       
-      this.$router.push({ name: "boardlist" }).catch(() => { });
+      // this.$router.push({ name: "boardlist" }).catch(() => { });
       
       // },
       // TODO : search 후 /themetrip 이동 구현

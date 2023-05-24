@@ -1,7 +1,7 @@
 <template>
   <b-container>  
     <div style="display: flex;">
-      <BoardTypeNav/>
+      <BoardTypeNav :isMy="false"/>
       <router-view/>
     </div>
  

@@ -65,6 +65,9 @@ export default {
       ],
     };
   },
+  props: {
+    isMy:Boolean
+  },
   created() {
     this.searchArticle();
     // let param = {
@@ -100,10 +103,18 @@ export default {
       this.$router.push({ name: "boardwrite" });
     },
     viewArticle(item) {
-      this.$router.push({
+      if (this.isMy) {
+        this.$router.push({
+        name: "myboardview",
+        params: { postId: item.postId },
+      });
+      } else {
+        this.$router.push({
         name: "boardview",
         params: { postId: item.postId },
       });
+      }
+    
     },
   },
 };

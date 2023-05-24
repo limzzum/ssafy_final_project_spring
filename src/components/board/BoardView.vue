@@ -83,7 +83,12 @@ export default {
       }
     },
     moveList() {
-      this.$router.push({ name: "boardlist" });
+      if (this.$router.currentRoute.name == "boardview") {
+        this.$router.push({ name: "boardlist" });
+      } else if (this.$router.currentRoute.name == "myboardview") {
+        this.$router.push({ name: "myboardlist" });
+      }
+      
     },
   },
   // filters: {
