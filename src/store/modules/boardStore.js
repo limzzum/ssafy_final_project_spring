@@ -67,12 +67,9 @@ const boardStore = {
       await writeArticle(
         article,
         ({ data }) => {
-          let msg = "오류가 발생했습니다. 잠시 후 다시 시도해주세요.";
-          if (data.msg === "success") {
-            msg = "글 작성이 완료되었습니다.";
-            console.log(commit);
+          if (data.msg != "success") {
+            alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
           }
-          alert(msg);
         },
         (error) => {
           console.log(error);

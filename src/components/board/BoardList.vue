@@ -20,9 +20,12 @@
             <BoardSearchbar />
           </b-col>
           <b-col cols="1">
-            <router-link to="/board/write" style="white-space: nowrap">
-              <b-button variant="outline-primary">글쓰기</b-button>
-            </router-link>
+            <b-button
+              variant="outline-primary"
+              style="white-space: nowrap"
+              @click="moveWrite"
+              >글쓰기</b-button
+            >
           </b-col>
         </b-row>
         <b-table
@@ -49,7 +52,7 @@ import { mapState, mapActions } from "vuex";
 const boardStore = "boardStore";
 import BoardPagination from "./BoardPagination.vue";
 import BoardSearchbar from "@/components/board/BoardSearchbar.vue";
-import moment from "moment";
+import moment from "moment-timezone";
 export default {
   components: { BoardPagination, BoardSearchbar },
   name: "BoardList",
@@ -72,7 +75,9 @@ export default {
     };
   },
   created() {
-    this.setBoardType("notice");
+    if (this.boardType == null) {
+      this.setBoardType("notice");
+    }
     this.condition.boardType = this.boardType;
     this.setCondition(this.condition);
     this.searchArticle();
@@ -99,17 +104,19 @@ export default {
       });
     },
     getTime(data) {
-      let tdiff = moment.duration(moment().diff(data.item.createTime));
-      if (tdiff.asDays() >= 1) {
-        tdiff = tdiff.asDays();
+      let tdiff = parseInt(
+        moment.duration(moment().diff(data.item.createTime)).asMinutes() +
+          9 * 60
+      );
+      if (tdiff >= 24 * 60) {
+        tdiff = parseInt(tdiff / (24 * 60));
         if (tdiff >= 365) return parseInt(tdiff / 365) + "년 전";
         if (tdiff >= 30) return parseInt(tdiff / 30) + "달 전";
         if (tdiff >= 7) return parseInt(tdiff / 7) + "주 전";
         if (tdiff >= 1) return parseInt(tdiff) + "일 전";
       }
-      tdiff = tdiff.asMinutes();
       if (tdiff >= 60) return parseInt(tdiff / 60) + "시간 전";
-      // if (tdiff <= 0) return "방금 전";
+      if (tdiff <= 0) return "방금 전";
       return parseInt(tdiff) + "분 전";
     },
     search(type) {
@@ -123,6 +130,12 @@ export default {
     },
     isActive(type) {
       return type == this.boardType;
+    },
+    moveWrite() {
+      this.$router.push({
+        name: "boardwrite",
+        params: { type: "write", backroute: "boardlist" },
+      });
     },
   },
 };

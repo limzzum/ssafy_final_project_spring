@@ -23,7 +23,7 @@
                 required
                 placeholder="아이디 입력...."
                 @keyup.enter="confirm"
-                @click="
+                @focus="
                   isRegistError = null;
                   isEmptyId = false;
                 "
@@ -40,7 +40,7 @@
                 required
                 placeholder="비밀번호 입력...."
                 @keyup.enter="confirm"
-                @click="
+                @focus="
                   isNotEqualPwd = false;
                   isEmptyPwd = false;
                 "
@@ -56,7 +56,7 @@
                 required
                 placeholder="비밀번호 확인...."
                 @keyup.enter="confirm"
-                @click="isNotEqualPwd = false"
+                @focus="isNotEqualPwd = false"
               ></b-form-input>
               <b-alert show variant="danger" v-if="isNotEqualPwd"
                 >비밀번호가 일치하지 않습니다.</b-alert
@@ -69,7 +69,7 @@
                 required
                 placeholder="이름 입력...."
                 @keyup.enter="confirm"
-                @click="isEmptyName = false"
+                @focus="isEmptyName = false"
               ></b-form-input> </b-form-group
             ><b-alert show variant="danger" v-if="isEmptyName"
               >이름을 입력하세요.</b-alert
@@ -82,7 +82,7 @@
                 required
                 placeholder="이메일 입력...."
                 @keyup.enter="confirm"
-                @click="isEmptyEmail = false"
+                @focus="isEmptyEmail = false"
               ></b-form-input
               ><b-alert show variant="danger" v-if="isEmptyEmail"
                 >이메일을 입력하세요.</b-alert
