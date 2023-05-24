@@ -81,10 +81,26 @@ const boardStore = {
       );
     },
     async searchArticle({ commit, state }) {
-      console.log("search")
       await listArticle(
         state.currentPage,
         { boardType: state.boardType },
+        ({ data }) => {
+          console.log(data);
+          commit("SET_ARTICLE_LIST", data.result);
+          commit("SET_TOTAL_PAGE_NUM", data.totalNum);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    async searchMyArticle({ commit, state }) {
+      await listArticle(
+        state.currentPage,
+        {
+          userNo: sessionStorage.getItem("userNo"),
+          boardType: state.boardType
+        },
         ({ data }) => {
           console.log(data);
           commit("SET_ARTICLE_LIST", data.result);
