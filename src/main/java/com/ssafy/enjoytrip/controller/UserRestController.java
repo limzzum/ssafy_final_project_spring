@@ -1,7 +1,8 @@
 package com.ssafy.enjoytrip.controller;
 
 import com.ssafy.enjoytrip.model.dto.User;
-import com.ssafy.enjoytrip.model.dto.valid.LoginForm;
+import com.ssafy.enjoytrip.model.dto.form.LoginForm;
+import com.ssafy.enjoytrip.model.dto.form.UserUpdateForm;
 import com.ssafy.enjoytrip.model.service.UserService;
 import com.ssafy.enjoytrip.security.SecurityService;
 import io.swagger.annotations.Api;
@@ -105,19 +106,19 @@ public class UserRestController {
 
     @ApiOperation(value = "유저 정보 수정", notes = "변경에 성공하면 성공메시지, 실패하면 실패메시지 반환",response = Map.class)
     @PutMapping
-    public ResponseEntity<Map<String, Object>> update(@RequestBody @ApiParam(value = "유저 아이디와 비밀번호", required = true) LoginForm loginForm,
-                                                      @RequestBody @ApiParam(value = "새로운 비밀번호", required = true) String newPwd) {
+    public ResponseEntity<Map<String, Object>> update(@RequestBody @ApiParam(value = "유저 아이디와 비밀번호", required = true)UserUpdateForm updateForm) {
+        LoginForm loginForm = new LoginForm(updateForm.getUserId(),updateForm.getUserPwd());
         User user = service.login(loginForm);
         Map<String, Object> map = new HashMap<>();
-        String msg = "비밀번호 변경 성공";
+        String msg = "success";
         if(user==null){
-            msg="비밀번호가 일치하지 않습니다";
+            msg="fail";
         }
         else{
-            user.setUserPwd(newPwd);
+            user.setUserPwd(updateForm.getUserNewPwd());
             int result = service.update(user);
             if(result!=1){
-                msg="비밀번호 변경 실패";
+                msg="fail";
             }
         }
         map.put("msg",msg);
