@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.github.pagehelper.Page;
 import com.ssafy.enjoytrip.model.dto.Board;
+import com.ssafy.enjoytrip.model.dto.form.PostBoard;
 import com.ssafy.enjoytrip.model.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int insert(Board board) {
+	public int insert(PostBoard board) {
 		return mapper.insert(board);
 	}
 

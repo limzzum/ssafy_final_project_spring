@@ -7,10 +7,11 @@ import java.util.Map;
 import com.github.pagehelper.Page;
 import com.ssafy.enjoytrip.model.dto.Board;
 import com.ssafy.enjoytrip.model.dto.User;
+import com.ssafy.enjoytrip.model.dto.form.PostBoard;
 
 public interface BoardService {
 
-	int insert(Board board);
+	int insert(PostBoard board);
 	int delete(int postId);
 	int update(Board board);
 	Board select(int postId);
