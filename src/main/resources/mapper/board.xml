@@ -37,6 +37,9 @@
             <if test="content!=null">
                 and content like concat("%",#{content},"%")
             </if>
+            <if test="userName!=null">
+                and u.user_name like concat("%",#{userName},"%")
+            </if>
         </trim>
         order by post_id desc
     </select>

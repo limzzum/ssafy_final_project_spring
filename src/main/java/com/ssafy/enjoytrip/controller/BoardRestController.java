@@ -86,7 +86,7 @@ public class BoardRestController {
         return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
     }
 
-    @ApiOperation(value = "board 리스트 요청", notes = "option값을 json으로 전달: title, content, boardType, user_no 전달 가능 ",response = ResponseEntity.class)
+    @ApiOperation(value = "board 리스트 요청", notes = "option값을 json으로 전달: title, content, boardType, userNo, userName 전달 가능 ",response = ResponseEntity.class)
     @PostMapping("/search/{page}")
     public ResponseEntity<Map<String, Object>> list(@RequestBody @ApiParam(value = "boardList option값", required = true) Map<String,Object> body,
                                                     @ApiParam(value = "page") @PathVariable int page){
