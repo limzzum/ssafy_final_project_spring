@@ -25,7 +25,6 @@
     <b-tab @click="routeMyBoard()" title="작성한 글 보기">
   
     <div style="display: flex;width: 170%;">
-        <BoardTypeNav :isMy="true"/>
       <router-view/>
     </div>
     </b-tab>
@@ -101,12 +100,11 @@
 import { mapState, mapActions } from "vuex";
 // import BoardList from "@/components/board/BoardList.vue";
 // import UserBoardList from "@/components/user/UserBoardList.vue";
-import BoardTypeNav from "../board/item/BoardTypeNav.vue";
 const userStore = "userStore";
 
 export default {
   name: "UserMyPage",
-  components: { BoardTypeNav},
+  components: { },
   data() {
     return {
       user: {
