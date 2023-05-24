@@ -60,6 +60,7 @@ const routes = [
       {
         path: "list",
         name: "boardlist",
+        props:{isMy:false},
         component: () =>
           import(
             /* webpackChunkName: "board" */ "@/components/board/BoardList"
@@ -128,6 +129,25 @@ const routes = [
         beforeEnter: onlyAuthUser,
         component: () =>
           import(/* webpackChunkName: "user" */ "@/components/user/UserMyPage"),
+        children: [
+          {
+            path: "myboardlist",
+            name: "myboardlist",
+            props:{isMy:true},
+            component: () =>
+              import(
+                /* webpackChunkName: "mypage" */ "@/components/board/BoardList"
+              ),
+          },
+          {
+            path: "myboardview",
+            name: "myboardview",
+            component: () =>
+              import(
+                /* webpackChunkName: "mypage" */ "@/components/board/BoardView"
+              ),
+          },
+        ]
       },
     ],
   },
