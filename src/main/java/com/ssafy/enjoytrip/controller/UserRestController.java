@@ -8,6 +8,7 @@ import com.ssafy.enjoytrip.security.SecurityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -107,36 +108,46 @@ public class UserRestController {
     @ApiOperation(value = "유저 정보 수정", notes = "변경에 성공하면 성공메시지, 실패하면 실패메시지 반환",response = Map.class)
     @PutMapping
     public ResponseEntity<Map<String, Object>> update(@RequestBody @ApiParam(value = "유저 아이디와 비밀번호", required = true)UserUpdateForm updateForm) {
-        LoginForm loginForm = new LoginForm(updateForm.getUserId(),updateForm.getUserPwd());
-        User user = service.login(loginForm);
-        Map<String, Object> map = new HashMap<>();
+        log.info("update user");
+        log.info(updateForm.toString());
+        User user = service.selectById(updateForm.getUserNo());
         String msg = "success";
-        if(user==null){
+        if(!user.getUserPwd().equals(updateForm.getCurPwd())){
             msg="fail";
-        }
-        else{
-            user.setUserPwd(updateForm.getUserNewPwd());
+        }else{
+            user.setUserPwd(updateForm.getNewPwd());
             int result = service.update(user);
             if(result!=1){
                 msg="fail";
             }
         }
+        Map<String, Object> map = new HashMap<>();
         map.put("msg",msg);
+
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
     @ApiOperation(value = "회원 탈퇴", notes = "탈퇴 성공 메시지 반환", response = Map.class)
     @DeleteMapping("/{userNo}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable @ApiParam(value = "user no", required = true) int userNo){
-        int result = service.delete(userNo);
-        Map<String, Object> map = new HashMap<>();
-        String msg = "정상적으로 탈퇴되었습니다.";;
-        if(result == 1){
-            map.put("msg", msg);
-            return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
+    public ResponseEntity<Map<String, Object>> delete(@RequestHeader(name = "access-token") String accessToken,
+                                                      @PathVariable @ApiParam(value = "user no", required = true) int userNo){
+        String msg = "fail";
+        try {
+            System.out.println(accessToken);
+            String subject = securityService.getSubject(accessToken);
+            System.out.println("subject "+subject);
+            if(Integer.parseInt(subject) == userNo){
+                service.delete(userNo);
+                securityService.deleteUserToken(userNo);
+                msg = "success";
+                System.out.println("good");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        msg = "탈퇴 실패.";
+        Map<String, Object> map = new HashMap<>();
         map.put("msg",msg);
+
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
