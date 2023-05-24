@@ -1,7 +1,7 @@
 package com.ssafy.enjoytrip.model.service;
 
 import com.ssafy.enjoytrip.model.dto.User;
-import com.ssafy.enjoytrip.model.dto.valid.LoginForm;
+import com.ssafy.enjoytrip.model.dto.form.LoginForm;
 
 
 public interface UserService {

@@ -1,7 +1,7 @@
 package com.ssafy.enjoytrip.model.service;
 
 import com.ssafy.enjoytrip.model.dto.User;
-import com.ssafy.enjoytrip.model.dto.valid.LoginForm;
+import com.ssafy.enjoytrip.model.dto.form.LoginForm;
 import com.ssafy.enjoytrip.model.mapper.UserMapper;
 import com.ssafy.enjoytrip.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
