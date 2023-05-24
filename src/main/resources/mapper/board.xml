@@ -41,7 +41,7 @@
         order by post_id desc
     </select>
 
-    <insert id="insert" parameterType="board">
+    <insert id="insert" parameterType="postBoard">
         <selectKey order="AFTER" keyProperty="postId" resultType="int">
             select max(post_id)
             from board
