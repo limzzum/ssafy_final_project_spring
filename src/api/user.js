@@ -22,9 +22,14 @@ async function regist(user, success, fail) {
   await api.post(`/user`, JSON.stringify(user)).then(success).catch(fail);
 }
 
+async function update(user, success, fail) {
+  console.log(JSON.stringify(user));
+  await api.put(`/user`, JSON.stringify(user)).then(success).catch(fail);
+}
+
 async function logout(userNo, success, fail) {
   api.defaults.headers["access-token"] = sessionStorage.getItem("access-token"); //axios header에 refresh-token 셋팅
   await api.get(`/user/logout/${userNo}`).then(success).catch(fail);
 }
 
-export { login, findByUserNo, tokenRegeneration, logout, regist };
+export { login, findByUserNo, tokenRegeneration, logout, regist, update };
