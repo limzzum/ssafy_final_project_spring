@@ -69,18 +69,17 @@
                             </tr>
                             </tbody>
                         </table>
-             <button v-on:click="updateUser()"></button>
 
                     <div class="col-md">
                        
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input"
+                                <input v-model="isConfirmCheck" type="checkbox" class="custom-control-input"
                                        id="deleteConfirm" required/>
                                 <label class="custom-control-label" for="deleteConfirm">회원 탈퇴시 저장된 회원 정보가 사라지는 것을
                                     이해했으며, 회원 탈퇴에 동의합니다.</label>
                             </div>
                             <button class="btn btn-primary btn-lg btn-danger btn-block m-1"
-                                    id="deleteUser">회원 탈퇴
+                                    id="deleteUser" @click="deleteUser()">회원 탈퇴
                             </button>
                     
                     </div>
@@ -114,7 +113,8 @@ export default {
         curPwd: null,
         newPwd: null,
         checkPwd: null,
-      }
+      },
+      isConfirmCheck: false,
       
     }
   },
@@ -124,7 +124,7 @@ export default {
  
   },
   methods:{
-    ...mapActions(userStore, ["userUpdate"]),
+    ...mapActions(userStore, ["userUpdate","userDelete"]),
     updateUser() {
       console.log(this.user.curPwd , this.user.newPwd , this.user.checkPwd)
       if (this.user.curPwd & this.user.newPwd & this.user.checkPwd) {
@@ -142,6 +142,16 @@ export default {
      
       }
     },
+    deleteUser() {
+      if (this.isConfirmCheck) {
+        if (confirm('Are you ready?')) {
+          this.userDelete();
+        }
+      
+      }
+      
+    },
+
     routeMyBoard() {
       this.$router.push({ name: "myboardlist" ,props:{isMy:true}});
     }
