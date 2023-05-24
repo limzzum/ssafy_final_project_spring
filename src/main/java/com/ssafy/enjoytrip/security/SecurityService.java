@@ -31,7 +31,6 @@ public class SecurityService {
         return refreshToken;
     }
     public String createJwtToken(String subject){
-        create(String.valueOf(subject), expireMin*1000*60);
         return create(String.valueOf(subject), expireMin*1000*60);
     }
 
@@ -47,6 +46,10 @@ public class SecurityService {
         }
         System.out.println("유효하지않은 refreshtoken");
         return null;
+    }
+
+    public void deleteUserToken(int userNo){
+        redisUtil.delete(String.valueOf(userNo));
     }
 
     public String create(String subject, long expTime){
