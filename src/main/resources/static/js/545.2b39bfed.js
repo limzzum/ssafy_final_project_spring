@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunktp_s09_s09_vue_enjoytrip_front"]=self["webpackChunktp_s09_s09_vue_enjoytrip_front"]||[]).push([[545],{10545:function(e,n,t){t.r(n),t.d(n,{default:function(){return _}});var r=function(){var e=this,n=e._self._c;return n("b-container",[n("router-view")],1)},u=[],s={name:"AppWorldcup",components:{},data(){return{message:""}}},o=s,c=t(1001),p=(0,c.Z)(o,r,u,!1,null,"7c63ca4e",null),_=p.exports}}]);
+//# sourceMappingURL=545.2b39bfed.js.map
