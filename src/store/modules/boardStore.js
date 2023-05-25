@@ -84,12 +84,12 @@ const boardStore = {
       commit("SET_BOARD_TYPE", type);
     },
     async searchArticle({ commit, state }) {
-      // console.log(state.condition);
+      console.log(state.condition);
       await listArticle(
         state.currentPage,
         state.condition,
         ({ data }) => {
-          // console.log(data);
+          console.log(data);
           commit("SET_ARTICLE_LIST", data.result);
           commit("SET_TOTAL_PAGE_NUM", data.totalNum);
         },
@@ -102,7 +102,7 @@ const boardStore = {
       await getArticle(
         article.postId,
         ({ data }) => {
-          // console.log(data);
+          console.log(data);
           let result = data.result;
           result["places"] = data.places;
           result["comments"] = data.comments;

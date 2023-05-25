@@ -30,15 +30,12 @@
             </b-row>
           </b-card-body>
           <b-tabs
-            v-if="article.places != null && article.places.length"
+            v-if="selected != null && selected.length"
             card
             style="text-align: center"
           >
             <b-tab title="태그된 장소">
-              <b-card-group
-                v-for="item in article.places"
-                :key="item.contentId"
-              >
+              <b-card-group v-for="item in selected" :key="item.contentId">
                 <b-card class="no-padding">
                   <b-row class="align-items-center">
                     <b-col cols="5">
@@ -74,6 +71,25 @@
               </b-col>
               <b-table v-else> TODO </b-table>
             </b-row>
+            <hr />
+            <b-row class="align-items-center">
+              <b-col cols="11">
+                <b-card>
+                  <b-form>
+                    <b-form-textarea
+                      rows="3"
+                      placeholder="댓글을 입력하세요"
+                      no-resize
+                      v-model="comment.content"
+                      @focus="isEmptyContent = false"
+                    ></b-form-textarea>
+                  </b-form>
+                </b-card>
+              </b-col>
+              <b-col cols="1" style="white-space: nowrap" class="text-left">
+                <b-button variant="primary" @click="regComment">등록</b-button>
+              </b-col>
+            </b-row>
           </b-card-footer>
         </b-card>
       </b-col>
@@ -93,25 +109,42 @@ import { mapState, mapActions } from "vuex";
 import moment from "moment";
 import TheMap from "@/components/TheMap.vue";
 const boardStore = "boardStore";
+const userStore = "userStore";
 const placeStore = "placeStore";
 export default {
   name: "BoardView",
   components: { TheMap },
   data() {
-    return {};
+    return {
+      isEmptyContent: false,
+      comment: {
+        postId: null,
+        parentId: -1,
+        userNo: null,
+        content: null,
+      },
+    };
+  },
+  created() {
+    this.setSelected(this.article.places);
+    this.comment.postId = this.article.postId;
+    this.comment.userNo = this.userInfo.userNo;
   },
   computed: {
+    ...mapState(userStore, ["userInfo"]),
     ...mapState(boardStore, ["article"]),
+    ...mapState(placeStore, ["selected"]),
     regTime() {
       return moment(this.article.regTime).format("YY.MM.DD hh:mm");
     },
   },
-  created() {
-    this.clearPlace();
-    this.setSelected(this.article.places);
+  watch: {
+    article(item) {
+      this.setSelected(item.places);
+    },
   },
   methods: {
-    ...mapActions(placeStore, ["clearPlace", "setSelected"]),
+    ...mapActions(placeStore, ["setSelected"]),
     img(link) {
       return link ? link : require("@/assets/img/on_error.png");
     },
@@ -119,6 +152,7 @@ export default {
       //TODO: 기능 구현
       console.log(place);
     },
+    regComment() {},
   },
 };
 </script>

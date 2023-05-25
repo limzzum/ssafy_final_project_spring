@@ -76,11 +76,11 @@ export default {
     };
   },
   created() {
-    if (this.boardType == null) {
+    if (!this.$route.params.noUpdate && this.boardType == null) {
       this.setBoardType("notice");
+      this.setCondition(this.condition);
+      this.condition.boardType = this.boardType;
     }
-    this.condition.boardType = this.boardType;
-    this.setCondition(this.condition);
     this.searchArticle();
   },
   computed: {
@@ -99,11 +99,10 @@ export default {
       "searchArticle",
       "setArticle",
     ]),
-    ...mapActions(placeStore, ["setSelected", "clearPlace"]),
-    viewArticle(item) {
-      this.setArticle(item);
+    ...mapActions(placeStore, ["clearPlace"]),
+    async viewArticle(item) {
+      await this.setArticle(item);
       this.clearPlace();
-      this.setSelected(item.places);
       this.$router.push({
         name: "boardview",
       });

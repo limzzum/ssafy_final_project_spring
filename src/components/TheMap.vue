@@ -25,13 +25,26 @@ export default {
   computed: {
     ...mapState(placeStore, ["place", "places", "selected"]),
   },
-  created() {
-    const script = document.createElement("script");
-    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.VUE_APP_KAKAO_MAP_API_KEY}&autoload=false`;
-    document.head.appendChild(script);
-    script.onload = () => {
-      window.kakao.maps.load(this.init);
-    };
+  mounted() {
+    if (!window.kakao || !window.kakao.map) {
+      const script = document.createElement("script");
+      const key = "6bc1f07b70e955115657c85693cd9af0";
+      script.src =
+        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=" + key;
+
+      /*global kakao*/
+      script.addEventListener("load", () => {
+        kakao.maps.load(() => {
+          this.init();
+        });
+      });
+
+      document.head.appendChild(script);
+    } else {
+      kakao.maps.load(() => {
+        this.init();
+      });
+    }
   },
   watch: {
     places: function (places) {
@@ -47,6 +60,7 @@ export default {
   },
   methods: {
     init() {
+      if (!document.getElementById("map")) return;
       this.map = new window.kakao.maps.Map(document.getElementById("map"), {
         center: new window.kakao.maps.LatLng(37.566352778, 126.977952778),
         level: 3,
@@ -68,11 +82,12 @@ export default {
       this.isLoading = false;
     },
     mark(places) {
+      // console.log(places);
       this.markers.forEach((item) => {
         item.setMap(null);
       });
       this.bounds = new window.kakao.maps.LatLngBounds();
-      if (!places || places.length) return;
+      if (!places || !places.length) return;
       mark: for (let pos of places) {
         // console.log(pos);
         for (let sel of this.selected) {
@@ -91,6 +106,7 @@ export default {
       this.map.setBounds(this.bounds);
     },
     selectMark(places) {
+      console.log(places);
       if (this.distanceOverlay) this.distanceOverlay.setVisible(false);
       this.selectedMarkers.forEach((item) => {
         item.setMap(null);
