@@ -50,13 +50,8 @@
                       ></b-card-img>
                     </b-col>
                     <b-col></b-col>
-                    <b-col cols="4">
+                    <b-col cols="6">
                       {{ item.title }}
-                    </b-col>
-                    <b-col cols="2">
-                      <b-button variant="primary" @click="detailPlace(item)">
-                        상세
-                      </b-button>
                     </b-col>
                   </b-row>
                 </b-card>
@@ -149,6 +144,7 @@ export default {
     this.setSelected(this.article.places);
     this.comment.postId = this.article.postId;
     this.comment.userNo = this.userInfo.userNo;
+    console.log(this.article);
   },
   computed: {
     ...mapState(userStore, ["userInfo"]),
@@ -175,6 +171,8 @@ export default {
     },
     comfirm() {
       this.regComment(this.comment);
+      this.comment.postId = this.article.postId;
+      this.comment.userNo = this.userInfo.userNo;
     },
     getTime(time) {
       let tdiff = parseInt(
