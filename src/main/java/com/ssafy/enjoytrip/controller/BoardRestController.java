@@ -65,6 +65,7 @@ public class BoardRestController {
             Map<String,Object> option = new HashMap<>();
             option.put("postId",postId);
             option.put("parentId",-1);
+            option.put("postId",postId);
             List<Comment> comments = commentService.search(option);
 
             for (Comment comment:comments) {
