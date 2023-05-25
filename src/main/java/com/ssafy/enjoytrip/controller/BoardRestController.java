@@ -63,6 +63,7 @@ public class BoardRestController {
             map.put("places", search);
 
             Map<String,Object> option = new HashMap<>();
+            option.put("postId",postId);
             option.put("parentId",-1);
             List<Comment> comments = commentService.search(option);
 
