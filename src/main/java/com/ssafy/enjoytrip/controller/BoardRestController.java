@@ -3,11 +3,13 @@ package com.ssafy.enjoytrip.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.ssafy.enjoytrip.model.dto.Board;
+import com.ssafy.enjoytrip.model.dto.Comment;
 import com.ssafy.enjoytrip.model.dto.Place;
 import com.ssafy.enjoytrip.model.dto.User;
 import com.ssafy.enjoytrip.model.dto.form.PostBoard;
 import com.ssafy.enjoytrip.model.service.BoardMapPlaceService;
 import com.ssafy.enjoytrip.model.service.BoardService;
+import com.ssafy.enjoytrip.model.service.CommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -29,11 +31,13 @@ import java.util.Map;
 public class BoardRestController {
     private final BoardService service;
     private final BoardMapPlaceService boardMapPlaceService;
+    private final CommentService commentService;
 
     @Autowired
-    public BoardRestController(BoardService service, BoardMapPlaceService boardMapPlaceService){
+    public BoardRestController(BoardService service, BoardMapPlaceService boardMapPlaceService, CommentService commentService){
         this.service = service;
         this.boardMapPlaceService = boardMapPlaceService;
+        this.commentService = commentService;
     }
 
     @PostMapping("/test")
@@ -49,9 +53,20 @@ public class BoardRestController {
         Map<String,Object> map = new HashMap<>();
         Board select = service.select(postId);
         List<Place> search = boardMapPlaceService.search(postId);
+
         map.put("result", select);
         map.put("places", search);
 
+        Map<String,Object> option = new HashMap<>();
+        option.put("parentId",0);
+        List<Comment> comments = commentService.search(option);
+
+        for (int i = 0; i < comments.size(); i++) {
+            option.put("parentId", comments.get(i).getCommentId());
+            List<Comment> sub = commentService.search(option);
+            comments.get(i).setSubs(sub);
+        }
+        map.put("comments", comments);
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
