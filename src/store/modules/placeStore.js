@@ -46,6 +46,9 @@ const placeStore = {
         });
       });
     },
+    SET_PLACE(state, place) {
+      state.place = place;
+    },
     SET_PLACE_LIST(state, places) {
       state.places = places;
     },
@@ -54,21 +57,33 @@ const placeStore = {
     },
     SET_CONDITION(state, condition) {
       state.condition = condition;
-      console.log("condition : " + state.condition);
+      // console.log("condition : " + state.condition);
     },
     SET_CURRENT_PAGE(state, page) {
       state.currentPage = page;
-      console.log("current page : " + state.currentPage);
+      // console.log("current page : " + state.currentPage);
     },
     SET_TOTAL_PAGE_NUM(state, num) {
       state.totalPageNum = num;
+    },
+    SET_SELECTED(state, list) {
+      state.selected = list;
     },
     ADD_SELECTED(state, place) {
       for (let sel of state.selected) {
         if (sel.contentId == place.contentId) return;
       }
       state.selected.push(place);
-      console.log(state.selected);
+      // console.log(state.selected);
+    },
+    SUB_SELECTED(state, place) {
+      let tmp = [];
+      for (let sel of state.selected) {
+        if (sel.contentId == place.contentId) continue;
+        tmp.push(sel);
+      }
+      state.selected = tmp;
+      // console.log(state.selected);
     },
   },
 
@@ -111,8 +126,11 @@ const placeStore = {
       commit("CLEAR_PLACE_LIST");
       commit("CLEAR_SELECTED_LIST");
     },
+    setPlace({ commit }, place) {
+      commit("SET_PLACE", place);
+    },
     async searchPlace({ commit, state }) {
-      console.log(state.condition);
+      // console.log(state.condition);
       await searchPlace(
         { page: state.currentPage },
         state.condition,
@@ -136,6 +154,12 @@ const placeStore = {
     },
     selectPlace({ commit }, place) {
       commit("ADD_SELECTED", place);
+    },
+    unselectPlace({ commit }, place) {
+      commit("SUB_SELECTED", place);
+    },
+    setSelected({ commit }, list) {
+      commit("SET_SELECTED", list);
     },
   },
 };

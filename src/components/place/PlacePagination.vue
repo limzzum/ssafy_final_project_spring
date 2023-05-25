@@ -25,6 +25,9 @@ export default {
       this.setPage(page);
       this.searchPlace();
     },
+    currentPage(page) {
+      this.curPage = page;
+    },
   },
   methods: {
     ...mapMutations(placeStore, ["SET_CURRENT_PAGE"]),

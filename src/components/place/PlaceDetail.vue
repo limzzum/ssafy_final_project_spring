@@ -1,11 +1,6 @@
 <template>
   <b-container>
     <b-card border-variant="black" class="mb-2" no-body>
-      <b-card-img-lazy
-        :src="img"
-        blank-color="grey"
-        style="max-height: 400px; min-height: 400px; object-fit: cover"
-      ></b-card-img-lazy>
       <b-card-header>
         <b-row class="text-center">
           <b-col cols="10"
@@ -22,6 +17,12 @@
           >
         </b-row>
       </b-card-header>
+
+      <b-card-img-lazy
+        :src="img"
+        blank-color="grey"
+        style="max-height: 200px; min-height: 200px; object-fit: cover"
+      ></b-card-img-lazy>
       <b-card-body class="text-left">
         <div v-html="message"></div>
       </b-card-body>
@@ -30,15 +31,15 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+const placeStore = "placeStore";
 export default {
   name: "PlaceDetail",
   data() {
     return {};
   },
-  props: {
-    place: Object,
-  },
   computed: {
+    ...mapState(placeStore, ["place"]),
     title() {
       if (!this.place) return "";
       return this.place.title ? this.place.title : "오류";
@@ -57,6 +58,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(placeStore, ["unselectPlace"]),
     back() {
       this.$emit("backEmit");
     },

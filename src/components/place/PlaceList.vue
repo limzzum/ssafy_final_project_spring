@@ -1,7 +1,7 @@
 <template>
   <b-container class="text-center">
     <div v-if="!places.length">
-      <b-alert show>관광지를 검색하고 선택하세요</b-alert>
+      <b-alert show>장소를 검색하고 선택하세요</b-alert>
     </div>
     <b-table
       hover
@@ -14,16 +14,15 @@
       outlined
       v-if="places.length"
     >
+      <template #cell(info)="data">
+        <b-button variant="primary" @click="detail(data.item)">상세</b-button>
+      </template>
       <template #cell(contentId)="data">
-        <b-button variant="primary" @click="search(data.item)">검색</b-button>
+        <b-button variant="success" @click="search(data.item)">검색</b-button>
       </template>
     </b-table>
     <PlacePagination v-show="!detailShow" v-if="places.length" />
-    <PlaceDetail
-      v-show="detailShow"
-      :place="detailPlace"
-      @backEmit="closeDetail"
-    />
+    <PlaceDetail v-show="detailShow" @backEmit="closeDetail" />
   </b-container>
 </template>
 
@@ -55,10 +54,10 @@ export default {
         { key: "title", label: "이름", tdClass: "col-3" },
         { key: "contentTypeName", label: "유형", tdClass: "col-1" },
         { key: "sidoName", label: "지역", tdClass: "col-1" },
-        { key: "contentId", label: "근처 관광지", tdClass: "col-1" },
+        { key: "info", label: "상세 정보", tdClass: "col-1" },
+        { key: "contentId", label: "근처 장소", tdClass: "col-1" },
       ],
       detailShow: false,
-      detailPlace: null,
     };
   },
   computed: {
@@ -68,13 +67,17 @@ export default {
     this.detailShow = false;
   },
   methods: {
-    ...mapActions(placeStore, ["setCondition", "searchPlace", "selectPlace"]),
+    ...mapActions(placeStore, [
+      "setPage",
+      "setCondition",
+      "searchPlace",
+      "selectPlace",
+      "setPlace",
+    ]),
     clicked(item) {
       if (this.viewDetail) {
-        this.detailShow = true;
-        this.detailPlace = item;
+        this.detail(item);
       } else {
-        console.log(item);
         this.selectPlace(item);
       }
     },
@@ -87,6 +90,10 @@ export default {
       this.setCondition(this.condition);
       this.searchPlace();
     },
+    detail(item) {
+      this.detailShow = true;
+      this.setPlace(item);
+    },
   },
 };
 </script>
@@ -94,5 +101,8 @@ export default {
 .table th,
 .table td {
   vertical-align: middle;
+}
+.table th {
+  white-space: nowrap;
 }
 </style>
