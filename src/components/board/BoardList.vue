@@ -103,7 +103,7 @@ export default {
     viewArticle(item) {
       this.setArticle(item);
       this.clearPlace();
-      this.setSelected(this.article.places);
+      this.setSelected(item.places);
       this.$router.push({
         name: "boardview",
       });

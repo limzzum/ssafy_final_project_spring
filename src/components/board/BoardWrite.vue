@@ -39,7 +39,7 @@
           @focus="isEmptyContent = false"
         ></b-form-textarea>
         <b-tabs v-if="selected.length" style="text-align: center" card>
-          <b-tab title="태그된 장소" active>
+          <b-tab title="태그된 장소">
             <b-card-group v-for="item in selected" :key="item.contentId">
               <b-card class="no-padding">
                 <b-row class="align-items-center">
@@ -67,7 +67,7 @@
               </b-card>
             </b-card-group>
           </b-tab>
-          <b-tab title="지도"> <TheMap /></b-tab>
+          <b-tab title="지도" active> <TheMap /></b-tab>
         </b-tabs>
         <template #footer>
           <b-row v-if="!type || type == 'write'" style="white-space: nowrap">
