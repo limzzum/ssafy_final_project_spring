@@ -1,14 +1,10 @@
 <template>
   <b-container class="bv-example-row mt-3">
     <b-row>
-      <b-col>
-        <b-alert variant="secondary" show><h3>회원가입</h3></b-alert>
-      </b-col>
-    </b-row>
-    <b-row>
       <b-col></b-col>
       <b-col cols="8">
         <b-card class="text-center mt-3" style="max-width: 40rem" align="left">
+          <template #header> <h2>회원가입</h2> </template>
           <b-form class="text-left">
             <b-alert
               show
@@ -88,20 +84,29 @@
                 >이메일을 입력하세요.</b-alert
               >
             </b-form-group>
-            <b-button
-              type="button"
-              variant="primary"
-              class="m-1"
-              @click="confirm"
-              >회원가입</b-button
-            >
-            <b-button
-              type="button"
-              variant="success"
-              class="m-1"
-              @click="movePage"
-              >로그인</b-button
-            >
+
+            <b-row class="align-items-center p-3" style="white-space: nowrap">
+              <b-col cols="6" class="text-right"> 이미 가입하셨습니까?</b-col>
+              <b-col cols="2" class="text-left">
+                <b-button
+                  type="button"
+                  variant="warning"
+                  class="m-1"
+                  @click="movePage"
+                  >로그인</b-button
+                >
+              </b-col>
+              <b-col cols="2"> </b-col>
+              <b-col cols="2" class="text-right">
+                <b-button
+                  type="button"
+                  variant="primary"
+                  class="m-1"
+                  @click="confirm"
+                  >회원가입</b-button
+                >
+              </b-col>
+            </b-row>
           </b-form>
         </b-card>
       </b-col>

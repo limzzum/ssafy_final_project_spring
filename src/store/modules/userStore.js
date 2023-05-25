@@ -16,7 +16,7 @@ const userStore = {
     isLogin: false,
     isLoginError: false,
     userInfo: null,
-    userName : null,
+    userName: null,
     isValidToken: false,
   },
   getters: {
@@ -95,25 +95,22 @@ const userStore = {
       );
       return msg;
     },
-    async userUpdate({ commit }, user) {
-      console.log("update ",commit);
-      let msg = null;
+    async userUpdate({ commit, state }, user) {
+      console.log("update ", commit);
       await update(
         user,
         ({ data }) => {
           console.log(data);
-          if (data.msg === "success") {
-            msg = "success";
-          } else {
-            msg = data.result;
+          if (data.result === "success") {
+            state.userName = user.userName;
           }
+          return data.result;
         },
         async (error) => {
           console.log(error);
-          msg = "통신 오류 : 잠시 후 다시 시도해보세요";
+          return "통신 오류 : 잠시 후 다시 시도해보세요";
         }
       );
-      return msg;
     },
     async getUserInfo({ commit, dispatch }, token) {
       let decodeToken = jwtDecode(token);
@@ -145,12 +142,12 @@ const userStore = {
             sessionStorage.setItem("access-token", accessToken);
             commit("SET_IS_VALID_TOKEN", true);
           } else {
-            console.log("리프레시 토큰 만료")
+            console.log("리프레시 토큰 만료");
           }
         },
         async (error) => {
           // HttpStatus.UNAUTHORIZE(401) : RefreshToken 기간 만료 >> 다시 로그인!!!!
-          console.log(error)
+          console.log(error);
           if (error.response.status === 401) {
             console.log("갱신 실패");
             // 다시 로그인 전 DB에 저장된 RefreshToken 제거.

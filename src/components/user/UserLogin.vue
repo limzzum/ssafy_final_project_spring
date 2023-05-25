@@ -28,17 +28,18 @@
                 @keyup.enter="confirm"
               ></b-form-input>
             </b-form-group>
-            <b-row style="white-space: nowrap">
-              <b-col cols="8"></b-col>
-              <b-col cols="2" class="text-right">
+            <b-row class="align-items-center" style="white-space: nowrap">
+              <b-col cols="6" class="text-right"> 계정이 없으신가요? </b-col>
+              <b-col cols="2" class="text-left">
                 <b-button
                   type="button"
-                  variant="success"
+                  variant="warning"
                   class="m-1"
                   @click="movePage"
                   >회원가입</b-button
                 >
               </b-col>
+              <b-col cols="2"></b-col>
               <b-col cols="2" class="text-left">
                 <b-button
                   type="button"
