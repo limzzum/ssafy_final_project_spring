@@ -22,13 +22,9 @@
         </router-link>
       </b-carousel-slide>
       <b-carousel-slide img-src="@/assets/img/carousel3.png">
-        <router-link to="adjacent">
-          <h1 @click="clearPlace">가까운 관광지</h1>
-        </router-link>
-      </b-carousel-slide>
-      <b-carousel-slide img-src="@/assets/img/carousel4.png">
         <router-link to="worldcup"><h1>관광지 월드컵</h1></router-link>
       </b-carousel-slide>
+
       <b-carousel-slide img-src="@/assets/img/carousel5.png">
         <router-link to="board"><h1>게시판</h1></router-link>
       </b-carousel-slide>

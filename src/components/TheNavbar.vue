@@ -29,13 +29,6 @@
               ></b-nav-item
             >
             <b-nav-item href="#"
-              ><router-link to="/adjacent"
-                ><b-row class="p-3" @click="clearPlace"
-                  >가까운 관광지</b-row
-                ></router-link
-              ></b-nav-item
-            >
-            <b-nav-item href="#"
               ><router-link to="/worldcup"
                 ><b-row class="p-3">관광지 월드컵</b-row></router-link
               ></b-nav-item
@@ -48,26 +41,33 @@
           </b-navbar-nav>
 
           <!-- after login -->
+
           <b-navbar-nav class="ml-auto" v-if="userInfo">
-            <b-nav-item class="align-self-center">
+            <b-nav-item>
               <b-avatar
                 variant="primary"
                 v-text="userInfo.userId.charAt(0).toUpperCase()"
-              ></b-avatar>
+              />
               {{ userInfo.userName }}({{ userInfo.userId }})님
             </b-nav-item>
-            <b-nav-item class="align-self-center">
-              <router-link
-                :to="{ name: 'mypage' }"
-                class="link align-self-center"
-                >내정보보기</router-link
-              >
-            </b-nav-item>
-            <b-nav-item
-              class="align-self-center link"
-              @click.prevent="onClickLogout"
-              >로그아웃</b-nav-item
-            >
+            <b-nav-item-dropdown right>
+              <template #button-content>
+                <b-icon icon="person" font-scale="2"></b-icon>
+              </template>
+              <b-dropdown-item href="#">
+                <router-link :to="{ name: 'mypage' }" class="align-self-center">
+                  <b-nav-item class="align-self-center"> 회원 정보 </b-nav-item>
+                </router-link>
+              </b-dropdown-item>
+              <b-dropdown-item href="#">
+                <b-nav-item
+                  class="align-self-center"
+                  @click.prevent="onClickLogout"
+                >
+                  로그아웃
+                </b-nav-item>
+              </b-dropdown-item>
+            </b-nav-item-dropdown>
           </b-navbar-nav>
           <!-- before login -->
           <b-navbar-nav class="ml-auto" v-else>

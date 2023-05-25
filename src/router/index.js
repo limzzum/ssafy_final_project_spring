@@ -4,7 +4,6 @@ import AppMain from "@/views/AppMain.vue";
 import AppThemeTrip from "@/views/AppThemeTrip.vue";
 import AppMyPlan from "@/views/AppMyPlan.vue";
 import AppBoard from "@/views/AppBoard.vue";
-import AppAdjacent from "@/views/AppAdjacent.vue";
 
 import store from "@/store";
 
@@ -42,12 +41,6 @@ const routes = [
     path: "/myplan",
     name: "myplan",
     component: AppMyPlan,
-    beforeEnter: onlyAuthUser,
-  },
-  {
-    path: "/adjacent",
-    name: "adjacent",
-    component: AppAdjacent,
     beforeEnter: onlyAuthUser,
   },
   {
@@ -116,7 +109,7 @@ const routes = [
           {
             path: "myboardlist",
             name: "myboardlist",
-            props:{isMy:true},
+            props: { isMy: true },
             component: () =>
               import(
                 /* webpackChunkName: "mypage" */ "@/components/board/BoardList"
@@ -130,7 +123,7 @@ const routes = [
                 /* webpackChunkName: "mypage" */ "@/components/board/BoardView"
               ),
           },
-        ]
+        ],
       },
     ],
   },
