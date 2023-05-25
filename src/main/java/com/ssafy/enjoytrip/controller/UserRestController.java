@@ -107,22 +107,11 @@ public class UserRestController {
 
     @ApiOperation(value = "유저 정보 수정", notes = "변경에 성공하면 성공메시지, 실패하면 실패메시지 반환",response = Map.class)
     @PutMapping
-    public ResponseEntity<Map<String, Object>> update(@RequestBody @ApiParam(value = "유저 아이디와 비밀번호", required = true)UserUpdateForm updateForm) {
+    public ResponseEntity<Map<String, Object>> update(@RequestBody User user) {
         log.info("update user");
-        log.info(updateForm.toString());
-        User user = service.selectById(updateForm.getUserNo());
-        String msg = "success";
-        if(!user.getUserPwd().equals(updateForm.getCurPwd())){
-            msg="fail";
-        }else{
-            user.setUserPwd(updateForm.getNewPwd());
-            int result = service.update(user);
-            if(result!=1){
-                msg="fail";
-            }
-        }
+        int result = service.update(user);
         Map<String, Object> map = new HashMap<>();
-        map.put("msg",msg);
+        map.put("msg",result==1?"success":"fail");
 
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
