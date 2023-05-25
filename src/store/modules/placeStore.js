@@ -126,6 +126,9 @@ const placeStore = {
       commit("CLEAR_PLACE_LIST");
       commit("CLEAR_SELECTED_LIST");
     },
+    clearPlaceList({ commit }) {
+      commit("CLEAR_PLACE_LIST");
+    },
     setPlace({ commit }, place) {
       commit("SET_PLACE", place);
     },

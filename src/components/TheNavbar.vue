@@ -7,7 +7,8 @@
             ><b-img
               rounded
               id="logo-img"
-              src="@/assets/img/trip_logo.png" /></router-link
+              src="@/assets/img/trip_logo.png"
+              @click="clearPlace" /></router-link
         ></b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -54,17 +55,22 @@
               <template #button-content>
                 <b-icon icon="person" font-scale="2"></b-icon>
               </template>
-              <b-dropdown-item href="#">
-                <router-link :to="{ name: 'mypage' }" class="align-self-center">
-                  <b-nav-item class="align-self-center"> 회원 정보 </b-nav-item>
-                </router-link>
+              <b-dropdown-item href="#"
+                ><b-nav-item class="align-self-center">
+                  <router-link
+                    :to="{ name: 'mypage' }"
+                    class="align-self-center"
+                  >
+                    <b-icon icon="info-circle"></b-icon> 회원 정보
+                  </router-link>
+                </b-nav-item>
               </b-dropdown-item>
               <b-dropdown-item href="#">
                 <b-nav-item
                   class="align-self-center"
                   @click.prevent="onClickLogout"
                 >
-                  로그아웃
+                  <b-icon icon="box-arrow-right"></b-icon> 로그아웃
                 </b-nav-item>
               </b-dropdown-item>
             </b-nav-item-dropdown>
@@ -76,14 +82,18 @@
                 <b-icon icon="people" font-scale="2"></b-icon>
               </template>
               <b-dropdown-item href="#">
-                <router-link :to="{ name: 'join' }" class="link">
-                  <b-icon icon="person-circle"></b-icon> 회원가입
-                </router-link>
+                <b-nav-item class="align-self-center">
+                  <router-link :to="{ name: 'join' }" class="link">
+                    <b-icon icon="person-circle"></b-icon> 회원가입
+                  </router-link>
+                </b-nav-item>
               </b-dropdown-item>
               <b-dropdown-item href="#">
-                <router-link :to="{ name: 'login' }" class="link">
-                  <b-icon icon="key"></b-icon> 로그인
-                </router-link>
+                <b-nav-item class="align-self-center">
+                  <router-link :to="{ name: 'login' }" class="link">
+                    <b-icon icon="key"></b-icon> 로그인
+                  </router-link>
+                </b-nav-item>
               </b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>

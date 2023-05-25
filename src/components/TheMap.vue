@@ -1,5 +1,5 @@
 <template>
-  <b-container class="b-primary p-3">
+  <b-container class="p-3">
     <div id="map"></div>
   </b-container>
 </template>
@@ -19,6 +19,7 @@ export default {
       polyline: null,
       distanceOverlay: null,
       infoWindows: [],
+      isLoading: true,
     };
   },
   computed: {
@@ -34,10 +35,12 @@ export default {
   },
   watch: {
     places: function (places) {
+      if (this.isLoading) return;
       this.mark(places);
       this.selectMark(this.selected);
     },
     selected: function (places) {
+      if (this.isLoading) return;
       this.mark(this.places);
       this.selectMark(places);
     },
@@ -48,6 +51,8 @@ export default {
         center: new window.kakao.maps.LatLng(37.566352778, 126.977952778),
         level: 3,
       });
+      this.map.relayout();
+
       this.map.addControl(
         new window.kakao.maps.MapTypeControl(),
         window.kakao.maps.ControlPosition.TOPRIGHT
@@ -57,16 +62,17 @@ export default {
         window.kakao.maps.ControlPosition.RIGHT
       );
       // this.mark(this.markSelected ? this.selected : this.places);
-
       this.mark(this.places);
       this.selectMark(this.selected);
+      this.map.relayout();
+      this.isLoading = false;
     },
     mark(places) {
       this.markers.forEach((item) => {
         item.setMap(null);
       });
-      if (!places || !places.length) return;
       this.bounds = new window.kakao.maps.LatLngBounds();
+      if (!places || places.length) return;
       mark: for (let pos of places) {
         // console.log(pos);
         for (let sel of this.selected) {
@@ -93,16 +99,22 @@ export default {
         item.close();
       });
       if (this.polyline) this.polyline.setMap(null);
-      if (!places.length) return;
-      // this.bounds = new window.kakao.maps.LatLngBounds();
+      if (!places.length) {
+        if (!this.bounds.length)
+          this.bounds.extend(
+            new window.kakao.maps.LatLng(37.566352778, 126.977952778)
+          );
+        this.map.setBounds(this.bounds);
+        return;
+      }
+      if (!this.bounds) this.bounds = new window.kakao.maps.LatLngBounds();
       this.selectedImg = new window.kakao.maps.MarkerImage(
         "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
         new window.kakao.maps.Size(24, 35)
       );
       let line = [];
       this.infoWindows = [];
-      places.forEach((pos) => {
-        // console.log(pos);
+      for (let pos of places) {
         let latlng = new window.kakao.maps.LatLng(pos.latitude, pos.longitude);
         let marker = new window.kakao.maps.Marker({
           map: this.map,
@@ -118,7 +130,7 @@ export default {
         this.infoWindows.push(info);
         this.bounds.extend(latlng);
         line.push(latlng);
-      });
+      }
       this.polyline = new window.kakao.maps.Polyline({
         path: line,
         strokeWeight: 5, // 선의 두께 입니다
@@ -126,8 +138,6 @@ export default {
         strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
         strokeStyle: "solid", // 선의 스타일입니다
       });
-      this.polyline.setMap(this.map);
-      this.map.setBounds(this.bounds);
       var infoTitle = document.querySelectorAll(".info-window");
       infoTitle.forEach(function (e) {
         var w = e.offsetWidth + 10;
@@ -140,7 +150,9 @@ export default {
         e.parentElement.parentElement.style.border = "0px";
         e.parentElement.parentElement.style.background = "unset";
       });
-      if (places.length > 1)
+      this.polyline.setMap(this.map);
+      this.map.setBounds(this.bounds);
+      if (places.length > 1 && this.polyline)
         this.showDistance(
           this.getTimeHTML(Math.round(this.polyline.getLength())),
           line[line.length - 1]

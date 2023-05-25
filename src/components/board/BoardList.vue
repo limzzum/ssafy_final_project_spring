@@ -50,6 +50,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 const boardStore = "boardStore";
+const placeStore = "placeStore";
 import BoardPagination from "./BoardPagination.vue";
 import BoardSearchbar from "@/components/board/BoardSearchbar.vue";
 import moment from "moment-timezone";
@@ -88,6 +89,7 @@ export default {
       "boardType",
       "articles",
       "currentPage",
+      "article",
     ]),
   },
   methods: {
@@ -97,8 +99,11 @@ export default {
       "searchArticle",
       "setArticle",
     ]),
+    ...mapActions(placeStore, ["setSelected", "clearPlace"]),
     viewArticle(item) {
       this.setArticle(item);
+      this.clearPlace();
+      this.setSelected(this.article.places);
       this.$router.push({
         name: "boardview",
       });

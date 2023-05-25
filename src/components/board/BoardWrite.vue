@@ -38,14 +38,55 @@
           v-model="article.content"
           @focus="isEmptyContent = false"
         ></b-form-textarea>
+        <b-tabs v-if="selected.length" style="text-align: center" card>
+          <b-tab title="태그된 장소" active>
+            <b-card-group v-for="item in selected" :key="item.contentId">
+              <b-card class="no-padding">
+                <b-row class="align-items-center">
+                  <b-col cols="5">
+                    <b-card-img
+                      :src="img(item.firstImage)"
+                      fluid
+                      style="
+                        max-height: 75px;
+                        min-height: 75px;
+                        object-fit: cover;
+                      "
+                    ></b-card-img>
+                  </b-col>
+                  <b-col></b-col>
+                  <b-col cols="5">
+                    {{ item.title }}
+                  </b-col>
+                  <b-col cols="1">
+                    <b-button variant="danger" @click="unselectPlace(item)">
+                      X
+                    </b-button>
+                  </b-col>
+                </b-row>
+              </b-card>
+            </b-card-group>
+          </b-tab>
+          <b-tab title="지도"> <TheMap /></b-tab>
+        </b-tabs>
         <template #footer>
-          <b-row v-if="type == 'write'" style="white-space: nowrap">
+          <b-row v-if="!type || type == 'write'" style="white-space: nowrap">
             <b-col cols="9"></b-col>
             <b-col class="text-right">
               <b-button variant="danger" @click="back">취소</b-button>
             </b-col>
             <b-col>
               <b-button variant="primary" @click="write">작성</b-button></b-col
+            >
+          </b-row>
+
+          <b-row v-if="type == 'modify'" style="white-space: nowrap">
+            <b-col cols="9"></b-col>
+            <b-col class="text-right">
+              <b-button variant="danger" @click="back">취소</b-button>
+            </b-col>
+            <b-col>
+              <b-button variant="primary" @click="modify">작성</b-button></b-col
             >
           </b-row>
         </template>
@@ -56,11 +97,13 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import TheMap from "@/components/TheMap.vue";
 const boardStore = "boardStore";
 const userStore = "userStore";
+const placeStore = "placeStore";
 export default {
   name: "BoardWrite",
-  components: {},
+  components: { TheMap },
   data() {
     return {
       type: null,
@@ -76,6 +119,7 @@ export default {
         content: null,
         userNo: null,
         boardType: "free",
+        places: null,
       },
       isEmptyTitle: false,
       isEmptyContent: false,
@@ -83,6 +127,7 @@ export default {
   },
   computed: {
     ...mapState(userStore, ["userInfo"]),
+    ...mapState(placeStore, ["selected"]),
   },
   created() {
     this.type = this.$route.params.type;
@@ -90,9 +135,14 @@ export default {
     this.article.userNo = this.userInfo.userNo;
     if (this.userInfo.isAdmin === "T")
       this.boardTypeOptions.push({ value: "notice", text: "공지사항" });
+    if (this.$route.params.boardType == "plan") {
+      this.boardTypeOptions = [{ value: "plan", text: "여행코스" }];
+      this.article.boardType = "plan";
+    }
   },
   methods: {
     ...mapActions(boardStore, ["writeArticle", "setBoardType"]),
+    ...mapActions(placeStore, ["unselectPlace"]),
     write() {
       if (this.article.title == null || this.article.title.length < 2) {
         this.isEmptyTitle = true;
@@ -102,15 +152,31 @@ export default {
         this.isEmptyContent = true;
         return;
       }
+      if (this.selected.length) {
+        this.article.places = [];
+        this.selected.forEach((place) => {
+          // console.log(place);
+          this.article.places.push(place.contentId);
+        });
+        console.log(this.article.places);
+      }
       this.writeArticle(this.article);
       this.setBoardType(this.article.boardType);
       this.$router.push({ name: "boardlist" });
     },
     back() {
-      this.$router.push({ name: this.backroute });
+      if (this.backroute) this.$router.push({ name: this.backroute });
+      else this.$router.push({ name: "boardlist" });
+    },
+    img(link) {
+      return link ? link : require("@/assets/img/on_error.png");
     },
   },
 };
 </script>
 
-<style></style>
+<style>
+.no-padding .card-body {
+  padding: 5px;
+}
+</style>

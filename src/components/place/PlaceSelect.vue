@@ -63,7 +63,11 @@ export default {
     ...mapState(placeStore, ["selected"]),
   },
   methods: {
-    ...mapActions(placeStore, ["unselectPlace", "setSelected"]),
+    ...mapActions(placeStore, [
+      "clearPlaceList",
+      "unselectPlace",
+      "setSelected",
+    ]),
     print() {
       console.log(this.tmp);
     },
@@ -72,6 +76,11 @@ export default {
         alert("먼저 장소를 선택해주세요");
         return;
       }
+      this.clearPlaceList();
+      this.$router.push({
+        name: "boardwrite",
+        params: { type: "write", backroute: "myplan", boardType: "plan" },
+      });
     },
   },
 };

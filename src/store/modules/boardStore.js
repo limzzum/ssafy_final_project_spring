@@ -8,7 +8,6 @@ import {
   // eslint-disable-next-line no-unused-vars
   deleteArticle,
 } from "@/api/board";
-
 const boardStore = {
   namespaced: true,
   state: {
@@ -99,8 +98,21 @@ const boardStore = {
         }
       );
     },
-    setArticle({ commit }, article) {
-      commit("SET_ARTICLE", article);
+    async setArticle({ commit }, article) {
+      await getArticle(
+        article.postId,
+        ({ data }) => {
+          // console.log(data);
+          let result = data.result;
+          result["places"] = data.places;
+          result["comments"] = data.comments;
+          commit("SET_ARTICLE", result);
+          console.log(result);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     },
   },
 };
