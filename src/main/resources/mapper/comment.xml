@@ -12,6 +12,12 @@
         <result column="create_time" property="createTime"/>
     </resultMap>
 
+    <select id="select" parameterType="int" resultMap="CommentMap" >
+        select *
+        from comment
+        where comment_id = #{commentId}
+    </select>
+
     <select id="search" parameterType="map" resultMap="CommentMap">
         select *
         from comment
