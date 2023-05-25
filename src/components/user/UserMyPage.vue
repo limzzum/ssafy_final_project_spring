@@ -179,7 +179,7 @@ export default {
       "userDelete",
       "userLogout",
     ]),
-    ...mapActions(boardStore, ["userDelete", "setCondition", "searchArticle"]),
+    ...mapActions(boardStore, ["setCondition", "searchArticle"]),
     myArticles() {
       console.log(this.userInfo);
       this.condition.userNo = this.userInfo.userNo;

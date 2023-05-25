@@ -82,7 +82,7 @@ export default {
       this.isLoading = false;
     },
     mark(places) {
-      // console.log(places);
+      console.log(places);
       this.markers.forEach((item) => {
         item.setMap(null);
       });
@@ -116,11 +116,12 @@ export default {
       });
       if (this.polyline) this.polyline.setMap(null);
       if (!places.length) {
-        if (!this.bounds.length)
-          this.bounds.extend(
-            new window.kakao.maps.LatLng(37.566352778, 126.977952778)
-          );
-        this.map.setBounds(this.bounds);
+        // if (!this.bounds || !this.bounds.length) {
+        //   this.bounds.extend(
+        //     new window.kakao.maps.LatLng(37.566352778, 126.977952778)
+        //   );
+        //   this.map.setBounds(this.bounds);
+        // }
         return;
       }
       if (!this.bounds) this.bounds = new window.kakao.maps.LatLngBounds();

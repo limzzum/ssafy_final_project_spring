@@ -136,12 +136,20 @@ export default {
     if (this.userInfo.isAdmin === "T")
       this.boardTypeOptions.push({ value: "notice", text: "공지사항" });
     if (this.$route.params.boardType == "plan") {
-      this.boardTypeOptions = [{ value: "plan", text: "여행코스" }];
+      this.boardTypeOptions = [
+        { value: "review", text: "여행후기" },
+        { value: "plan", text: "여행코스" },
+      ];
       this.article.boardType = "plan";
     }
   },
   methods: {
-    ...mapActions(boardStore, ["writeArticle", "setBoardType"]),
+    ...mapActions(boardStore, [
+      "setCondition",
+      "writeArticle",
+      "searchArticle",
+      "setBoardType",
+    ]),
     ...mapActions(placeStore, ["unselectPlace"]),
     write() {
       if (this.article.title == null || this.article.title.length < 2) {
@@ -161,7 +169,15 @@ export default {
         console.log(this.article.places);
       }
       this.writeArticle(this.article);
+      this.setCondition({
+        title: null,
+        content: null,
+        userName: null,
+        userNo: null,
+        boardType: this.article.boardType,
+      });
       this.setBoardType(this.article.boardType);
+      this.searchArticle();
       this.$router.push({ name: "boardlist" });
     },
     back() {

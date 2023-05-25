@@ -69,8 +69,28 @@
               <b-col v-if="!article.comments.length">
                 등록된 댓글이 없습니다.
               </b-col>
-              <b-table v-else> TODO </b-table>
             </b-row>
+            <b-card-group
+              class="align-items-center"
+              v-for="comment in article.comments"
+              :key="comment.commentId"
+            >
+              <b-card no-body>
+                <template #header>
+                  <b-row>
+                    <b-col cols="2" class="text-center">
+                      {{ comment.userName }}
+                    </b-col>
+                    |
+                    <b-col cols="7" class="text-left">{{
+                      comment.content
+                    }}</b-col>
+                    |
+                    <b-col>{{ getTime(comment.createTime) }}</b-col>
+                  </b-row>
+                </template>
+              </b-card>
+            </b-card-group>
             <hr />
             <b-row class="align-items-center">
               <b-col cols="11">
@@ -87,7 +107,7 @@
                 </b-card>
               </b-col>
               <b-col cols="1" style="white-space: nowrap" class="text-left">
-                <b-button variant="primary" @click="regComment">등록</b-button>
+                <b-button variant="success" @click="comfirm">등록</b-button>
               </b-col>
             </b-row>
           </b-card-footer>
@@ -145,6 +165,7 @@ export default {
   },
   methods: {
     ...mapActions(placeStore, ["setSelected"]),
+    ...mapActions(boardStore, ["regComment"]),
     img(link) {
       return link ? link : require("@/assets/img/on_error.png");
     },
@@ -152,7 +173,24 @@ export default {
       //TODO: 기능 구현
       console.log(place);
     },
-    regComment() {},
+    comfirm() {
+      this.regComment(this.comment);
+    },
+    getTime(time) {
+      let tdiff = parseInt(
+        moment.duration(moment().diff(time)).asMinutes() + 9 * 60
+      );
+      if (tdiff >= 24 * 60) {
+        tdiff = parseInt(tdiff / (24 * 60));
+        if (tdiff >= 365) return parseInt(tdiff / 365) + "년 전";
+        if (tdiff >= 30) return parseInt(tdiff / 30) + "달 전";
+        if (tdiff >= 7) return parseInt(tdiff / 7) + "주 전";
+        if (tdiff >= 1) return parseInt(tdiff) + "일 전";
+      }
+      if (tdiff >= 60) return parseInt(tdiff / 60) + "시간 전";
+      if (tdiff <= 0) return "방금 전";
+      return parseInt(tdiff) + "분 전";
+    },
   },
 };
 </script>

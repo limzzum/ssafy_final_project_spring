@@ -1,13 +1,12 @@
 import {
   listArticle,
   writeArticle,
-  // eslint-disable-next-line no-unused-vars
   getArticle,
-  // eslint-disable-next-line no-unused-vars
-  modifyArticle,
-  // eslint-disable-next-line no-unused-vars
-  deleteArticle,
+  // modifyArticle,
+  // deleteArticle,
 } from "@/api/board";
+import { writeComment } from "@/api/comment";
+
 const boardStore = {
   namespaced: true,
   state: {
@@ -106,8 +105,28 @@ const boardStore = {
           let result = data.result;
           result["places"] = data.places;
           result["comments"] = data.comments;
+          // console.log(data.comments);
           commit("SET_ARTICLE", result);
           console.log(result);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    async regComment({ commit, state }, comment) {
+      await writeComment(
+        comment,
+        ({ data }) => {
+          console.log(data);
+          if (data.msg == "success") {
+            let article = state.article;
+            let list = article.comments ? article.comments : [];
+            list.push(data.result);
+            article.comments = list;
+            commit("SET_ARTICLE", article);
+          }
+          data.msg;
         },
         (error) => {
           console.log(error);

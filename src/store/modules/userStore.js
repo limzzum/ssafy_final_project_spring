@@ -97,6 +97,7 @@ const userStore = {
     },
     async userUpdate({ commit, state }, user) {
       console.log("update ", commit);
+      let msg = "";
       await update(
         user,
         ({ data }) => {
@@ -104,13 +105,15 @@ const userStore = {
           if (data.result === "success") {
             state.userName = user.userName;
           }
-          return data.result;
+          msg = data.result;
         },
         async (error) => {
           console.log(error);
-          return "통신 오류 : 잠시 후 다시 시도해보세요";
+          alert("통신 오류 : 잠시 후 다시 시도해보세요");
         }
       );
+
+      return msg;
     },
     async getUserInfo({ commit, dispatch }, token) {
       let decodeToken = jwtDecode(token);
@@ -194,6 +197,22 @@ const userStore = {
           console.log(error);
         }
       );
+    },
+    // eslint-disable-next-line no-unused-vars
+    async getUserName({ commit }, userNo) {
+      let userName = "사용자";
+      await findByUserNo(
+        userNo,
+        ({ data }) => {
+          // console.log(data.user.userName);
+          userName = data.user.userName;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+      console.log(userName);
+      return userName;
     },
     async userDelete({ commit }) {
       await deleteUser(
