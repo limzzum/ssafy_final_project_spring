@@ -3,6 +3,7 @@ package com.ssafy.enjoytrip.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.ssafy.enjoytrip.model.dto.Board;
+import com.ssafy.enjoytrip.model.dto.Place;
 import com.ssafy.enjoytrip.model.dto.User;
 import com.ssafy.enjoytrip.model.dto.form.PostBoard;
 import com.ssafy.enjoytrip.model.mapper.BoardMapPlace;
@@ -51,7 +52,9 @@ public class BoardRestController {
     public ResponseEntity<Map<String, Object>> detail(@PathVariable @ApiParam(value = "board primarykey", required = true) int postId){
         Map<String,Object> map = new HashMap<>();
         Board select = service.select(postId);
+        List<Place> search = boardMapPlaceService.search(postId);
         map.put("result", select);
+        map.put("places", search);
 
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
