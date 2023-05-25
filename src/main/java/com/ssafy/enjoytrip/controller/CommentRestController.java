@@ -8,6 +8,7 @@ import com.ssafy.enjoytrip.model.dto.form.PostBoard;
 import com.ssafy.enjoytrip.model.service.BoardMapPlaceService;
 import com.ssafy.enjoytrip.model.service.BoardService;
 import com.ssafy.enjoytrip.model.service.CommentService;
+import com.ssafy.enjoytrip.model.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -26,10 +27,12 @@ import java.util.*;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CommentRestController {
     private final CommentService service;
+    private final UserService userService;
 
     @Autowired
-    public CommentRestController(CommentService service){
+    public CommentRestController(CommentService service,UserService userService){
         this.service = service;
+        this.userService = userService;
     }
 
     @ApiOperation(value = "댓글 등록", notes = "required : content, postId, userNo", response = ResponseEntity.class)
@@ -43,7 +46,12 @@ public class CommentRestController {
             msg = "fail";
         }
         Map<String, Object> map = new HashMap<>();
+        comment = service.select(comment.getCommentId());
+        log.info(comment.toString());
+        comment.setUserName(userService.selectById(comment.getUserNo()).getUserName());
+        log.info(comment.toString());
         map.put("msg", msg);
+        map.put("result",comment);
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 

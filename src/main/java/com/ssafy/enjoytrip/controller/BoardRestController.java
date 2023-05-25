@@ -10,6 +10,7 @@ import com.ssafy.enjoytrip.model.dto.form.PostBoard;
 import com.ssafy.enjoytrip.model.service.BoardMapPlaceService;
 import com.ssafy.enjoytrip.model.service.BoardService;
 import com.ssafy.enjoytrip.model.service.CommentService;
+import com.ssafy.enjoytrip.model.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -32,12 +33,14 @@ public class BoardRestController {
     private final BoardService service;
     private final BoardMapPlaceService boardMapPlaceService;
     private final CommentService commentService;
+    private final UserService userService;
 
     @Autowired
-    public BoardRestController(BoardService service, BoardMapPlaceService boardMapPlaceService, CommentService commentService){
+    public BoardRestController(BoardService service, BoardMapPlaceService boardMapPlaceService, CommentService commentService, UserService userService){
         this.service = service;
         this.boardMapPlaceService = boardMapPlaceService;
         this.commentService = commentService;
+        this.userService = userService;
     }
 
     @PostMapping("/test")
@@ -60,13 +63,14 @@ public class BoardRestController {
             map.put("places", search);
 
             Map<String,Object> option = new HashMap<>();
-            option.put("parentId",0);
+            option.put("parentId",-1);
             List<Comment> comments = commentService.search(option);
 
-            for (int i = 0; i < comments.size(); i++) {
-                option.put("parentId", comments.get(i).getCommentId());
+            for (Comment comment:comments) {
+                option.put("parentId", comment.getCommentId());
                 List<Comment> sub = commentService.search(option);
-                comments.get(i).setSubs(sub);
+                comment.setSubs(sub);
+                comment.setUserName(userService.selectById(comment.getUserNo()).getUserName());
             }
             map.put("comments", comments);
             service.updateHits(postId);

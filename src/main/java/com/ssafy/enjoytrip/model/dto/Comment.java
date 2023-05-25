@@ -17,6 +17,7 @@ public class Comment {
     int postId;
     int parentId; //0이 아니면 대댓글
     int userNo;
+    String userName;
     List<Comment> subs;
     String content;
     Timestamp createTime;
