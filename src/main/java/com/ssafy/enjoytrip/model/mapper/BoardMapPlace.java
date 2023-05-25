@@ -10,5 +10,5 @@ import java.util.Map;
 public interface BoardMapPlace {
     int insert(Map<String, Object> map);
     List<Place> search(int postId);
-    int delete(int postId);
+    int delete(int contentId);
 }
