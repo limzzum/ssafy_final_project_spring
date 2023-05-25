@@ -36,6 +36,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public int updateHits(int postId) {
+		return mapper.updateHits(postId);
+	}
+
+	@Override
 	public Board select(int postId) {
 		return mapper.select(postId);
 	}

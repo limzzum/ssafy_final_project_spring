@@ -17,5 +17,6 @@ public interface BoardMapper {
     Page<Board> search(Map<String,Object> keys);
     int delete(int postId);
     int update(Board board);
+    int updateHits(int postId);
 
 }

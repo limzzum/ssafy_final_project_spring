@@ -14,6 +14,7 @@ public interface BoardService {
 	int insert(PostBoard board);
 	int delete(int postId);
 	int update(Board board);
+	int updateHits(int postId);
 	Board select(int postId);
 	Page<Board> search(Map<String,Object> keys);
 
