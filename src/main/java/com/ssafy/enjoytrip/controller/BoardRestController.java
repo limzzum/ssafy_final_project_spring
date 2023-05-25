@@ -51,22 +51,29 @@ public class BoardRestController {
     @GetMapping("/{postId}")
     public ResponseEntity<Map<String, Object>> detail(@PathVariable @ApiParam(value = "board primarykey", required = true) int postId){
         Map<String,Object> map = new HashMap<>();
-        Board select = service.select(postId);
-        List<Place> search = boardMapPlaceService.search(postId);
+        String msg = "success";
+        try {
+            Board select = service.select(postId);
+            List<Place> search = boardMapPlaceService.search(postId);
 
-        map.put("result", select);
-        map.put("places", search);
+            map.put("result", select);
+            map.put("places", search);
 
-        Map<String,Object> option = new HashMap<>();
-        option.put("parentId",0);
-        List<Comment> comments = commentService.search(option);
+            Map<String,Object> option = new HashMap<>();
+            option.put("parentId",0);
+            List<Comment> comments = commentService.search(option);
 
-        for (int i = 0; i < comments.size(); i++) {
-            option.put("parentId", comments.get(i).getCommentId());
-            List<Comment> sub = commentService.search(option);
-            comments.get(i).setSubs(sub);
+            for (int i = 0; i < comments.size(); i++) {
+                option.put("parentId", comments.get(i).getCommentId());
+                List<Comment> sub = commentService.search(option);
+                comments.get(i).setSubs(sub);
+            }
+            map.put("comments", comments);
+            service.updateHits(postId);
+        }catch (Exception e){
+            msg = "fail";
         }
-        map.put("comments", comments);
+        map.put("msg", msg);
         return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
     }
 
