@@ -51,7 +51,7 @@
     <update id="update" parameterType="comment">
         update comment
         set content=#{content}
-        where post_id=#{postId}
+        where comment_id=#{commentId}
     </update>
 
     <delete id="delete" parameterType="int" >
