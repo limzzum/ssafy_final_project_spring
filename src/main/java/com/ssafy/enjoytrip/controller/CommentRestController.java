@@ -22,7 +22,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/api/comment")
 @Slf4j
-@Api(tags = "BOARD REST API")
+@Api(tags = "COMMENT REST API")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CommentRestController {
     private final CommentService service;
@@ -32,7 +32,7 @@ public class CommentRestController {
         this.service = service;
     }
 
-    @ApiOperation(value = "댓글 등록", notes = "", response = ResponseEntity.class)
+    @ApiOperation(value = "댓글 등록", notes = "required : content, postId, userNo", response = ResponseEntity.class)
     @PostMapping
     public ResponseEntity<Map<String, Object>> regist(@RequestBody @ApiParam(value = "등록할 comment", required = true) Comment comment){
         String  msg = "success";
