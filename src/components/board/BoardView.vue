@@ -173,6 +173,7 @@ export default {
       this.regComment(this.comment);
       this.comment.postId = this.article.postId;
       this.comment.userNo = this.userInfo.userNo;
+      this.comment.content = null;
     },
     getTime(time) {
       let tdiff = parseInt(
