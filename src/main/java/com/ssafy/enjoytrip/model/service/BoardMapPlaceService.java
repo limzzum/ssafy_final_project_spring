@@ -10,6 +10,6 @@ import java.util.Map;
 
 public interface BoardMapPlaceService {
     int insert(Map<String, Object> map);
-    int delete(int postId);
+    int delete(int contentId);
     List<Place> search(int postId);
 }

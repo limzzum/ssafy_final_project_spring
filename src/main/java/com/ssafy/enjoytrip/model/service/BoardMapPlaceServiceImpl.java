@@ -24,8 +24,8 @@ public class BoardMapPlaceServiceImpl implements BoardMapPlaceService{
     }
 
     @Override
-    public int delete(int postId) {
-        return mapper.delete(postId);
+    public int delete(int contentId) {
+        return mapper.delete(contentId);
     }
 
     @Override
