@@ -1,24 +1,58 @@
-# tp_s09_s09_vue_enjoytrip_front
+## 여행지 추천 서비스 🍀
+  여행지 정보를 찾아보고, 나만의 여행 경로도 만들어 보자.
+  
+## 목차 🥇
+- [목표와 기능](#1목표와-기능-)
+- [개발 환경 및 배포 URL](#2개발-환경-및-배포-URL-)
+- [프로젝트 구조와 개발 일정](#3프로젝트-구조와-개발-일정-)
+- [역할 분담](#4역할-분담-)
+- [UI/BM](#5uibm-)
+- [메인 기능](#6-메인-기능-)
 
-## Project setup
-```
-npm install
-```
+## 1.목표와 기능 ✈
+### 1.1 목표
+  - 여행지 정보를 쉽게 찾아보고, 여행 계획에 도움을 주자.
+  - 내 여행을 기록하고 공유하며 추억을 오래 간직할 수 있도록 하자.
+  
+### 1.2 기능
+  - 여행지 정보 검색
+  - 나만의 여행 경로 만들기
+  - 여행지 월드컵 게임
+  - 게시판 글 등록, 수정, 삭제 관리
+  - 내 여행 정보 공유하기
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+---
+## 2.개발 환경 및 배포 URL 🏠 
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### 2.1 개발 환경
 
-### Lints and fixes files
-```
-npm run lint
-```
+  Framework & language
+    - SpringBoot & Java
+    - Vue & Javascript
+  서비스 배포 환경
+    -  
+### 2.2 배포 URL
+(예정)
+---
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 3.프로젝트 구조와 개발 일정 ⏲
+
+### 3.1 프로젝트 구조
+
+### 3.2 개발 일정
+- 기간: 2023.05 ~ 
+
+---
+## 4.역할 분담 🧑‍🤝‍🧑
+  - Front : 곽민규
+  - Back : 임정현
+
+## 5.UI/BM 🖼
+
+
+## 6. 메인 기능 🌟 
+  - 여행지 검색, 나만의 여행지 경로 등록.
+
+
+
+
