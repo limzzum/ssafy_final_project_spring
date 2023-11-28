@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunktp_s09_s09_vue_enjoytrip_front"]=self["webpackChunktp_s09_s09_vue_enjoytrip_front"]||[]).push([[346],{99346:function(e,t,n){n.r(t),n.d(t,{default:function(){return p}});var r=function(){var e=this,t=e._self._c;return t("b-container",{staticClass:"bv-example-row mt-3 text-center"},[t("router-view")],1)},s=[],u={name:"AppUser"},_=u,c=n(1001),o=(0,c.Z)(_,r,s,!1,null,"e93218bc",null),p=o.exports}}]);
+//# sourceMappingURL=346.8e95ce71.js.map
